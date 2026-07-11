@@ -19,49 +19,51 @@
   --blue:#499A13; --green:#8ECA3C; --orange:#ff9500; --red:#ff3b30;
   --purple:#8ECA3C; --teal:#30b0c7; --pink:#BBDC12; --indigo:#276F27; --yellow:#ffcc00;
 
-  /* light (systemGroupedBackground) */
-  --bg:#f2f2f7;
+  /* light (soft neutral surface) */
+  --bg:#eef1f4;
   --bg2:#ffffff;
   --card:#ffffff;
-  --card2:#f2f2f7;
-  --fill:rgba(120,120,128,.12);
-  --fill2:rgba(120,120,128,.16);
-  --text:#000000;
-  --text2:#3c3c43;
-  --muted:rgba(60,60,67,.6);
-  --muted2:rgba(60,60,67,.3);
-  --sep:rgba(60,60,67,.29);
-  --sepOpaque:#e5e5ea;
-  --nav-bg:rgba(249,249,249,.8);
-  --tab-bg:rgba(249,249,249,.82);
-  --shadow:0 1px 3px rgba(0,0,0,.06),0 6px 20px rgba(0,0,0,.05);
-  --shadow-lg:0 8px 30px rgba(0,0,0,.12);
-  --ring-track:rgba(120,120,128,.16);
-  --radius:18px;
-  --radius-sm:12px;
-  --radius-lg:26px;
+  --card2:#f1f4f7;
+  --fill:rgba(120,128,120,.10);
+  --fill2:rgba(120,128,120,.16);
+  --text:#0e1512;
+  --text2:#3c433f;
+  --muted:rgba(60,67,63,.6);
+  --muted2:rgba(60,67,63,.28);
+  --sep:rgba(60,67,63,.16);
+  --sepOpaque:#e6eae7;
+  --nav-bg:rgba(248,250,249,.72);
+  --tab-bg:rgba(255,255,255,.82);
+  --shadow:0 1px 2px rgba(16,32,20,.04),0 8px 24px rgba(16,32,20,.06);
+  --shadow-lg:0 12px 40px rgba(16,32,20,.16);
+  --hero-grad:linear-gradient(135deg,#276F27 0%,#499A13 52%,#8ECA3C 100%);
+  --ring-track:rgba(120,128,120,.14);
+  --radius:22px;
+  --radius-sm:14px;
+  --radius-lg:28px;
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
   --ease-ios:cubic-bezier(.32,.72,0,1);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#000000;
-    --bg2:#1c1c1e;
-    --card:#1c1c1e;
-    --card2:#2c2c2e;
-    --fill:rgba(120,120,128,.24);
-    --fill2:rgba(120,120,128,.32);
+    --bg:#0b0f0d;
+    --bg2:#161b18;
+    --card:#161b18;
+    --card2:#1f2622;
+    --fill:rgba(140,150,140,.16);
+    --fill2:rgba(140,150,140,.24);
     --text:#ffffff;
-    --text2:#ebebf5;
-    --muted:rgba(235,235,245,.6);
-    --muted2:rgba(235,235,245,.3);
-    --sep:rgba(84,84,88,.6);
-    --sepOpaque:#38383a;
-    --nav-bg:rgba(30,30,30,.72);
-    --tab-bg:rgba(22,22,24,.8);
-    --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
-    --shadow-lg:0 10px 40px rgba(0,0,0,.6);
-    --ring-track:rgba(120,120,128,.28);
+    --text2:#e7ece9;
+    --muted:rgba(230,238,232,.6);
+    --muted2:rgba(230,238,232,.28);
+    --sep:rgba(120,132,124,.28);
+    --sepOpaque:#2a322d;
+    --nav-bg:rgba(18,22,20,.7);
+    --tab-bg:rgba(16,20,18,.82);
+    --shadow:0 1px 3px rgba(0,0,0,.5),0 8px 26px rgba(0,0,0,.4);
+    --shadow-lg:0 14px 44px rgba(0,0,0,.62);
+    --hero-grad:linear-gradient(135deg,#1c5a1c 0%,#3c8a12 52%,#6fae2e 100%);
+    --ring-track:rgba(140,150,140,.24);
   }
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
@@ -153,6 +155,43 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.022em}
 .ring .cap{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .ring-side{flex:1}
 .ring-side .big{font-size:15px;font-weight:600;margin-bottom:10px}
+
+/* ---------- Hero gradient card (project header) ---------- */
+.hero{position:relative;background:var(--hero-grad);border-radius:var(--radius-lg);
+  padding:20px;margin:14px 0;color:#fff;overflow:hidden;
+  box-shadow:0 10px 30px rgba(39,111,39,.32),0 2px 6px rgba(39,111,39,.2)}
+.hero::before{content:"";position:absolute;top:-40%;right:-15%;width:230px;height:230px;
+  background:radial-gradient(circle,rgba(255,255,255,.22),transparent 70%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50%;left:-10%;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(187,220,18,.28),transparent 70%);pointer-events:none}
+.hero-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1;margin-bottom:16px}
+.hero-top .chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);
+  backdrop-filter:blur(8px);padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.01em}
+.hero-top .greet{margin-left:auto;font-size:12.5px;font-weight:500;opacity:.85;text-align:right}
+.hero .ring-wrap{position:relative;z-index:1}
+.hero .ring .track{stroke:rgba(255,255,255,.22)}
+.hero .ring .prog{stroke:#fff}
+.hero .ring .pct{color:#fff}
+.hero .ring .cap{color:rgba(255,255,255,.8)}
+.hero .ring-side .big{color:rgba(255,255,255,.92)}
+.hero .bar{background:rgba(255,255,255,.2)}
+.hero .small.muted{color:rgba(255,255,255,.72)!important}
+.hero-mini-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+.hero-mini-row .dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.hero-mini-row .bar{flex:1;background:rgba(255,255,255,.22)}
+.hero-mini-row .bar>span{background:#fff!important}
+.hero-mini-row .pv{width:34px;text-align:right;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
+
+/* ---------- KPI icon chips on tiles ---------- */
+.tile{position:relative}
+.kpi-ico{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-size:17px;margin-bottom:9px;color:#fff}
+.kpi-ico.g{background:linear-gradient(135deg,#499A13,#8ECA3C)}
+.kpi-ico.o{background:linear-gradient(135deg,#ff9500,#ffcc00)}
+.kpi-ico.p{background:linear-gradient(135deg,#276F27,#499A13)}
+.kpi-ico.b{background:linear-gradient(135deg,#8ECA3C,#BBDC12)}
+.tile .delta{position:absolute;top:15px;right:15px;font-size:11.5px;font-weight:700;
+  padding:3px 8px;border-radius:20px;background:rgba(73,154,19,.14);color:var(--brand-dark)}
 
 /* ---------- Bars ---------- */
 .bar{height:8px;background:var(--fill);border-radius:20px;overflow:hidden}
@@ -274,12 +313,24 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
   display:flex;padding-bottom:env(safe-area-inset-bottom);
 }
 .tabbar button{flex:1;background:none;border:0;color:var(--muted);cursor:pointer;
-  padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 0 6px;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;
   font-size:10px;font-weight:600;letter-spacing:.01em;transition:color .2s;font-family:inherit}
-.tabbar button .ico{font-size:23px;line-height:1;transition:transform .3s var(--ease-spring)}
+.tabbar button .ico{font-size:22px;line-height:1;transition:transform .3s var(--ease-spring);
+  width:46px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:16px;transition:transform .3s var(--ease-spring),background .25s}
 .tabbar button.active{color:var(--blue)}
-.tabbar button.active .ico{transform:translateY(-1px) scale(1.06)}
+.tabbar button.active .ico{transform:translateY(-1px) scale(1.04);background:rgba(73,154,19,.14)}
 .tabbar button:active .ico{transform:scale(.86)}
+
+/* ---------- Floating action button ---------- */
+.fab{position:fixed;right:18px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:55;
+  width:56px;height:56px;border:0;border-radius:20px;cursor:pointer;
+  background:var(--hero-grad);color:#fff;font-size:27px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 22px rgba(39,111,39,.42),0 2px 6px rgba(39,111,39,.3);
+  transition:transform .18s var(--ease-spring),box-shadow .2s}
+.fab:active{transform:scale(.9)}
+.fab svg{width:26px;height:26px}
+@media print{.fab{display:none!important}}
 
 /* ---------- Toast ---------- */
 .toast{
@@ -390,7 +441,11 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
     </div>
 
     <div class="stagger">
-      <div class="card">
+      <div class="hero">
+        <div class="hero-top">
+          <span class="chip">📍 Murehwa Villa</span>
+          <span class="greet" id="dashGreet"></span>
+        </div>
         <div class="ring-wrap">
           <div class="ring">
             <svg width="132" height="132" viewBox="0 0 132 132">
@@ -409,12 +464,14 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 
       <div class="grid g2">
         <div class="tile">
+          <div class="kpi-ico p">💵</div>
           <div class="lbl">Spent</div>
           <div class="val sm tnum" id="tSpent">$0</div>
           <div class="foot">of <span id="tBudget">$36,160</span></div>
           <div class="bar money" style="margin-top:9px"><span id="tSpentBar"></span></div>
         </div>
         <div class="tile">
+          <div class="kpi-ico o">🧱</div>
           <div class="lbl">Bricks</div>
           <div class="val sm tnum" id="tBricks">0</div>
           <div class="foot">of 80,000 delivered</div>
@@ -423,8 +480,8 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
       </div>
 
       <div class="grid g2">
-        <div class="tile"><div class="lbl">Remaining Budget</div><div class="val sm tnum" id="tRemain">$36,160</div></div>
-        <div class="tile"><div class="lbl">Est. Investment</div><div class="val sm tnum" id="tInvest">$36,160</div></div>
+        <div class="tile"><div class="kpi-ico g">🏦</div><div class="lbl">Remaining Budget</div><div class="val sm tnum" id="tRemain">$36,160</div></div>
+        <div class="tile"><div class="kpi-ico b">📊</div><div class="lbl">Est. Investment</div><div class="val sm tnum" id="tInvest">$36,160</div></div>
       </div>
 
       <div class="section-title">Timeline &amp; Forecast</div>
@@ -642,6 +699,10 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
   <button data-view="activity" onclick="App.go('activity')"><span class="ico">􀉉</span>Activity</button>
   <button data-view="settings" onclick="App.go('settings')"><span class="ico">􀍟</span>More</button>
 </nav>
+
+<button class="fab" id="fab" onclick="App.go('activity');App.buzz(6)" aria-label="Log activity" title="Log activity">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+</button>
 
 <div class="toast" id="toast"></div>
 <canvas id="confetti"></canvas>
@@ -949,6 +1010,8 @@ const App={
     const titles={dash:"Dashboard",stages:"Stages",materials:"Materials",budget:"Budget",activity:"Activity",settings:"More"};
     document.getElementById("navTitle").textContent=titles[v];
     window.scrollTo({top:0,behavior:"instant"});
+    const fab=document.getElementById("fab");
+    if(fab) fab.style.display=(v==="activity"||v==="settings")?"none":"flex";
     if(navigator.vibrate) navigator.vibrate(4);
   },
 
@@ -1105,12 +1168,19 @@ const App={
     let mini="";
     SEED.stages.forEach((st,i)=>{
       const sp=this.stageProgress(i);
-      mini+=`<div style="display:flex;align-items:center;gap:8px;margin:5px 0">
-        <div style="width:10px;height:10px;border-radius:3px;background:${SEED.stageColors[i]};flex:0 0 auto"></div>
-        <div style="flex:1"><div class="bar"><span style="width:${sp}%;background:${SEED.stageColors[i]}"></span></div></div>
-        <div class="small muted tnum" style="width:34px;text-align:right">${sp}%</div></div>`;
+      mini+=`<div class="hero-mini-row">
+        <div class="dot" style="background:${SEED.stageColors[i]}"></div>
+        <div class="bar"><span style="width:${sp}%"></span></div>
+        <div class="pv">${sp}%</div></div>`;
     });
     document.getElementById("dashStageMini").innerHTML=mini;
+    const gEl=document.getElementById("dashGreet");
+    if(gEl){
+      const h=new Date().getHours();
+      const greet=h<12?"Good morning":h<17?"Good afternoon":"Good evening";
+      const doneStages=SEED.stages.filter((s,i)=>this.stageProgress(i)===100).length;
+      gEl.innerHTML=`${greet}<br>${doneStages}/${SEED.stages.length} stages done`;
+    }
 
     // up next
     let next=[],count=0;
