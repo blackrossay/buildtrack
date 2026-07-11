@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+villa-dashboard/node_modules/
+
+# Build output
+dist/
+villa-dashboard/dist/
+
+# Vercel
+.vercel/
+
+# Local / OS
+.DS_Store
+*.log
+.env
+.env.local

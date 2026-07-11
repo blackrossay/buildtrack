@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Murehwa Villa</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23276F27'/%3E%3Cstop offset='1' stop-color='%238ECA3C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='13' fill='url(%23g)'/%3E%3Crect x='12' y='21' width='24' height='16' rx='2' fill='%23fff'/%3E%3Crect x='9' y='16' width='30' height='4.5' rx='2.25' fill='%23fff'/%3E%3Crect x='15.5' y='24' width='5' height='5' rx='1' fill='%23499A13'/%3E%3Crect x='27.5' y='24' width='5' height='5' rx='1' fill='%23499A13'/%3E%3Crect x='21.5' y='30' width='5' height='7' rx='1' fill='%23499A13'/%3E%3C/svg%3E">
+<style>
+/* ===================================================================
+   APPLE HIG DESIGN SYSTEM  ·  Murehwa Villa Build Tracker
+   =================================================================== */
+:root{
+  /* Brand palette — ColorHunt greens */
+  --brand:#499A13; --brand-dark:#276F27; --brand-light:#8ECA3C; --lime:#BBDC12;
+  --blue:#499A13; --green:#8ECA3C; --orange:#ff9500; --red:#ff3b30;
+  --purple:#8ECA3C; --teal:#30b0c7; --pink:#BBDC12; --indigo:#276F27; --yellow:#ffcc00;
+
+  /* light (systemGroupedBackground) */
+  --bg:#f2f2f7;
+  --bg2:#ffffff;
+  --card:#ffffff;
+  --card2:#f2f2f7;
+  --fill:rgba(120,120,128,.12);
+  --fill2:rgba(120,120,128,.16);
+  --text:#000000;
+  --text2:#3c3c43;
+  --muted:rgba(60,60,67,.6);
+  --muted2:rgba(60,60,67,.3);
+  --sep:rgba(60,60,67,.29);
+  --sepOpaque:#e5e5ea;
+  --nav-bg:rgba(249,249,249,.8);
+  --tab-bg:rgba(249,249,249,.82);
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 6px 20px rgba(0,0,0,.05);
+  --shadow-lg:0 8px 30px rgba(0,0,0,.12);
+  --ring-track:rgba(120,120,128,.16);
+  --radius:18px;
+  --radius-sm:12px;
+  --radius-lg:26px;
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --ease-ios:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#000000;
+    --bg2:#1c1c1e;
+    --card:#1c1c1e;
+    --card2:#2c2c2e;
+    --fill:rgba(120,120,128,.24);
+    --fill2:rgba(120,120,128,.32);
+    --text:#ffffff;
+    --text2:#ebebf5;
+    --muted:rgba(235,235,245,.6);
+    --muted2:rgba(235,235,245,.3);
+    --sep:rgba(84,84,88,.6);
+    --sepOpaque:#38383a;
+    --nav-bg:rgba(30,30,30,.72);
+    --tab-bg:rgba(22,22,24,.8);
+    --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
+    --shadow-lg:0 10px 40px rgba(0,0,0,.6);
+    --ring-track:rgba(120,120,128,.28);
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html,body{margin:0;padding:0;height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-size:17px; line-height:1.4; letter-spacing:-.01em;
+  padding-bottom:calc(64px + env(safe-area-inset-bottom));
+  overscroll-behavior-y:none;
+}
+::-webkit-scrollbar{width:0;height:0}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.022em}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* ---------- Frosted nav bar with large title ---------- */
+.navbar{
+  position:sticky;top:0;z-index:40;
+  background:var(--nav-bg);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:.5px solid var(--sep);
+  transition:border-color .3s;
+}
+.navbar .bar{display:flex;align-items:center;gap:10px;height:52px;max-width:720px;margin:0 auto;padding:0 16px}
+.navbar .title-sm{font-size:17px;font-weight:600;opacity:0;transition:opacity .3s;flex:1;text-align:center}
+.navbar.scrolled .title-sm{opacity:1}
+.nav-btn{
+  background:var(--fill);border:0;color:var(--blue);font-size:15px;font-weight:500;
+  padding:7px 13px;border-radius:20px;cursor:pointer;display:flex;align-items:center;gap:5px;
+  transition:transform .15s var(--ease-spring),background .2s;white-space:nowrap;
+}
+.nav-btn:active{transform:scale(.92);background:var(--fill2)}
+.large-title{padding:6px 16px 2px;max-width:720px;margin:0 auto}
+.large-title h1{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.large-title .loc{color:var(--muted);font-size:15px;font-weight:500;margin-top:3px;display:flex;align-items:center;gap:5px}
+
+/* ---------- Views + transitions ---------- */
+.view{display:none;padding-top:8px;animation:viewIn .45s var(--ease-ios) both}
+.view.active{display:block}
+@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* stagger children */
+.stagger>*{animation:cardIn .5s var(--ease-ios) both}
+.stagger>*:nth-child(1){animation-delay:.02s}
+.stagger>*:nth-child(2){animation-delay:.07s}
+.stagger>*:nth-child(3){animation-delay:.12s}
+.stagger>*:nth-child(4){animation-delay:.17s}
+.stagger>*:nth-child(5){animation-delay:.22s}
+.stagger>*:nth-child(6){animation-delay:.27s}
+.stagger>*:nth-child(7){animation-delay:.32s}
+.stagger>*:nth-child(8){animation-delay:.37s}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--card);border-radius:var(--radius);padding:18px;margin:14px 0;
+  box-shadow:var(--shadow);
+}
+.card.pad0{padding:0;overflow:hidden}
+.section-title{font-size:20px;font-weight:700;margin:26px 4px 8px;letter-spacing:-.02em}
+.section-sub{color:var(--muted);font-size:13px;margin:0 4px 8px;font-weight:500}
+.group-hd{font-size:13px;font-weight:590;color:var(--muted);text-transform:uppercase;letter-spacing:.02em;margin:24px 20px 7px}
+
+/* ---------- Grid stats ---------- */
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.tile{
+  background:var(--card);border-radius:var(--radius);padding:15px;box-shadow:var(--shadow);
+  transition:transform .2s var(--ease-spring);
+}
+.tile:active{transform:scale(.97)}
+.tile .lbl{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.tile .val{font-size:24px;font-weight:750;margin-top:4px;letter-spacing:-.03em}
+.tile .val.sm{font-size:19px}
+.tile .foot{font-size:12px;color:var(--muted);margin-top:2px;font-weight:500}
+
+/* ---------- Progress ring ---------- */
+.ring-wrap{display:flex;align-items:center;gap:20px}
+.ring{position:relative;width:132px;height:132px;flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .track{fill:none;stroke:var(--ring-track);stroke-width:12}
+.ring .prog{fill:none;stroke:url(#ringGrad);stroke-width:12;stroke-linecap:round;
+  transition:stroke-dashoffset 1s var(--ease-ios)}
+.ring .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .pct{font-size:32px;font-weight:800;letter-spacing:-.04em}
+.ring .cap{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.ring-side{flex:1}
+.ring-side .big{font-size:15px;font-weight:600;margin-bottom:10px}
+
+/* ---------- Bars ---------- */
+.bar{height:8px;background:var(--fill);border-radius:20px;overflow:hidden}
+.bar>span{display:block;height:100%;width:0;border-radius:20px;
+  background:linear-gradient(90deg,var(--blue),var(--green));
+  transition:width .9s var(--ease-ios)}
+.bar.brick>span{background:linear-gradient(90deg,var(--orange),var(--yellow))}
+.bar.money>span{background:linear-gradient(90deg,var(--purple),var(--pink))}
+.bar.over>span{background:linear-gradient(90deg,var(--red),var(--orange))}
+
+/* ---------- iOS grouped inset list ---------- */
+.list{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin:8px 0}
+.row{
+  display:flex;align-items:center;gap:13px;padding:12px 16px;min-height:48px;position:relative;
+  transition:background .15s;
+}
+.row+.row::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--sep)}
+.row.tap{cursor:pointer}
+.row.tap:active{background:var(--fill)}
+.row .lead{width:29px;height:29px;border-radius:8px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff}
+.row .body{flex:1;min-width:0}
+.row .body .t{font-size:16px;font-weight:500;line-height:1.25}
+.row .body .s{font-size:13px;color:var(--muted);margin-top:1px}
+.row .qty{font-size:13px;font-weight:600;color:var(--orange);white-space:nowrap;background:var(--fill);padding:3px 9px;border-radius:20px}
+.row .chev{color:var(--muted2);font-size:20px;font-weight:600;transition:transform .3s var(--ease-ios)}
+.row .trail{color:var(--muted);font-size:15px;white-space:nowrap}
+.row.checked .body .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--muted2)}
+
+/* ---------- iOS switch (used as checkbox) ---------- */
+.sw{position:relative;width:51px;height:31px;flex:0 0 auto;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:2}
+.sw .track{position:absolute;inset:0;background:var(--fill2);border-radius:20px;transition:background .3s var(--ease-ios)}
+.sw .knob{position:absolute;top:2px;left:2px;width:27px;height:27px;background:#fff;border-radius:50%;
+  box-shadow:0 3px 8px rgba(0,0,0,.15),0 1px 1px rgba(0,0,0,.16);
+  transition:transform .32s var(--ease-spring)}
+.sw input:checked~.track{background:var(--green)}
+.sw input:checked~.knob{transform:translateX(20px)}
+
+/* round check variant (compact lists) */
+.check{width:26px;height:26px;flex:0 0 auto;border-radius:50%;border:2px solid var(--muted2);
+  position:relative;cursor:pointer;transition:all .25s var(--ease-spring)}
+.check input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.check.on{background:var(--green);border-color:var(--green)}
+.check.on::after{content:"";position:absolute;left:8px;top:4px;width:6px;height:11px;
+  border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);animation:pop .3s var(--ease-spring)}
+@keyframes pop{0%{transform:rotate(45deg) scale(0)}100%{transform:rotate(45deg) scale(1)}}
+
+/* ---------- Buttons ---------- */
+.btn{
+  background:var(--blue);color:#fff;border:0;border-radius:14px;padding:14px 18px;
+  font-size:17px;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:-.01em;
+  transition:transform .15s var(--ease-spring),filter .2s;
+}
+.btn:active{transform:scale(.96);filter:brightness(.92)}
+.btn.wide{width:100%}
+.btn.sm{padding:10px 14px;font-size:15px;border-radius:11px}
+.btn.gray{background:var(--fill);color:var(--blue)}
+.btn.green{background:var(--green)}
+.btn.danger{background:var(--fill);color:var(--red)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn-row .btn{flex:1}
+
+/* ---------- Forms ---------- */
+.field{margin-bottom:12px}
+label.fl{font-size:13px;color:var(--muted);font-weight:600;display:block;margin:0 0 5px 4px}
+input,select,textarea{
+  background:var(--card2);border:1px solid transparent;color:var(--text);
+  border-radius:12px;padding:13px 14px;font-size:17px;font-family:inherit;width:100%;
+  transition:border-color .2s,background .2s;-webkit-appearance:none;appearance:none;
+}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238e8e93' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);background:var(--card)}
+textarea{min-height:80px;resize:vertical;line-height:1.45}
+.inline-num{max-width:120px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- Expense rows ---------- */
+.exp{display:flex;align-items:center;gap:12px;padding:13px 16px;position:relative}
+.exp+.exp::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--sep)}
+.exp .ico{width:36px;height:36px;border-radius:10px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:17px;background:var(--fill)}
+.exp .l{flex:1;min-width:0}
+.exp .l .t{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exp .l .s{font-size:12px;color:var(--muted);margin-top:1px}
+.exp .amt{font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.exp .del{background:none;border:0;color:var(--red);font-size:15px;cursor:pointer;padding:4px 6px;border-radius:8px;transition:transform .15s}
+.exp .del:active{transform:scale(.85)}
+
+/* ---------- Stage disclosure ---------- */
+.stage{background:var(--card);border-radius:var(--radius);margin:12px 0;box-shadow:var(--shadow);overflow:hidden}
+.stage-hd{display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;transition:background .15s}
+.stage-hd:active{background:var(--fill)}
+.stage-num{width:40px;height:40px;flex:0 0 auto;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:18px;color:#fff;box-shadow:0 3px 8px rgba(0,0,0,.14)}
+.stage-hd h3{font-size:16px;font-weight:650}
+.stage-hd .meta{font-size:13px;color:var(--muted);margin-top:2px}
+.stage-hd .chev{margin-left:auto;color:var(--muted2);font-size:22px;transition:transform .35s var(--ease-ios)}
+.stage.open .chev{transform:rotate(90deg)}
+.stage .prog-mini{padding:0 16px 14px}
+.stage-body{max-height:0;overflow:hidden;transition:max-height .45s var(--ease-ios)}
+.stage.open .stage-body{max-height:2600px}
+.stage-inner{padding:2px 16px 18px;border-top:.5px solid var(--sep)}
+.objective{font-size:14px;color:var(--text2);background:var(--fill);padding:12px 14px;border-radius:12px;margin:14px 0;line-height:1.45}
+.sub-lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:18px 0 6px}
+
+/* ---------- Badges ---------- */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:3px 9px;border-radius:20px;font-weight:600;letter-spacing:-.01em}
+.b-todo{background:var(--fill);color:var(--muted)}
+.b-prog{background:rgba(255,149,0,.16);color:var(--orange)}
+.b-done{background:rgba(73,154,19,.15);color:var(--brand-dark)}
+.applogo{width:52px;height:52px;flex:0 0 auto;filter:drop-shadow(0 4px 10px rgba(73,154,19,.35))}
+.applogo-sm{width:26px;height:26px;flex:0 0 auto;vertical-align:middle}
+
+/* ---------- Tab bar ---------- */
+.tabbar{
+  position:fixed;bottom:0;left:0;right:0;z-index:50;
+  background:var(--tab-bg);
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-top:.5px solid var(--sep);
+  display:flex;padding-bottom:env(safe-area-inset-bottom);
+}
+.tabbar button{flex:1;background:none;border:0;color:var(--muted);cursor:pointer;
+  padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:10px;font-weight:600;letter-spacing:.01em;transition:color .2s;font-family:inherit}
+.tabbar button .ico{font-size:23px;line-height:1;transition:transform .3s var(--ease-spring)}
+.tabbar button.active{color:var(--blue)}
+.tabbar button.active .ico{transform:translateY(-1px) scale(1.06)}
+.tabbar button:active .ico{transform:scale(.86)}
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom));transform:translate(-50%,20px);
+  background:var(--card);color:var(--text);padding:12px 20px;border-radius:24px;
+  font-size:15px;font-weight:600;z-index:60;box-shadow:var(--shadow-lg);
+  opacity:0;pointer-events:none;transition:all .4s var(--ease-spring);
+  display:flex;align-items:center;gap:8px;border:.5px solid var(--sep);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- Confetti ---------- */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:70;display:none}
+
+/* ---------- Misc ---------- */
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.center{text-align:center}
+.small{font-size:13px}
+.tnum{font-variant-numeric:tabular-nums}
+.hint{font-size:13px;color:var(--muted);padding:8px 20px 0;line-height:1.4}
+.divider{height:.5px;background:var(--sep);margin:14px 0}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s!important;transition-duration:.05s!important}
+}
+
+/* ---------- Photos ---------- */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin-top:10px}
+.thumb{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--card2);cursor:pointer;
+  box-shadow:var(--shadow);transition:transform .15s var(--ease-spring)}
+.thumb:active{transform:scale(.95)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .rm{position:absolute;top:3px;right:3px;width:22px;height:22px;border:0;border-radius:50%;
+  background:rgba(0,0,0,.55);color:#fff;font-size:13px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.add-photo{aspect-ratio:1;border:2px dashed var(--muted2);border-radius:12px;background:var(--card2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--muted);
+  font-size:12px;font-weight:600;transition:border-color .2s,color .2s}
+.add-photo:active{border-color:var(--brand);color:var(--brand)}
+.add-photo .plus{font-size:22px;line-height:1}
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.92);display:none;
+  align-items:center;justify-content:center;padding:20px;animation:viewIn .25s ease both}
+.lightbox.show{display:flex}
+.lightbox img{max-width:100%;max-height:88vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lightbox .close{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;width:40px;height:40px;
+  border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font-size:22px;cursor:pointer;backdrop-filter:blur(10px)}
+
+@media print{
+  body{padding:0;background:#fff}
+  .navbar,.tabbar,.toast,#confetti{display:none!important}
+}
+
+/* ---------- Gantt ---------- */
+.gantt{margin-top:6px}
+.gantt-scale{position:relative;height:18px;margin-left:96px;border-bottom:1px solid var(--sep)}
+.gantt-scale .mk{position:absolute;top:0;font-size:10px;color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.gantt-scale .mk::after{content:"";position:absolute;left:50%;top:16px;width:1px;height:6px;background:var(--sep)}
+.grow{display:flex;align-items:center;gap:8px;margin:9px 0}
+.grow .glbl{width:88px;flex:0 0 auto;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gtrack{position:relative;flex:1;height:22px;background:var(--fill);border-radius:8px;overflow:hidden}
+.gbar{position:absolute;top:0;height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;
+  min-width:6px;overflow:hidden;transition:left .5s var(--ease-ios),width .5s var(--ease-ios)}
+.gbar .fill{position:absolute;left:0;top:0;height:100%;background:rgba(255,255,255,.35)}
+.gbar .plabel{position:relative;font-size:10px;font-weight:700;color:#fff;padding-right:6px;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.gtoday{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--red);z-index:3}
+.gtoday::after{content:"TODAY";position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:800;color:var(--red);letter-spacing:.04em}
+.gantt-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:11px;color:var(--muted)}
+.gantt-legend span{display:flex;align-items:center;gap:4px}
+.gantt-legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+</style>
+</head>
+<body>
+
+<!-- gradient defs for ring -->
+<svg width="0" height="0" style="position:absolute"><defs>
+  <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#276F27"/><stop offset="100%" stop-color="#BBDC12"/>
+  </linearGradient>
+  <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#276F27"/><stop offset="55%" stop-color="#499A13"/><stop offset="100%" stop-color="#8ECA3C"/>
+  </linearGradient>
+</defs></svg>
+
+<div class="navbar" id="navbar">
+  <div class="bar">
+    <button class="nav-btn" onclick="App.go('settings')">􀍟 More</button>
+    <div class="title-sm" id="navTitle">Dashboard</div>
+    <button class="nav-btn" onclick="Store.export()">Backup 􀈄</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= DASHBOARD ================= -->
+  <section id="view-dash" class="view active">
+    <div class="large-title" style="display:flex;align-items:center;gap:14px">
+      <svg class="applogo" viewBox="0 0 48 48">
+        <rect width="48" height="48" rx="13" fill="url(#logoGrad)"/>
+        <rect x="12" y="21" width="24" height="16" rx="2" fill="#fff"/>
+        <rect x="9" y="16" width="30" height="4.5" rx="2.25" fill="#fff"/>
+        <rect x="15.5" y="24" width="5" height="5" rx="1" fill="#499A13"/>
+        <rect x="27.5" y="24" width="5" height="5" rx="1" fill="#499A13"/>
+        <rect x="21.5" y="30" width="5" height="7" rx="1" fill="#499A13"/>
+      </svg>
+      <div>
+        <h1>Murehwa Villa</h1>
+        <div class="loc">📍 Murehwa · Mashonaland East · Zimbabwe</div>
+      </div>
+    </div>
+
+    <div class="stagger">
+      <div class="card">
+        <div class="ring-wrap">
+          <div class="ring">
+            <svg width="132" height="132" viewBox="0 0 132 132">
+              <circle class="track" cx="66" cy="66" r="54"></circle>
+              <circle class="prog" id="ringProg" cx="66" cy="66" r="54"
+                stroke-dasharray="339.29" stroke-dashoffset="339.29"></circle>
+            </svg>
+            <div class="center"><div class="pct" id="ringPct">0%</div><div class="cap">Complete</div></div>
+          </div>
+          <div class="ring-side">
+            <div class="big">Build Progress</div>
+            <div id="dashStageMini"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid g2">
+        <div class="tile">
+          <div class="lbl">Spent</div>
+          <div class="val sm tnum" id="tSpent">$0</div>
+          <div class="foot">of <span id="tBudget">$36,160</span></div>
+          <div class="bar money" style="margin-top:9px"><span id="tSpentBar"></span></div>
+        </div>
+        <div class="tile">
+          <div class="lbl">Bricks</div>
+          <div class="val sm tnum" id="tBricks">0</div>
+          <div class="foot">of 80,000 delivered</div>
+          <div class="bar brick" style="margin-top:9px"><span id="tBrickBar"></span></div>
+        </div>
+      </div>
+
+      <div class="grid g2">
+        <div class="tile"><div class="lbl">Remaining Budget</div><div class="val sm tnum" id="tRemain">$36,160</div></div>
+        <div class="tile"><div class="lbl">Est. Investment</div><div class="val sm tnum" id="tInvest">$36,160</div></div>
+      </div>
+
+      <div class="section-title">Timeline &amp; Forecast</div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-weight:600">Overall Progress</span>
+          <span class="tnum" style="font-weight:700;color:var(--brand)" id="tlPct">0%</span>
+        </div>
+        <div class="bar"><span id="tlBar"></span></div>
+        <div class="grid g2" style="margin-top:16px">
+          <div>
+            <div class="lbl" style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">Started</div>
+            <div style="font-weight:600;font-size:15px;margin-top:2px" id="tlStart">—</div>
+          </div>
+          <div>
+            <div class="lbl" style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">Projected Finish</div>
+            <div style="font-weight:600;font-size:15px;margin-top:2px;color:var(--brand)" id="tlFinish">—</div>
+          </div>
+        </div>
+        <div class="small muted" id="tlNote" style="margin-top:12px;line-height:1.4">Complete a few tasks to forecast your finish date.</div>
+      </div>
+
+      <div class="section-title">Schedule · Gantt</div>
+      <div class="section-sub">Planned stage timeline — set target dates inside each stage</div>
+      <div class="card">
+        <div class="gantt">
+          <div class="gantt-scale" id="ganttScale"></div>
+          <div id="ganttRows"></div>
+        </div>
+        <div class="gantt-legend">
+          <span><i style="background:var(--brand)"></i>Planned duration</span>
+          <span><i style="background:rgba(255,255,255,.5);border:1px solid var(--muted2)"></i>Completed</span>
+          <span><i style="background:var(--red)"></i>Today</span>
+        </div>
+      </div>
+
+      <div class="section-title">Up Next</div>
+      <div class="section-sub">Pending action steps across all stages</div>
+      <div class="list" id="dashNext"></div>
+    </div>
+  </section>
+
+  <!-- ================= STAGES ================= -->
+  <section id="view-stages" class="view">
+    <div class="large-title"><h1>Stages</h1></div>
+    <div class="hint">Tap a stage to expand. Toggle steps &amp; materials as you go — everything saves automatically.</div>
+    <div id="stagesList" class="stagger"></div>
+  </section>
+
+  <!-- ================= MATERIALS ================= -->
+  <section id="view-materials" class="view">
+    <div class="large-title"><h1>Materials</h1></div>
+    <div class="stagger">
+      <div class="grid g2">
+        <div class="tile"><div class="lbl">Delivered</div><div class="val sm tnum" id="matDone">0 / 0</div></div>
+        <div class="tile"><div class="lbl">Procurement</div><div class="val sm tnum" id="matPct">0%</div>
+          <div class="bar" style="margin-top:9px"><span id="matBar"></span></div></div>
+      </div>
+
+      <div class="section-title">🧱 Brick Logistics</div>
+      <div class="section-sub">80,000 bricks total · est. supply &amp; haulage $9,610</div>
+      <div class="card" id="brickBox"></div>
+
+      <div class="section-title">Procurement Checklist</div>
+      <div id="materialsList"></div>
+    </div>
+  </section>
+
+  <!-- ================= BUDGET ================= -->
+  <section id="view-budget" class="view">
+    <div class="large-title"><h1>Budget</h1></div>
+    <div class="stagger">
+      <div class="grid g3">
+        <div class="tile"><div class="lbl">Budget</div><div class="val sm tnum" id="bBudget">$36,160</div></div>
+        <div class="tile"><div class="lbl">Spent</div><div class="val sm tnum" id="bSpent">$0</div></div>
+        <div class="tile"><div class="lbl">Left</div><div class="val sm tnum" id="bRemain">$36,160</div></div>
+      </div>
+      <div class="card">
+        <div class="bar money"><span id="bBar"></span></div>
+      </div>
+
+      <div class="section-title">Log an Expense</div>
+      <div class="card">
+        <div class="field"><label class="fl">Item / description</label><input id="expItem" placeholder="e.g. 50 bags cement"></div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Amount (USD)</label><input id="expAmt" type="number" inputmode="decimal" placeholder="0.00"></div>
+          <div class="field"><label class="fl">Stage</label><select id="expStage"></select></div>
+        </div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Supplier</label><input id="expSupplier" placeholder="optional"></div>
+          <div class="field"><label class="fl">Date</label><input id="expDate" type="date"></div>
+        </div>
+        <button class="btn green wide" onclick="App.addExpense()">Add Expense</button>
+      </div>
+
+      <div class="section-title">Spend by Stage</div>
+      <div class="card" id="budgetByStage"></div>
+
+      <div class="section-title">👷 Labour Costs</div>
+      <div class="section-sub">Tracked separately from materials · added to total project outlay</div>
+      <div class="grid g2">
+        <div class="tile"><div class="lbl">Labour Paid</div><div class="val sm tnum" id="labTotal">$0</div></div>
+        <div class="tile"><div class="lbl">Total Outlay</div><div class="val sm tnum" id="totalOutlay">$0</div><div class="foot">materials + labour</div></div>
+      </div>
+      <div class="card">
+        <div class="field"><label class="fl">Worker / role</label><input id="labWorker" placeholder="e.g. Brick-laying team"></div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Amount (USD)</label><input id="labAmt" type="number" inputmode="decimal" placeholder="0.00"></div>
+          <div class="field"><label class="fl">Stage</label><select id="labStage"></select></div>
+        </div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Task (optional)</label><input id="labTask" placeholder="e.g. Foundation"></div>
+          <div class="field"><label class="fl">Date</label><input id="labDate" type="date"></div>
+        </div>
+        <button class="btn wide" onclick="App.addLabour()">Add Labour Payment</button>
+      </div>
+      <div class="list" id="labourLog"></div>
+
+      <div class="section-title">Expense Log</div>
+      <div class="list" id="expenseLog"></div>
+
+      <div style="margin-top:18px">
+        <button class="btn gray wide" onclick="App.report()">􀉁 Generate Printable Report (PDF)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACTIVITY ================= -->
+  <section id="view-activity" class="view">
+    <div class="large-title"><h1>Activity</h1></div>
+    <div class="hint">Log everything that happens on site — items bought, added, removed, or work completed.</div>
+    <div class="stagger">
+      <div class="card">
+        <div class="field"><label class="fl">What happened?</label><input id="actText" placeholder="e.g. Bought 80 IBR roof sheets"></div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Type</label>
+            <select id="actCat">
+              <option value="bought">🛒 Bought</option>
+              <option value="completed">✅ Completed</option>
+              <option value="added">➕ Added / Delivered</option>
+              <option value="removed">➖ Removed / Returned</option>
+              <option value="note">📝 Note</option>
+            </select>
+          </div>
+          <div class="field"><label class="fl">Amount (USD, optional)</label><input id="actAmt" type="number" inputmode="decimal" placeholder="0.00"></div>
+        </div>
+        <div class="field"><label class="fl">Date</label><input id="actDate" type="date"></div>
+        <div class="field">
+          <label class="fl">Photo (optional)</label>
+          <input type="file" id="actPhotoInput" accept="image/*" class="hidden" onchange="App.pickActivityPhoto(this)">
+          <button class="btn gray sm" type="button" onclick="document.getElementById('actPhotoInput').click()">📷 Attach Photo</button>
+          <span id="actPhotoName" class="small muted" style="margin-left:8px"></span>
+        </div>
+        <label style="display:flex;align-items:center;gap:10px;font-size:14px;margin:2px 4px 14px;cursor:pointer">
+          <input type="checkbox" id="actToBudget" checked style="width:auto;margin:0"> Also count amount toward budget spend
+        </label>
+        <button class="btn wide" onclick="App.addActivity()">Add to Log</button>
+      </div>
+
+      <div class="grid g2">
+        <div class="tile"><div class="lbl">Entries</div><div class="val sm tnum" id="actCount">0</div></div>
+        <div class="tile"><div class="lbl">Logged Value</div><div class="val sm tnum" id="actTotal">$0</div></div>
+      </div>
+
+      <div class="section-title">History</div>
+      <div class="list" id="activityLog"></div>
+    </div>
+  </section>
+
+  <!-- ================= SETTINGS ================= -->
+  <section id="view-settings" class="view">
+    <div class="large-title"><h1>More</h1></div>
+    <div class="stagger">
+      <div class="group-hd">Project Notes</div>
+      <div class="card">
+        <textarea id="projectNotes" placeholder="Builder contacts, delivery dates, curing schedule, decisions…"></textarea>
+        <button class="btn gray sm wide" style="margin-top:10px" onclick="App.saveNotes()">Save Notes</button>
+      </div>
+
+      <div class="group-hd">Project Timeline</div>
+      <div class="card">
+        <label class="fl">Build start date</label>
+        <input id="startDate" type="date" onchange="App.setStartDate(this.value)">
+        <div class="small muted" style="margin-top:8px">Used to forecast your projected completion date from your work pace.</div>
+      </div>
+
+      <div class="group-hd">Data &amp; Backup</div>
+      <div class="card">
+        <div class="small muted" style="margin-bottom:12px">Everything is stored privately on this device. Back up regularly.</div>
+        <div class="btn-row">
+          <button class="btn sm" onclick="Store.export()">􀈄 Export</button>
+          <button class="btn gray sm" onclick="document.getElementById('importFile').click()">􀈃 Import</button>
+        </div>
+        <input type="file" id="importFile" accept="application/json" class="hidden" onchange="Store.import(event)">
+        <div class="divider"></div>
+        <button class="btn gray sm wide" onclick="App.report()">🖨️ Generate Printable Report (PDF)</button>
+      </div>
+
+      <div class="group-hd">Danger Zone</div>
+      <div class="card">
+        <button class="btn danger sm wide" onclick="App.resetAll()">Reset All Progress</button>
+      </div>
+
+      <div class="hint center" style="margin-top:20px">Murehwa Villa Build Tracker · works offline · v2.0</div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="tabbar">
+  <button data-view="dash" class="active" onclick="App.go('dash')"><span class="ico">􀣔</span>Dashboard</button>
+  <button data-view="stages" onclick="App.go('stages')"><span class="ico">􀏦</span>Stages</button>
+  <button data-view="materials" onclick="App.go('materials')"><span class="ico">􀐗</span>Materials</button>
+  <button data-view="budget" onclick="App.go('budget')"><span class="ico">􀖗</span>Budget</button>
+  <button data-view="activity" onclick="App.go('activity')"><span class="ico">􀉉</span>Activity</button>
+  <button data-view="settings" onclick="App.go('settings')"><span class="ico">􀍟</span>More</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+<canvas id="confetti"></canvas>
+<div class="lightbox" id="lightbox" onclick="App.closeLightbox()">
+  <button class="close" onclick="App.closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+/* ===== SF Symbols fallback: if glyphs don't render, swap to emoji ===== */
+const TAB_EMOJI={dash:"📊",stages:"🏗️",materials:"📦",budget:"💵",activity:"📋",settings:"⚙️"};
+
+/* ============================================================
+   SEED DATA — Murehwa Villa Structural Shell
+   ============================================================ */
+const SEED = {
+  meta:{ budget:36160 },
+  stageColors:["#276F27","#499A13","#8ECA3C","#BBDC12","#30b0c7","#f59e0b"],
+  stageIcons:["⛏️","🧱","🏗️","🧱","🏠","🪟"],
+  stageWeeks:[3,2,6,3,2,4],
+  stages:[
+    { id:"s1", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
+      objective:"Excavate load-bearing trenches to carry the vertical weight of a double-storey structure, avoiding ground settling or wall cracking.",
+      steps:[
+        "Excavate trenches exactly 1 m deep and 600 mm wide",
+        "Assemble and bind heavy steel rebar reinforcement cages",
+        "Mix and pour thick structural strip-footing concrete inside trenches",
+        "Lay high-strength foundation brickwork courses up to floor line"
+      ],
+      materials:[
+        {n:"50kg Cement (1:3:6 bulk mix)", q:"180 bags"},
+        {n:"Y12 High-Yield Reinforcing Rebar", q:"1.2 tonnes"},
+        {n:"19mm Quarry Stones", q:"15 m³"},
+        {n:"Coarse Pit Sand", q:"12 m³"}
+      ]},
+    { id:"s2", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
+      objective:"Cast a solid concrete surface bed across the full living area and the attached single-storey vehicle wing (295 m²).",
+      steps:[
+        "Backfill internal foundation pockets in 150 mm layers, water & compact heavily",
+        "Lay plastic Damp-Proof Membrane (DPC) to block ground moisture",
+        "Lay steel anti-crack reinforcing mesh across the ground footprint",
+        "Pour continuous 100 mm concrete slab across combined 295 m² zone"
+      ],
+      materials:[
+        {n:"50kg Cement (1:2:4 mix)", q:"210 bags"},
+        {n:"Ref 88 Structural Concrete Mesh", q:"8 sheets"},
+        {n:"Heavy Brickforce Wire", q:"5 rolls"},
+        {n:"Washed River Sand", q:"20 m³"},
+        {n:"19mm Crushed Quarry Stones", q:"25 m³"}
+      ]},
+    { id:"s3", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11600,
+      objective:"Erect ground level walls and engineer the heavy floor structure supporting the upper-level bedrooms.",
+      steps:[
+        "Erect external & internal walls to 3 m height (machine-pressed bricks on load-bearing walls)",
+        "Assemble steel scaffolding props & marine plywood shuttering",
+        "Weave & tie dense dual-layer Y16 + Y12 reinforcement grid",
+        "Pour solid 150 mm suspended concrete deck over 225 m² footprint",
+        "Keep slab wet & propped for 28 consecutive days (full curing)"
+      ],
+      materials:[
+        {n:"50kg Cement (1:1.5:3 structural mix)", q:"380 bags"},
+        {n:"Y16 + Y12 Reinforcing Steel Bars", q:"2.5 tonnes"},
+        {n:"Fine Clean River Sand", q:"18 m³"},
+        {n:"19mm Structural Quarry Stones", q:"22 m³"},
+        {n:"Adjustable Steel Decking Props (rental)", q:"~250 props"}
+      ]},
+    { id:"s4", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
+      objective:"Build the upstairs private sanctuary and erect architectural screening to mimic a flat Dubai layout.",
+      steps:[
+        "Build upper-level bedroom partitions, bathrooms & corridors",
+        "Extend perimeter walls 800–1000 mm above ceiling line (high parapet)",
+        "Cast continuous concrete ring-beam along highest parapet course",
+        "Embed heavy-duty hoop-iron strapping into ring-beam as roof tie-downs"
+      ],
+      materials:[
+        {n:"50kg Cement (ring-beam & mortar)", q:"30 bags"},
+        {n:"Galvanized Hoop Iron Strapping Wire", q:"3 rolls"}
+      ]},
+    { id:"s5", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
+      objective:"Install a lightweight, ultra-durable timber & steel roof hidden entirely inside the parapet framework.",
+      steps:[
+        "Construct sloped timber truss network inside parapet, pitched to backyard",
+        "Secure 0.47mm Charcoal Chromadek sheets over timber framing",
+        "Fabricate & mount deep-channel galvanized box gutters along parapet base",
+        "Run wide PVC downpipes down rear walls for seasonal rain runoff"
+      ],
+      materials:[
+        {n:"38×114×6.0m Treated Timber Trusses", q:"45 lengths"},
+        {n:"38×76×6.0m Timber Purlins", q:"60 lengths"},
+        {n:"38×38×6.0m Ceiling Brandering", q:"80 lengths"},
+        {n:"0.47mm Charcoal Grey IBR Sheeting", q:"80 sheets"},
+        {n:"Galvanized Box Gutters & Downpipes", q:"custom set"},
+        {n:"Roofing Screws, Washers & Weatherproof Silicone", q:"1 lot"}
+      ]},
+    { id:"s6", name:"Windows, Glazing & Fittings", short:"Glazing & Fittings", estCost:7800,
+      objective:"Install aluminium-framed glazing, doors, and full electrical lights & fittings to bring the villa to a livable, finished lock-up state.",
+      steps:[
+        "Install aluminium window frames & glass glazing throughout",
+        "Fit aluminium/glass external doors & internal doors",
+        "First-fix electrical wiring, conduits & distribution (DB) board",
+        "Mount light fittings, switches, sockets & fixtures",
+        "Fit plumbing fixtures, taps & bathroom fittings",
+        "Fit ceilings, cornices & final trims"
+      ],
+      materials:[
+        {n:"Aluminium Window Frames (assorted sizes)", q:"1 set"},
+        {n:"Glass Glazing Panels (windows & doors)", q:"1 lot"},
+        {n:"Aluminium & Glass Doors", q:"assorted"},
+        {n:"Electrical Cabling, Conduits & DB Board", q:"1 lot"},
+        {n:"Light Fittings, Switches & Sockets", q:"full house"},
+        {n:"Plumbing & Bathroom Fittings", q:"1 set"},
+        {n:"Ceiling Boards, Cornices & Trims", q:"1 lot"}
+      ]}
+  ],
+  bricks:[
+    {n:"External & Parapet (double skin) — Machine-pressed (Beta/Willdale)", q:51000},
+    {n:"Internal Partitions (single skin) — Local molded farm bricks", q:29000}
+  ],
+  brickCost:9610
+};
+SEED.meta.budget = SEED.stages.reduce((a,s)=>a+s.estCost,0) + SEED.brickCost;
+const todayISO=()=>new Date().toISOString().slice(0,10);
+
+/* Compress an image File to a small JPEG dataURL for localStorage */
+function compressImage(file, maxDim=1200, quality=0.6){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        let {width:w,height:h}=img;
+        if(w>h && w>maxDim){ h=Math.round(h*maxDim/w); w=maxDim; }
+        else if(h>maxDim){ w=Math.round(w*maxDim/h); h=maxDim; }
+        const c=document.createElement("canvas"); c.width=w; c.height=h;
+        c.getContext("2d").drawImage(img,0,0,w,h);
+        resolve(c.toDataURL("image/jpeg",quality));
+      };
+      img.onerror=reject; img.src=reader.result;
+    };
+    reader.onerror=reject; reader.readAsDataURL(file);
+  });
+}
+
+/* ---------- IndexedDB photo store (large capacity) ---------- */
+const Photo={
+  db:null, cache:new Map(),
+  open(){
+    return new Promise((resolve)=>{
+      if(!("indexedDB" in window)){ resolve(null); return; }
+      const req=indexedDB.open("murehwa_villa_photos",1);
+      req.onupgradeneeded=e=>{ const db=e.target.result; if(!db.objectStoreNames.contains("photos")) db.createObjectStore("photos",{keyPath:"id"}); };
+      req.onsuccess=e=>{ this.db=e.target.result; resolve(this.db); };
+      req.onerror=()=>{ resolve(null); };
+    });
+  },
+  _tx(mode){ return this.db.transaction("photos",mode).objectStore("photos"); },
+  put(id,data){
+    this.cache.set(id,data);
+    return new Promise(res=>{ if(!this.db){res();return;} const r=this._tx("readwrite").put({id,data}); r.onsuccess=()=>res(); r.onerror=()=>res(); });
+  },
+  del(id){
+    this.cache.delete(id);
+    return new Promise(res=>{ if(!this.db){res();return;} const r=this._tx("readwrite").delete(id); r.onsuccess=()=>res(); r.onerror=()=>res(); });
+  },
+  get(id){ return this.cache.get(id)||null; },
+  loadAll(){
+    return new Promise(res=>{
+      if(!this.db){res();return;}
+      const r=this._tx("readonly").getAll();
+      r.onsuccess=()=>{ (r.result||[]).forEach(p=>this.cache.set(p.id,p.data)); res(); };
+      r.onerror=()=>res();
+    });
+  },
+  clear(){
+    this.cache.clear();
+    return new Promise(res=>{ if(!this.db){res();return;} const r=this._tx("readwrite").clear(); r.onsuccess=()=>res(); r.onerror=()=>res(); });
+  }
+};
+
+/* ============================================================
+   STORE — localStorage persistence (backward compatible)
+   ============================================================ */
+const KEY="murehwa_villa_v1";
+const Store={
+  state:null,
+  load(){
+    let raw=null; try{ raw=localStorage.getItem(KEY); }catch(e){}
+    if(raw){ try{ this.state=JSON.parse(raw); }catch(e){ this.state=null; } }
+    if(!this.state) this.state=this.fresh();
+    this.migrate(); return this.state;
+  },
+  fresh(){
+    const s={ stages:[], expenses:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO() };
+    SEED.stages.forEach(st=> s.stages.push({id:st.id,steps:st.steps.map(()=>false),materials:st.materials.map(()=>false),notes:"",photos:[]}));
+    SEED.bricks.forEach(()=> s.bricks.push({delivered:0}));
+    return s;
+  },
+  migrate(){
+    SEED.stages.forEach((st,i)=>{
+      if(!this.state.stages[i]) this.state.stages[i]={id:st.id,steps:[],materials:[],notes:"",photos:[]};
+      const c=this.state.stages[i];
+      while(c.steps.length<st.steps.length) c.steps.push(false);
+      while(c.materials.length<st.materials.length) c.materials.push(false);
+      if(!c.photos) c.photos=[];
+    });
+    if(!this.state.bricks) this.state.bricks=[];
+    SEED.bricks.forEach((b,i)=>{ if(!this.state.bricks[i]) this.state.bricks[i]={delivered:0}; });
+    if(!this.state.expenses) this.state.expenses=[];
+    if(!this.state.activity) this.state.activity=[];
+    if(!this.state.labour) this.state.labour=[];
+    if(!this.state.startDate) this.state.startDate=todayISO();
+    if(typeof this.state.notes!=="string") this.state.notes="";
+  },
+  save(){ try{ localStorage.setItem(KEY,JSON.stringify(this.state)); }catch(e){ App.toast("⚠︎","Save failed"); } },
+  async export(){
+    const photos={}; Photo.cache.forEach((data,id)=>{ photos[id]=data; });
+    const data=JSON.stringify({app:"murehwa_villa",version:3,exported:new Date().toISOString(),state:this.state,photos},null,2);
+    const blob=new Blob([data],{type:"application/json"});
+    const url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url; a.download="murehwa-villa-backup-"+new Date().toISOString().slice(0,10)+".json";
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    App.toast("✅","Backup downloaded");
+  },
+  import(ev){
+    const f=ev.target.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=async()=>{
+      try{
+        const p=JSON.parse(r.result), st=p.state||p;
+        if(!st.stages) throw 0;
+        if(p.photos){ for(const id in p.photos){ await Photo.put(id,p.photos[id]); } }
+        this.state=st; this.migrate(); this.save();
+        App.renderAll(); App.toast("✅","Backup imported");
+      }catch(e){ App.toast("⚠︎","Invalid backup file"); }
+    };
+    r.readAsText(f); ev.target.value="";
+  }
+};
+
+/* ============================================================
+   APP
+   ============================================================ */
+const fmt=n=>"$"+Math.round(n).toLocaleString("en-US");
+const fmtN=n=>Number(n).toLocaleString("en-US");
+
+const App={
+  async init(){
+    Store.load();
+    await Photo.open();
+    await Photo.loadAll();
+    await this.migratePhotos();
+    this.buildStageSelect();
+    document.getElementById("expDate").value=todayISO();
+    document.getElementById("actDate").value=todayISO();
+    document.getElementById("labDate").value=todayISO();
+    document.getElementById("startDate").value=Store.state.startDate||todayISO();
+    document.getElementById("projectNotes").value=Store.state.notes||"";
+    document.getElementById("tInvest").textContent=fmt(SEED.meta.budget);
+    document.getElementById("tBudget").textContent=fmt(SEED.meta.budget);
+    this.detectGlyphs();
+    this.renderAll(true);
+    window.addEventListener("scroll",()=>{
+      document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>60);
+    },{passive:true});
+  },
+
+  /* migrate legacy inline (localStorage) photos → IndexedDB */
+  async migratePhotos(){
+    let moved=false;
+    for(const st of Store.state.stages){
+      if(!st.photos) continue;
+      for(const ph of st.photos){
+        if(ph.data){ await Photo.put(ph.id,ph.data); delete ph.data; moved=true; }
+      }
+    }
+    for(const a of (Store.state.activity||[])){
+      if(a.photo && typeof a.photo==="string" && a.photo.startsWith("data:")){
+        const id="p"+a.id+"a"; await Photo.put(id,a.photo); a.photo=id; moved=true;
+      }
+    }
+    if(moved) Store.save();
+  },
+
+  detectGlyphs(){
+    // SF Symbols private-use glyphs only render on Apple platforms; fall back to emoji elsewhere
+    const c=document.createElement("canvas"),ctx=c.getContext("2d");
+    ctx.font="20px -apple-system";
+    const w1=ctx.measureText("\u{100594}").width, w2=ctx.measureText("\u{FFFF}").width;
+    const isApple=/Mac|iPhone|iPad|iPod/.test(navigator.platform)||/Mac OS X/.test(navigator.userAgent);
+    if(!isApple){
+      document.querySelectorAll(".tabbar button").forEach(b=>{
+        b.querySelector(".ico").textContent=TAB_EMOJI[b.dataset.view];
+      });
+      document.querySelectorAll(".nav-btn").forEach(b=>{
+        b.textContent=b.textContent.replace(/[\u{F0000}-\u{FFFFF}]/gu,"").trim();
+      });
+    }
+  },
+
+  go(v){
+    document.querySelectorAll(".view").forEach(el=>el.classList.remove("active"));
+    const view=document.getElementById("view-"+v);
+    view.classList.remove("active"); void view.offsetWidth; view.classList.add("active");
+    document.querySelectorAll(".tabbar button").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+    const titles={dash:"Dashboard",stages:"Stages",materials:"Materials",budget:"Budget",activity:"Activity",settings:"More"};
+    document.getElementById("navTitle").textContent=titles[v];
+    window.scrollTo({top:0,behavior:"instant"});
+    if(navigator.vibrate) navigator.vibrate(4);
+  },
+
+  toast(icon,msg){
+    const t=document.getElementById("toast");
+    t.innerHTML=`<span>${icon}</span><span>${msg}</span>`;
+    t.classList.add("show");
+    clearTimeout(this._tt); this._tt=setTimeout(()=>t.classList.remove("show"),1900);
+  },
+
+  buzz(ms){ if(navigator.vibrate) navigator.vibrate(ms); },
+
+  /* ---------- progress ---------- */
+  stageProgress(i){
+    const c=Store.state.stages[i], total=c.steps.length+c.materials.length;
+    if(!total) return 0;
+    return Math.round((c.steps.filter(Boolean).length+c.materials.filter(Boolean).length)/total*100);
+  },
+  overallProgress(){
+    let d=0,t=0;
+    Store.state.stages.forEach(c=>{t+=c.steps.length+c.materials.length;d+=c.steps.filter(Boolean).length+c.materials.filter(Boolean).length;});
+    return t?Math.round(d/t*100):0;
+  },
+  totalSpent(){ return Store.state.expenses.reduce((a,e)=>a+(+e.amt||0),0); },
+  totalBricks(){ return SEED.bricks.reduce((a,b)=>a+b.q,0); },
+  bricksDelivered(){ return Store.state.bricks.reduce((a,b)=>a+(+b.delivered||0),0); },
+  badge(p){
+    if(p===0) return '<span class="badge b-todo">Not started</span>';
+    if(p===100) return '<span class="badge b-done">✓ Complete</span>';
+    return '<span class="badge b-prog">'+p+'%</span>';
+  },
+
+  countUp(el,to,prefix="",dur=650){
+    const from=parseFloat((el.dataset.v||"0")); el.dataset.v=to;
+    const t0=performance.now();
+    const tick=now=>{
+      const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+      const val=Math.round(from+(to-from)*e);
+      el.textContent=prefix+val.toLocaleString("en-US");
+      if(k<1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  },
+
+  renderAll(anim){
+    this.renderDash(anim);
+    this.renderStages();
+    this.renderMaterials();
+    this.renderBudget();
+    this.renderActivity();
+    Store.save();
+  },
+
+  /* ---------- Forecast ---------- */
+  daysBetween(a,b){ return Math.round((b-a)/86400000); },
+  forecast(){
+    const p=this.overallProgress();
+    const start=new Date((Store.state.startDate||todayISO())+"T00:00:00");
+    const now=new Date(todayISO()+"T00:00:00");
+    let elapsed=this.daysBetween(start,now); if(elapsed<0) elapsed=0;
+    const out={progress:p,start,elapsed,finish:null,daysLeft:null,ready:false};
+    if(p>0 && p<100 && elapsed>=1){
+      const perDay=p/elapsed;
+      const daysLeft=Math.ceil((100-p)/perDay);
+      const finish=new Date(now.getTime()+daysLeft*86400000);
+      out.finish=finish; out.daysLeft=daysLeft; out.ready=true;
+    } else if(p>=100){ out.done=true; }
+    return out;
+  },
+
+  /* ---------- Schedule / Gantt ---------- */
+  scheduleFor(){
+    const base=new Date((Store.state.startDate||todayISO())+"T00:00:00");
+    let cursor=new Date(base);
+    const out=[];
+    SEED.stages.forEach((st,i)=>{
+      const c=Store.state.stages[i];
+      const start=c.planStart? new Date(c.planStart+"T00:00:00") : new Date(cursor);
+      const end=c.planEnd? new Date(c.planEnd+"T00:00:00") : new Date(start.getTime()+SEED.stageWeeks[i]*7*86400000);
+      out.push({start,end,custom:!!(c.planStart||c.planEnd)});
+      cursor=new Date(end.getTime()+86400000);
+    });
+    return out;
+  },
+  setStageDate(i,key,v){
+    Store.state.stages[i][key]=v||"";
+    Store.save();
+    this.renderGantt(); this.renderDash(false);
+    this.toast("✅","Schedule updated");
+  },
+  renderGantt(){
+    const sch=this.scheduleFor();
+    let min=Math.min(...sch.map(s=>s.start.getTime()));
+    let max=Math.max(...sch.map(s=>s.end.getTime()));
+    const now=new Date(todayISO()+"T00:00:00").getTime();
+    min=Math.min(min,now); max=Math.max(max,now);
+    const span=Math.max(1,max-min);
+    const pos=t=>((t-min)/span)*100;
+
+    const scale=document.getElementById("ganttScale");
+    let mk="";
+    const d=new Date(min); d.setDate(1);
+    let guard=0;
+    while(d.getTime()<=max && guard++<60){
+      const t=d.getTime();
+      if(t>=min){
+        const left=pos(t);
+        if(left>=0&&left<=100) mk+=`<span class="mk" style="left:${left}%">${d.toLocaleDateString("en-US",{month:"short",year:"2-digit"})}</span>`;
+      }
+      d.setMonth(d.getMonth()+1);
+    }
+    scale.innerHTML=mk;
+
+    let rows="";
+    SEED.stages.forEach((st,i)=>{
+      const s=sch[i], left=pos(s.start.getTime()), width=Math.max(1.5,pos(s.end.getTime())-left);
+      const prog=this.stageProgress(i), col=SEED.stageColors[i];
+      const behind = prog<100 && now>s.end.getTime();
+      rows+=`<div class="grow">
+        <div class="glbl">S${i+1} ${st.short}</div>
+        <div class="gtrack">
+          <div class="gbar" style="left:${left}%;width:${width}%;background:${behind?'var(--red)':col}">
+            <div class="fill" style="width:${prog}%"></div>
+            <div class="plabel">${prog}%</div>
+          </div>
+          <div class="gtoday" style="left:${pos(now)}%"></div>
+        </div>
+      </div>`;
+    });
+    document.getElementById("ganttRows").innerHTML=rows;
+  },
+
+  /* ---------- DASHBOARD ---------- */
+  renderDash(anim){
+    const p=this.overallProgress();
+    const circ=2*Math.PI*54;
+    const ring=document.getElementById("ringProg");
+    setTimeout(()=>{ ring.style.strokeDashoffset=circ*(1-p/100); }, anim?120:0);
+    this.countUp(document.getElementById("ringPct"),p,"");
+    document.getElementById("ringPct").textContent=p+"%"; // ensure % suffix
+    // countUp overwrites; re-apply after
+    setTimeout(()=>{document.getElementById("ringPct").textContent=p+"%";},700);
+
+    const spent=this.totalSpent(), budget=SEED.meta.budget;
+    this.countUp(document.getElementById("tSpent"),spent,"$");
+    this.countUp(document.getElementById("tRemain"),budget-spent,"$");
+    document.getElementById("tBudget").textContent=fmt(budget);
+    setTimeout(()=>document.getElementById("tSpentBar").style.width=Math.min(100,budget?spent/budget*100:0)+"%",100);
+
+    const bd=this.bricksDelivered(), bt=this.totalBricks();
+    this.countUp(document.getElementById("tBricks"),bd,"");
+    setTimeout(()=>document.getElementById("tBrickBar").style.width=(bt?bd/bt*100:0)+"%",100);
+
+    let mini="";
+    SEED.stages.forEach((st,i)=>{
+      const sp=this.stageProgress(i);
+      mini+=`<div style="display:flex;align-items:center;gap:8px;margin:5px 0">
+        <div style="width:10px;height:10px;border-radius:3px;background:${SEED.stageColors[i]};flex:0 0 auto"></div>
+        <div style="flex:1"><div class="bar"><span style="width:${sp}%;background:${SEED.stageColors[i]}"></span></div></div>
+        <div class="small muted tnum" style="width:34px;text-align:right">${sp}%</div></div>`;
+    });
+    document.getElementById("dashStageMini").innerHTML=mini;
+
+    // up next
+    let next=[],count=0;
+    for(let i=0;i<SEED.stages.length&&count<5;i++){
+      const st=SEED.stages[i], cur=Store.state.stages[i];
+      st.steps.forEach((s,j)=>{
+        if(!cur.steps[j]&&count<5){
+          next.push(`<div class="row"><div class="check" onclick="App.tapCheck(this,${i},'steps',${j})"><input type="checkbox"></div>
+            <div class="body"><div class="t">${this.esc(s)}</div><div class="s">Stage ${i+1} · ${st.short}</div></div></div>`);
+          count++;
+        }
+      });
+    }
+    document.getElementById("dashNext").innerHTML = next.length ? next.join("") :
+      '<div class="row center" style="justify-content:center;color:var(--green);font-weight:600">🎉 All action steps complete!</div>';
+
+    // timeline forecast
+    const f=this.forecast();
+    const fmtDate=d=>d?d.toLocaleDateString("en-US",{day:"numeric",month:"short",year:"numeric"}):"—";
+    document.getElementById("tlPct").textContent=f.progress+"%";
+    setTimeout(()=>{const b=document.getElementById("tlBar"); if(b) b.style.width=f.progress+"%";},120);
+    document.getElementById("tlStart").textContent=fmtDate(f.start);
+    if(f.done){
+      document.getElementById("tlFinish").textContent="Complete 🎉";
+      document.getElementById("tlNote").textContent="All stages finished — congratulations!";
+    } else if(f.ready){
+      document.getElementById("tlFinish").textContent=fmtDate(f.finish);
+      const wks=Math.round(f.daysLeft/7);
+      document.getElementById("tlNote").innerHTML=`At your current pace (${f.progress}% in ${f.elapsed} day${f.elapsed===1?"":"s"}), about <b>${f.daysLeft} days</b> (~${wks} week${wks===1?"":"s"}) remaining.`;
+    } else {
+      document.getElementById("tlFinish").textContent="—";
+      document.getElementById("tlNote").textContent = f.progress>=100 ? "" :
+        "Complete a few tasks over a day or two to forecast your finish date.";
+    }
+    this.renderGantt();
+  },
+
+  /* ---------- STAGES ---------- */
+  renderStages(){
+    let html="";
+    SEED.stages.forEach((st,i)=>{
+      const cur=Store.state.stages[i], p=this.stageProgress(i), col=SEED.stageColors[i];
+      let steps="";
+      st.steps.forEach((s,j)=>{
+        const c=cur.steps[j];
+        steps+=`<div class="row ${c?'checked':''}"><div class="body"><div class="t">${this.esc(s)}</div></div>
+          <div class="sw"><input type="checkbox" ${c?'checked':''} onchange="App.toggle(${i},'steps',${j},this)">
+          <div class="track"></div><div class="knob"></div></div></div>`;
+      });
+      let mats="";
+      st.materials.forEach((m,j)=>{
+        const c=cur.materials[j];
+        mats+=`<div class="row ${c?'checked':''}"><div class="body"><div class="t">${this.esc(m.n)}</div></div>
+          <div class="qty">${m.q}</div>
+          <div class="sw"><input type="checkbox" ${c?'checked':''} onchange="App.toggle(${i},'materials',${j},this)">
+          <div class="track"></div><div class="knob"></div></div></div>`;
+      });
+      html+=`<div class="stage" id="stage-${i}">
+        <div class="stage-hd" onclick="App.toggleStage(${i})">
+          <div class="stage-num" style="background:${col}">${i+1}</div>
+          <div style="flex:1"><h3>${st.name}</h3>
+            <div class="meta">${st.short} · ${fmt(st.estCost)} ${this.badge(p)}</div></div>
+          <div class="chev">›</div>
+        </div>
+        <div class="prog-mini"><div class="bar"><span style="width:${p}%;background:${col}"></span></div></div>
+        <div class="stage-body"><div class="stage-inner">
+          <div class="objective">🎯 ${st.objective}</div>
+          <div class="sub-lbl">Action Steps</div>
+          <div class="list" style="margin:0;box-shadow:none;background:var(--card2)">${steps}</div>
+          <div class="sub-lbl">Materials</div>
+          <div class="list" style="margin:0;box-shadow:none;background:var(--card2)">${mats}</div>
+          <div class="sub-lbl">Target Dates</div>
+          <div class="grid g2">
+            <div><label class="fl">Planned start</label><input type="date" value="${cur.planStart||''}" onchange="App.setStageDate(${i},'planStart',this.value)"></div>
+            <div><label class="fl">Planned finish</label><input type="date" value="${cur.planEnd||''}" onchange="App.setStageDate(${i},'planEnd',this.value)"></div>
+          </div>
+          <div class="sub-lbl">Stage Notes</div>
+          <textarea placeholder="Notes for this stage…" onchange="App.stageNote(${i},this.value)">${this.esc(cur.notes||"")}</textarea>
+          <div class="sub-lbl">Photos</div>
+          <div class="photo-grid">
+            ${(cur.photos||[]).map(ph=>{const d=Photo.get(ph.id)||"";return `<div class="thumb"><img src="${d}" onclick="App.openLightbox(this.src)"><button class="rm" onclick="event.stopPropagation();App.delStagePhoto(${i},'${ph.id}')">✕</button></div>`;}).join("")}
+            <label class="add-photo"><span class="plus">＋</span>Add<input type="file" accept="image/*" class="hidden" onchange="App.addStagePhoto(${i},this)"></label>
+          </div>
+        </div></div>
+      </div>`;
+    });
+    document.getElementById("stagesList").innerHTML=html;
+    if(this._openStage!=null){ const el=document.getElementById("stage-"+this._openStage); if(el) el.classList.add("open"); }
+  },
+  toggleStage(i){
+    const el=document.getElementById("stage-"+i);
+    const willOpen=!el.classList.contains("open");
+    el.classList.toggle("open");
+    this._openStage=willOpen?i:null;
+    this.buzz(4);
+  },
+  toggle(i,type,j,inputEl){
+    const nv=!Store.state.stages[i][type][j];
+    Store.state.stages[i][type][j]=nv;
+    Store.save();
+    const before=this.stageProgress(i);
+    // update row visual immediately
+    const row=inputEl.closest(".row"); if(row) row.classList.toggle("checked",nv);
+    this.buzz(nv?8:4);
+    // refresh dependent views without collapsing stage
+    this.renderDash(false);
+    this.renderMaterials();
+    // update this stage's bars/badge in place
+    this.refreshStageMeta(i);
+    // celebrate completion
+    if(nv && this.stageProgress(i)===100 && before<100){ this.celebrate(); this.toast("🎉","Stage "+(i+1)+" complete!"); }
+  },
+  refreshStageMeta(i){
+    const p=this.stageProgress(i), col=SEED.stageColors[i], st=SEED.stages[i];
+    const el=document.getElementById("stage-"+i); if(!el) return;
+    el.querySelector(".prog-mini .bar>span").style.width=p+"%";
+    el.querySelector(".stage-hd .meta").innerHTML=`${st.short} · ${fmt(st.estCost)} ${this.badge(p)}`;
+  },
+  stageNote(i,v){ Store.state.stages[i].notes=v; Store.save(); },
+
+  tapCheck(elDiv,i,type,j){
+    const nv=!Store.state.stages[i][type][j];
+    Store.state.stages[i][type][j]=nv; Store.save();
+    elDiv.classList.toggle("on",nv);
+    const row=elDiv.closest(".row"); if(row && type==='steps') row.classList.toggle("checked",nv);
+    this.buzz(nv?8:4);
+    const before=this.stageProgress(i);
+    setTimeout(()=>{ this.renderDash(false); this.renderStages(); this.renderMaterials(); },260);
+    if(nv && this.stageProgress(i)===100 && before<=100){ /* handled elsewhere */ }
+  },
+
+  /* ---------- MATERIALS ---------- */
+  renderMaterials(){
+    let bhtml="";
+    SEED.bricks.forEach((b,i)=>{
+      const del=Store.state.bricks[i].delivered||0, pct=Math.min(100,b.q?del/b.q*100:0);
+      bhtml+=`<div style="padding:6px 0 14px">
+        <div class="small" style="font-weight:600;margin-bottom:8px">${this.esc(b.n)}</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <input class="inline-num" type="number" inputmode="numeric" value="${del}" min="0" max="${b.q}" onchange="App.setBrick(${i},this.value)">
+          <span class="muted small">of ${fmtN(b.q)}</span>
+          <span class="muted small tnum" style="margin-left:auto;font-weight:600">${Math.round(pct)}%</span>
+        </div>
+        <div class="bar brick" style="margin-top:9px"><span style="width:${pct}%"></span></div></div>`;
+    });
+    document.getElementById("brickBox").innerHTML=bhtml;
+
+    let done=0,total=0,html="";
+    SEED.stages.forEach((st,i)=>{
+      const cur=Store.state.stages[i]; let rows="";
+      st.materials.forEach((m,j)=>{
+        const c=cur.materials[j]; total++; if(c) done++;
+        rows+=`<div class="row ${c?'checked':''}">
+          <div class="check ${c?'on':''}" onclick="App.tapMat(this,${i},${j})"><input type="checkbox"></div>
+          <div class="body"><div class="t">${this.esc(m.n)}</div></div><div class="qty">${m.q}</div></div>`;
+      });
+      html+=`<div class="group-hd" style="margin-top:18px">Stage ${i+1} · ${st.short}</div><div class="list">${rows}</div>`;
+    });
+    document.getElementById("materialsList").innerHTML=html;
+    document.getElementById("matDone").textContent=done+" / "+total;
+    const mp=total?Math.round(done/total*100):0;
+    document.getElementById("matPct").textContent=mp+"%";
+    setTimeout(()=>{ const b=document.getElementById("matBar"); if(b) b.style.width=mp+"%"; },80);
+  },
+  tapMat(elDiv,i,j){
+    const nv=!Store.state.stages[i].materials[j];
+    Store.state.stages[i].materials[j]=nv; Store.save();
+    elDiv.classList.toggle("on",nv);
+    const row=elDiv.closest(".row"); if(row) row.classList.toggle("checked",nv);
+    this.buzz(nv?8:4);
+    const before=this.stageProgress(i);
+    this.renderDash(false); this.renderStages();
+    // update counts
+    let done=0,total=0;
+    SEED.stages.forEach((st,k)=>st.materials.forEach((m,l)=>{total++;if(Store.state.stages[k].materials[l])done++;}));
+    document.getElementById("matDone").textContent=done+" / "+total;
+    const mp=total?Math.round(done/total*100):0;
+    document.getElementById("matPct").textContent=mp+"%";
+    document.getElementById("matBar").style.width=mp+"%";
+    if(nv && this.stageProgress(i)===100 && before<100){ this.celebrate(); this.toast("🎉","Stage "+(i+1)+" complete!"); }
+  },
+  setBrick(i,v){
+    let n=parseInt(v)||0; if(n<0)n=0;
+    Store.state.bricks[i].delivered=n; Store.save();
+    this.renderDash(false); this.renderMaterials();
+    this.buzz(4);
+  },
+
+  /* ---------- BUDGET ---------- */
+  buildStageSelect(){
+    let opt='<option value="general">General / Other</option>';
+    SEED.stages.forEach((st,i)=>opt+=`<option value="s${i+1}">Stage ${i+1} — ${st.short}</option>`);
+    opt+='<option value="bricks">Bricks / Logistics</option>';
+    document.getElementById("expStage").innerHTML=opt;
+    let lopt='<option value="general">General</option>';
+    SEED.stages.forEach((st,i)=>lopt+=`<option value="s${i+1}">Stage ${i+1} — ${st.short}</option>`);
+    document.getElementById("labStage").innerHTML=lopt;
+  },
+  addExpense(){
+    const item=document.getElementById("expItem").value.trim();
+    const amt=parseFloat(document.getElementById("expAmt").value);
+    const stage=document.getElementById("expStage").value;
+    const supplier=document.getElementById("expSupplier").value.trim();
+    const date=document.getElementById("expDate").value;
+    if(!item){ this.toast("⚠︎","Enter an item"); return; }
+    if(!(amt>0)){ this.toast("⚠︎","Enter a valid amount"); return; }
+    Store.state.expenses.unshift({id:Date.now(),item,amt,stage,supplier,date});
+    document.getElementById("expItem").value="";
+    document.getElementById("expAmt").value="";
+    document.getElementById("expSupplier").value="";
+    Store.save(); this.renderDash(false); this.renderBudget();
+    this.buzz(10); this.toast("✅","Expense added");
+  },
+  delExpense(id){
+    Store.state.expenses=Store.state.expenses.filter(e=>String(e.id)!==String(id));
+    Store.save(); this.renderDash(false); this.renderBudget(); this.buzz(6);
+  },
+  stageLabel(code){
+    if(code==="general") return "General";
+    if(code==="bricks") return "Bricks";
+    const i=parseInt(code.replace("s",""))-1;
+    return SEED.stages[i]?("S"+(i+1)+" "+SEED.stages[i].short):code;
+  },
+  renderBudget(){
+    const spent=this.totalSpent(), budget=SEED.meta.budget;
+    document.getElementById("bBudget").textContent=fmt(budget);
+    document.getElementById("bSpent").textContent=fmt(spent);
+    document.getElementById("bRemain").textContent=fmt(budget-spent);
+    setTimeout(()=>document.getElementById("bBar").style.width=Math.min(100,budget?spent/budget*100:0)+"%",80);
+
+    const buckets={};
+    Store.state.expenses.forEach(e=>buckets[e.stage]=(buckets[e.stage]||0)+(+e.amt||0));
+    let bs="";
+    SEED.stages.forEach((st,i)=>{
+      const sp=buckets["s"+(i+1)]||0, pct=st.estCost?Math.min(100,sp/st.estCost*100):0, over=sp>st.estCost;
+      bs+=`<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px">
+        <span style="font-weight:600">S${i+1} ${st.short}</span>
+        <span class="tnum" style="${over?'color:var(--red);font-weight:700':'color:var(--muted)'}">${fmt(sp)} / ${fmt(st.estCost)}</span></div>
+        <div class="bar ${over?'over':''}"><span style="width:${pct}%;${over?'':'background:'+SEED.stageColors[i]}"></span></div></div>`;
+    });
+    const brk=buckets["bricks"]||0, gen=buckets["general"]||0;
+    bs+=`<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px">
+      <span style="font-weight:600">🧱 Bricks / Logistics</span>
+      <span class="muted tnum">${fmt(brk)} / ${fmt(SEED.brickCost)}</span></div>
+      <div class="bar brick"><span style="width:${SEED.brickCost?Math.min(100,brk/SEED.brickCost*100):0}%"></span></div></div>`;
+    if(gen>0) bs+=`<div class="small muted" style="margin-top:6px">General / other: <b>${fmt(gen)}</b></div>`;
+    document.getElementById("budgetByStage").innerHTML=bs;
+
+    const log=document.getElementById("expenseLog");
+    if(!Store.state.expenses.length){ log.innerHTML='<div class="row center" style="justify-content:center;color:var(--muted)">No expenses logged yet</div>'; return; }
+    log.innerHTML=Store.state.expenses.map(e=>`
+      <div class="exp">
+        <div class="ico">💵</div>
+        <div class="l"><div class="t">${this.esc(e.item)}</div>
+          <div class="s">${e.date||""} · ${this.stageLabel(e.stage)}${e.supplier?" · "+this.esc(e.supplier):""}${e.fromActivity?" · 📋 activity":""}</div></div>
+        <div class="amt tnum">${fmt(e.amt)}</div>
+        <button class="del" onclick="App.delExpense('${e.id}')">Delete</button>
+      </div>`).join("");
+    this.renderLabour();
+  },
+  esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); },
+
+  /* ---------- ACTIVITY LOG ---------- */
+  actMeta:{
+    bought:{ico:"🛒",label:"Bought",color:"#499A13"},
+    completed:{ico:"✅",label:"Completed",color:"#276F27"},
+    added:{ico:"➕",label:"Added",color:"#8ECA3C"},
+    removed:{ico:"➖",label:"Removed",color:"#ff3b30"},
+    note:{ico:"📝",label:"Note",color:"#30b0c7"}
+  },
+  addActivity(){
+    const text=document.getElementById("actText").value.trim();
+    const cat=document.getElementById("actCat").value;
+    const amt=parseFloat(document.getElementById("actAmt").value);
+    const date=document.getElementById("actDate").value||todayISO();
+    const toBudget=document.getElementById("actToBudget").checked;
+    if(!text){ this.toast("⚠︎","Describe what happened"); return; }
+    const id=Date.now();
+    const hasAmt=amt>0;
+    const entry={id,cat,text,amt:hasAmt?amt:0,date,linked:false,photo:this._pendingPhoto||null};
+    // count toward budget for money-affecting types
+    if(hasAmt && toBudget && (cat==="bought"||cat==="added")){
+      Store.state.expenses.unshift({id:"a"+id,item:text,amt,stage:"general",supplier:"",date,fromActivity:true});
+      entry.linked=true;
+    }
+    Store.state.activity.unshift(entry);
+    this._pendingPhoto=null;
+    document.getElementById("actPhotoName").textContent="";
+    document.getElementById("actText").value="";
+    document.getElementById("actAmt").value="";
+    Store.save();
+    this.renderActivity(); this.renderBudget(); this.renderDash(false);
+    this.buzz(10); this.toast("✅","Logged");
+  },
+  delActivity(id){
+    const e=Store.state.activity.find(a=>a.id===id);
+    Store.state.activity=Store.state.activity.filter(a=>a.id!==id);
+    if(e&&e.linked) Store.state.expenses=Store.state.expenses.filter(x=>x.id!=="a"+id);
+    if(e&&e.photo) Photo.del(e.photo);
+    Store.save();
+    this.renderActivity(); this.renderBudget(); this.renderDash(false); this.buzz(6);
+  },
+  renderActivity(){
+    const list=Store.state.activity||[];
+    document.getElementById("actCount").textContent=list.length;
+    const total=list.reduce((a,e)=>a+(+e.amt||0),0);
+    document.getElementById("actTotal").textContent=fmt(total);
+    const el=document.getElementById("activityLog");
+    if(!list.length){ el.innerHTML='<div class="row center" style="justify-content:center;color:var(--muted)">No activity logged yet</div>'; return; }
+    el.innerHTML=list.map(e=>{
+      const m=this.actMeta[e.cat]||this.actMeta.note;
+      const d=e.date?new Date(e.date+"T00:00:00").toLocaleDateString("en-US",{day:"numeric",month:"short"}):"";
+      return `<div class="exp">
+        <div class="ico" style="background:${m.color}22">${m.ico}</div>
+        <div class="l"><div class="t">${this.esc(e.text)}</div>
+          <div class="s">${m.label} · ${d}${e.linked?" · 💵 in budget":""}</div></div>
+        ${e.photo?`<img src="${Photo.get(e.photo)||''}" onclick="App.openLightbox(this.src)" style="width:42px;height:42px;object-fit:cover;border-radius:9px;cursor:pointer;flex:0 0 auto">`:""}
+        ${e.amt>0?`<div class="amt tnum" style="color:${e.cat==='removed'?'var(--red)':'var(--brand)'}">${e.cat==='removed'?'−':''}${fmt(e.amt)}</div>`:""}
+        <button class="del" onclick="App.delActivity(${e.id})">Delete</button>
+      </div>`;
+    }).join("");
+  },
+  setStartDate(v){
+    if(!v) return;
+    Store.state.startDate=v; Store.save();
+    this.renderDash(false); this.toast("✅","Start date updated");
+  },
+
+  /* ---------- PHOTOS (IndexedDB) ---------- */
+  async addStagePhoto(i,input){
+    const f=input.files[0]; if(!f) return;
+    try{
+      const data=await compressImage(f);
+      const id="p"+Date.now();
+      await Photo.put(id,data);
+      Store.state.stages[i].photos.push({id});
+      Store.save(); this.renderStages(); this.buzz(8); this.toast("📷","Photo added");
+    }catch(e){ this.toast("⚠︎","Couldn't add photo"); }
+    input.value="";
+  },
+  async delStagePhoto(i,id){
+    Store.state.stages[i].photos=Store.state.stages[i].photos.filter(p=>p.id!==id);
+    await Photo.del(id);
+    Store.save(); this.renderStages(); this.buzz(6);
+  },
+  async pickActivityPhoto(input){
+    const f=input.files[0]; if(!f){ return; }
+    try{
+      const data=await compressImage(f,1000,0.55);
+      const id="p"+Date.now()+"a"; await Photo.put(id,data);
+      this._pendingPhoto=id;
+      document.getElementById("actPhotoName").textContent="📷 photo attached";
+    }catch(e){ this.toast("⚠︎","Couldn't attach photo"); }
+  },
+  openLightbox(src){
+    document.getElementById("lightboxImg").src=src;
+    document.getElementById("lightbox").classList.add("show");
+  },
+  closeLightbox(){ document.getElementById("lightbox").classList.remove("show"); },
+
+  /* ---------- LABOUR ---------- */
+  labourTotal(){ return Store.state.labour.reduce((a,l)=>a+(+l.amt||0),0); },
+  addLabour(){
+    const worker=document.getElementById("labWorker").value.trim();
+    const amt=parseFloat(document.getElementById("labAmt").value);
+    const stage=document.getElementById("labStage").value;
+    const task=document.getElementById("labTask").value.trim();
+    const date=document.getElementById("labDate").value||todayISO();
+    if(!worker){ this.toast("⚠︎","Enter worker / role"); return; }
+    if(!(amt>0)){ this.toast("⚠︎","Enter a valid amount"); return; }
+    Store.state.labour.unshift({id:Date.now(),worker,amt,stage,task,date});
+    document.getElementById("labWorker").value="";
+    document.getElementById("labAmt").value="";
+    document.getElementById("labTask").value="";
+    Store.save(); this.renderBudget(); this.renderDash(false);
+    this.buzz(10); this.toast("✅","Labour payment added");
+  },
+  delLabour(id){
+    Store.state.labour=Store.state.labour.filter(l=>l.id!==id);
+    Store.save(); this.renderBudget(); this.renderDash(false); this.buzz(6);
+  },
+  renderLabour(){
+    const lab=this.labourTotal(), mat=this.totalSpent();
+    document.getElementById("labTotal").textContent=fmt(lab);
+    document.getElementById("totalOutlay").textContent=fmt(lab+mat);
+    const el=document.getElementById("labourLog");
+    if(!Store.state.labour.length){ el.innerHTML='<div class="row center" style="justify-content:center;color:var(--muted)">No labour payments yet</div>'; return; }
+    el.innerHTML=Store.state.labour.map(l=>`
+      <div class="exp">
+        <div class="ico">👷</div>
+        <div class="l"><div class="t">${this.esc(l.worker)}</div>
+          <div class="s">${l.date||""} · ${this.stageLabel(l.stage)}${l.task?" · "+this.esc(l.task):""}</div></div>
+        <div class="amt tnum">${fmt(l.amt)}</div>
+        <button class="del" onclick="App.delLabour(${l.id})">Delete</button>
+      </div>`).join("");
+  },
+
+  /* ---------- PRINTABLE REPORT ---------- */
+  report(){
+    const p=this.overallProgress(), f=this.forecast();
+    const spent=this.totalSpent(), lab=this.labourTotal(), budget=SEED.meta.budget;
+    const fmtDate=d=>d?d.toLocaleDateString("en-US",{day:"numeric",month:"short",year:"numeric"}):"—";
+    const esc=s=>this.esc(s);
+    let stagesHtml="";
+    SEED.stages.forEach((st,i)=>{
+      const cur=Store.state.stages[i], sp=this.stageProgress(i);
+      const steps=st.steps.map((s,j)=>`<li class="${cur.steps[j]?'d':''}">${cur.steps[j]?'☑':'☐'} ${esc(s)}</li>`).join("");
+      const mats=st.materials.map((m,j)=>`<li class="${cur.materials[j]?'d':''}">${cur.materials[j]?'☑':'☐'} ${esc(m.n)} <em>(${m.q})</em></li>`).join("");
+      const pics=(cur.photos||[]).map(ph=>{const d=Photo.get(ph.id);return d?`<img src="${d}">`:"";}).join("");
+      stagesHtml+=`<div class="stg">
+        <h3><span class="dot" style="background:${SEED.stageColors[i]}"></span>Stage ${i+1}: ${esc(st.name)} — <b>${sp}%</b> <span class="cost">${fmt(st.estCost)}</span></h3>
+        <p class="obj">${esc(st.objective)}</p>
+        <div class="cols"><div><h4>Action Steps</h4><ul>${steps}</ul></div>
+        <div><h4>Materials</h4><ul>${mats}</ul></div></div>
+        ${cur.notes?`<p class="note"><b>Notes:</b> ${esc(cur.notes)}</p>`:""}
+        ${pics?`<div class="pics">${pics}</div>`:""}
+      </div>`;
+    });
+    const bricks=SEED.bricks.map((b,i)=>`<tr><td>${esc(b.n)}</td><td class="r">${fmtN(Store.state.bricks[i].delivered||0)} / ${fmtN(b.q)}</td></tr>`).join("");
+    const exp=Store.state.expenses.map(e=>`<tr><td>${esc(e.item)}</td><td>${this.stageLabel(e.stage)}</td><td>${e.date||""}</td><td class="r">${fmt(e.amt)}</td></tr>`).join("")||`<tr><td colspan="4" class="muted">None</td></tr>`;
+    const labr=Store.state.labour.map(l=>`<tr><td>${esc(l.worker)}${l.task?" — "+esc(l.task):""}</td><td>${this.stageLabel(l.stage)}</td><td>${l.date||""}</td><td class="r">${fmt(l.amt)}</td></tr>`).join("")||`<tr><td colspan="4" class="muted">None</td></tr>`;
+    const act=Store.state.activity.slice(0,40).map(e=>{const m=this.actMeta[e.cat]||this.actMeta.note;return `<tr><td>${m.label}</td><td>${esc(e.text)}</td><td>${e.date||""}</td><td class="r">${e.amt>0?fmt(e.amt):""}</td></tr>`;}).join("")||`<tr><td colspan="4" class="muted">None</td></tr>`;
+
+    const logo=`<svg width="42" height="42" viewBox="0 0 48 48"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#276F27"/><stop offset="1" stop-color="#8ECA3C"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg)"/><rect x="12" y="21" width="24" height="16" rx="2" fill="#fff"/><rect x="9" y="16" width="30" height="4.5" rx="2.25" fill="#fff"/><rect x="15.5" y="24" width="5" height="5" rx="1" fill="#499A13"/><rect x="27.5" y="24" width="5" height="5" rx="1" fill="#499A13"/><rect x="21.5" y="30" width="5" height="7" rx="1" fill="#499A13"/></svg>`;
+
+    const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Murehwa Villa — Progress Report</title>
+    <style>
+      *{box-sizing:border-box}
+      body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1a1a1a;margin:0;padding:34px 40px;font-size:13px;line-height:1.5}
+      .head{display:flex;align-items:center;gap:14px;border-bottom:3px solid #499A13;padding-bottom:14px;margin-bottom:20px}
+      .head h1{margin:0;font-size:24px;color:#276F27}
+      .head .sub{color:#666;font-size:12px;margin-top:2px}
+      .head .date{margin-left:auto;text-align:right;font-size:11px;color:#888}
+      .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+      .kpi{border:1px solid #e2e2e2;border-radius:10px;padding:12px 14px;background:#f7faf2}
+      .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#7a8a5a;font-weight:700}
+      .kpi .v{font-size:20px;font-weight:800;color:#276F27;margin-top:3px}
+      h2{color:#499A13;font-size:15px;border-bottom:1px solid #ddd;padding-bottom:5px;margin:24px 0 12px}
+      .stg{margin-bottom:16px;page-break-inside:avoid;border-left:3px solid #eee;padding-left:12px}
+      .stg h3{font-size:14px;margin:0 0 4px;display:flex;align-items:center;gap:7px}
+      .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+      .cost{margin-left:auto;color:#888;font-weight:600;font-size:12px}
+      .obj{color:#555;font-size:11.5px;margin:2px 0 8px;font-style:italic}
+      .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+      .cols h4{margin:0 0 4px;font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.03em}
+      ul{margin:0;padding-left:2px;list-style:none}
+      li{font-size:11.5px;margin:2px 0}
+      li.d{color:#8a8a8a}
+      li.d em{color:#aaa}
+      em{color:#8a8a8a;font-style:normal}
+      .note{background:#f4f7ee;border-radius:6px;padding:6px 9px;font-size:11px;margin:8px 0 0}
+      .pics{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+      .pics img{width:120px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ddd}
+      table{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:11.5px}
+      th{text-align:left;background:#f0f4ea;color:#456;padding:6px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.03em}
+      td{padding:5px 8px;border-bottom:1px solid #eee}
+      td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+      .muted{color:#aaa}
+      .foot{margin-top:26px;padding-top:12px;border-top:1px solid #ddd;color:#999;font-size:10px;text-align:center}
+      @media print{body{padding:16px 20px}.kpi{background:#f7faf2!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}th,.head,.dot{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+    </style></head><body>
+      <div class="head">${logo}<div><h1>Murehwa Villa</h1><div class="sub">Construction Progress Report · Murehwa, Mashonaland East, Zimbabwe</div></div>
+        <div class="date">Generated<br>${new Date().toLocaleDateString("en-US",{day:"numeric",month:"long",year:"numeric"})}</div></div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="l">Overall Progress</div><div class="v">${p}%</div></div>
+        <div class="kpi"><div class="l">Materials Spent</div><div class="v">${fmt(spent)}</div></div>
+        <div class="kpi"><div class="l">Labour Paid</div><div class="v">${fmt(lab)}</div></div>
+        <div class="kpi"><div class="l">Total Outlay</div><div class="v">${fmt(spent+lab)}</div></div>
+      </div>
+
+      <table><tr><th>Materials budget</th><th>Est. investment</th><th>Started</th><th>Projected finish</th></tr>
+        <tr><td>${fmt(budget)}</td><td>${fmt(budget)}</td><td>${fmtDate(f.start)}</td><td>${f.done?"Complete":f.ready?fmtDate(f.finish)+" (~"+f.daysLeft+" days)":"—"}</td></tr></table>
+
+      <h2>Stage-by-Stage Progress</h2>
+      ${stagesHtml}
+
+      <h2>Brick Logistics</h2>
+      <table><tr><th>Type</th><th class="r">Delivered</th></tr>${bricks}<tr><td><b>Total</b></td><td class="r"><b>${fmtN(this.bricksDelivered())} / ${fmtN(this.totalBricks())}</b></td></tr></table>
+
+      <h2>Material Expenses</h2>
+      <table><tr><th>Item</th><th>Stage</th><th>Date</th><th class="r">Amount</th></tr>${exp}</table>
+
+      <h2>Labour Payments</h2>
+      <table><tr><th>Worker / Task</th><th>Stage</th><th>Date</th><th class="r">Amount</th></tr>${labr}</table>
+
+      <h2>Recent Activity</h2>
+      <table><tr><th>Type</th><th>Detail</th><th>Date</th><th class="r">Value</th></tr>${act}</table>
+
+      <div class="foot">Murehwa Villa Build Tracker · This report reflects data saved on the device at time of generation.</div>
+    </body></html>`;
+
+    const w=window.open("","_blank");
+    if(!w){ this.toast("⚠︎","Allow pop-ups to print"); return; }
+    w.document.open(); w.document.write(html); w.document.close();
+    setTimeout(()=>{ try{ w.focus(); w.print(); }catch(e){} }, 500);
+    this.toast("🖨️","Report ready — Save as PDF");
+  },
+
+  /* ---------- SETTINGS ---------- */
+  saveNotes(){ Store.state.notes=document.getElementById("projectNotes").value; Store.save(); this.toast("✅","Notes saved"); },
+  resetAll(){
+    if(!confirm("Reset ALL progress, expenses and notes? This cannot be undone. Export a backup first!")) return;
+    Store.state=Store.fresh(); Store.save();
+    Photo.clear();
+    document.getElementById("projectNotes").value="";
+    document.getElementById("startDate").value=Store.state.startDate;
+    this._openStage=null;
+    this.renderAll(true); this.go("dash"); this.toast("↺","All data reset");
+  },
+
+  /* ---------- Confetti celebration ---------- */
+  celebrate(){
+    this.buzz([12,40,12]);
+    const cv=document.getElementById("confetti"); cv.style.display="block";
+    const ctx=cv.getContext("2d");
+    const W=cv.width=innerWidth, H=cv.height=innerHeight;
+    const colors=["#007aff","#34c759","#ff9500","#af52de","#ff2d55","#ffcc00","#30b0c7"];
+    const P=[];
+    for(let i=0;i<130;i++) P.push({
+      x:W/2+(Math.random()-.5)*120, y:H*0.32,
+      vx:(Math.random()-.5)*11, vy:Math.random()*-13-4,
+      s:5+Math.random()*7, c:colors[i%colors.length],
+      rot:Math.random()*6, vr:(Math.random()-.5)*.4, life:0
+    });
+    const g=0.32; let t0=performance.now();
+    const draw=now=>{
+      const dt=Math.min(2,(now-t0)/16); t0=now;
+      ctx.clearRect(0,0,W,H); let alive=false;
+      P.forEach(p=>{
+        p.vy+=g*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; p.rot+=p.vr*dt; p.life+=dt;
+        if(p.y<H+30){ alive=true;
+          ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+          ctx.globalAlpha=Math.max(0,1-p.life/150);
+          ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6); ctx.restore();
+        }
+      });
+      if(alive) requestAnimationFrame(draw); else cv.style.display="none";
+    };
+    requestAnimationFrame(draw);
+  }
+};
+
+window.addEventListener("DOMContentLoaded",()=>App.init());
+window.addEventListener("resize",()=>{const c=document.getElementById("confetti");c.width=innerWidth;c.height=innerHeight;});
+</script>
+</body>
+</html>
