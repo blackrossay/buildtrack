@@ -1,6 +1,6 @@
-# 🏗️ Murehwa Villa — Build Tracker
+# 🏗️ BuildTrack — Murehwa Villa
 
-An offline-capable construction tracking & management app for a double-storey villa build in **Murehwa, Mashonaland East, Zimbabwe** (8,000 m² communal plot · 2,000 m² house zone).
+**BuildTrack** is an offline-capable construction tracking & management app for a double-storey villa build in **Murehwa, Mashonaland East, Zimbabwe** (8,000 m² communal plot · 2,000 m² house zone).
 
 The production app is a single, self-contained **`index.html`** — no server or internet required. All data is stored privately on your device (localStorage + IndexedDB for photos).
 
