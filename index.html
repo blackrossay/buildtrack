@@ -507,6 +507,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 .proc-status{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 8px;border-radius:6px;flex:0 0 auto}
 .proc-status.todo{background:var(--fill);color:var(--muted)}
 .proc-status.ordered{background:var(--brand-soft);color:var(--brand)}
+.proc-status.purchased{background:var(--brand);color:#fff}
 .pg-row{display:flex;align-items:center;gap:12px;padding:9px 0}
 .pg-row+.pg-row{border-top:1px solid var(--surface-border)}
 .pg-i{flex:1;min-width:0}
@@ -787,13 +788,17 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
           <button class="btn gray sm" onclick="App.shareProcurement()">📤 Share list</button>
         </div>
         <div class="field"><label class="fl">Add an item manually</label><input id="procItem" placeholder="e.g. 20 × 6m Y12 rebar"></div>
-        <div class="grid g3">
+        <div class="grid g2">
           <div class="field"><label class="fl">Qty</label><input id="procQty" placeholder="1"></div>
           <div class="field"><label class="fl">Unit</label><input id="procUnit" placeholder="e.g. lengths"></div>
+        </div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Est. price (USD)</label><input id="procPrice" type="number" inputmode="decimal" placeholder="0.00"></div>
           <div class="field"><label class="fl">For stage</label><select id="procStage"></select></div>
         </div>
         <button class="btn sm wide" onclick="App.addProcItem()">Add to List</button>
       </div>
+      <div class="section-sub" style="margin-top:8px">Tap a status to cycle <b>To buy → Ordered → Purchased</b>. Marking an item <b>Purchased</b> with a price auto-logs it as a budget expense (and draws down cash in hand).</div>
       <div id="procList" class="list"></div>
     </div>
   </section>
@@ -2011,8 +2016,9 @@ const App={
     let bs="";
     SEED.stages.forEach((st,i)=>{
       const sp=buckets["s"+(i+1)]||0, pct=st.estCost?Math.min(100,sp/st.estCost*100):0, over=sp>st.estCost;
+      const prog=this.stageProgress(i);
       bs+=`<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px">
-        <span style="font-weight:600">S${i+1} ${st.short}</span>
+        <span style="font-weight:600">S${i+1} ${st.short} <span class="muted" style="font-weight:600;font-size:12px">· ${prog}% built</span></span>
         <span class="tnum" style="${over?'color:var(--red);font-weight:700':'color:var(--muted)'}">${fmt(sp)} / ${fmt(st.estCost)}</span></div>
         <div class="bar ${over?'over':''}"><span style="width:${pct}%;${over?'':'background:'+SEED.stageColors[i]}"></span></div></div>`;
     });
@@ -2030,7 +2036,7 @@ const App={
       <div class="exp">
         <div class="ico">💵</div>
         <div class="l"><div class="t">${this.esc(e.item)}</div>
-          <div class="s">${e.date||""} · ${this.stageLabel(e.stage)}${e.supplier?" · "+this.esc(e.supplier):""}${e.fromActivity?" · 📋 activity":""}</div></div>
+          <div class="s">${e.date||""} · ${this.stageLabel(e.stage)}${e.supplier?" · "+this.esc(e.supplier):""}${e.fromActivity?" · 📋 activity":""}${e.fromProc?" · 🛒 procurement":""}</div></div>
         <div class="amt tnum">${fmt(e.amt)}</div>
         <button class="del" onclick="App.delExpense('${e.id}')">Delete</button>
       </div>`).join("");
@@ -2219,13 +2225,24 @@ const App={
   addProcItem(){
     const item=document.getElementById("procItem").value.trim();
     if(!item){ this.toast("⚠︎","Enter an item"); return; }
+    const price=parseFloat(document.getElementById("procPrice").value)||0;
     Store.state.procurement.unshift({id:"p_"+this.uid(),item,
       qty:document.getElementById("procQty").value.trim(),
       unit:document.getElementById("procUnit").value.trim(),
+      price,
       stage:document.getElementById("procStage").value,status:"todo"});
     Store.save();
-    ["procItem","procQty","procUnit"].forEach(id=>document.getElementById(id).value="");
+    ["procItem","procQty","procUnit","procPrice"].forEach(id=>document.getElementById(id).value="");
     this.renderProcurement(); this.buzz(8); this.toast("✅","Added to list");
+  },
+  quoteForItem(itemName){
+    const key=(itemName||"").toLowerCase();
+    const qs=(Store.state.quotes||[]).filter(q=>(q.item||"").toLowerCase()===key);
+    if(!qs.length) return null;
+    const chosenId=(Store.state.chosen||{})[key];
+    let pick=chosenId?qs.find(q=>q.vendorId===chosenId):null;
+    if(!pick) pick=qs.slice().sort((a,b)=>(+a.total||0)-(+b.total||0))[0];
+    return pick?{price:+pick.total||0,vendorId:pick.vendorId}:null;
   },
   buildProcurementFromStages(){
     let added=0;
@@ -2235,7 +2252,8 @@ const App={
         if(cur.materials[j]) return; // skip already-delivered
         const exists=Store.state.procurement.some(p=>p.item===m.n && p.stage==="s"+(i+1));
         if(exists) return;
-        Store.state.procurement.push({id:"p_"+this.uid(),item:m.n,qty:m.q,unit:"",stage:"s"+(i+1),status:"todo"});
+        const q=this.quoteForItem(m.n);
+        Store.state.procurement.push({id:"p_"+this.uid(),item:m.n,qty:m.q,unit:"",price:q?q.price:0,stage:"s"+(i+1),status:"todo"});
         added++;
       });
     });
@@ -2244,25 +2262,40 @@ const App={
   },
   toggleProc(id){
     const p=Store.state.procurement.find(x=>x.id===id); if(!p) return;
-    p.status=p.status==="ordered"?"todo":"ordered"; Store.save(); this.renderProcurement(); this.buzz(6);
+    const cycle={todo:"ordered",ordered:"purchased",purchased:"todo"};
+    p.status=cycle[p.status]||"todo";
+    this.syncProcExpense(p);
+    Store.save(); this.renderProcurement(); this.renderBudget(); this.renderDash(false); this.buzz(6);
+    if(p.status==="purchased"&&!(+p.price>0)) this.toast("ℹ︎","Marked purchased — set a price to log the cost");
+  },
+  syncProcExpense(p){
+    const eid="proc_"+p.id;
+    Store.state.expenses=Store.state.expenses.filter(e=>e.id!==eid);
+    if(p.status==="purchased" && +p.price>0){
+      const q=this.quoteForItem(p.item), sup=q?this.vendorName(q.vendorId):"";
+      Store.state.expenses.unshift({id:eid,item:p.item,amt:+p.price,stage:p.stage||"general",
+        supplier:sup==="—"?"":sup,date:todayISO(),fromProc:true});
+    }
   },
   delProcItem(id){
+    Store.state.expenses=Store.state.expenses.filter(e=>e.id!=="proc_"+id);
     Store.state.procurement=Store.state.procurement.filter(p=>p.id!==id);
-    Store.save(); this.renderProcurement(); this.buzz(6);
+    Store.save(); this.renderProcurement(); this.renderBudget(); this.renderDash(false); this.buzz(6);
   },
   renderProcurement(){
     const el=document.getElementById("procList"); if(!el) return;
     const list=Store.state.procurement||[];
     if(!list.length){ el.innerHTML='<div class="row" style="justify-content:center;color:var(--muted)">List empty — add items or pull from stages</div>'; return; }
+    const lbl={todo:"To buy",ordered:"Ordered",purchased:"Purchased"};
     el.innerHTML=list.map(p=>`<div class="row">
-      <div class="body"><div class="t" style="${p.status==="ordered"?"text-decoration:line-through;color:var(--muted)":""}">${this.esc(p.item)}</div>
-        <div class="s">${[p.qty,p.unit].filter(Boolean).map(x=>this.esc(x)).join(" ")}${p.stage?(p.qty||p.unit?" · ":"")+this.stageLabel(p.stage):""}</div></div>
-      <span class="proc-status ${p.status}" onclick="App.toggleProc('${p.id}')">${p.status==="ordered"?"Ordered":"To buy"}</span>
+      <div class="body"><div class="t" style="${p.status==="purchased"?"text-decoration:line-through;color:var(--muted)":""}">${this.esc(p.item)}</div>
+        <div class="s">${[p.qty,p.unit].filter(Boolean).map(x=>this.esc(x)).join(" ")}${p.stage?(p.qty||p.unit?" · ":"")+this.stageLabel(p.stage):""}${+p.price>0?" · <b>"+fmt(p.price)+"</b>":""}</div></div>
+      <span class="proc-status ${p.status}" onclick="App.toggleProc('${p.id}')">${lbl[p.status]||"To buy"}</span>
       <button class="del" onclick="App.delProcItem('${p.id}')">✕</button></div>`).join("");
   },
   shareProcurement(){
-    const list=(Store.state.procurement||[]).filter(p=>p.status!=="ordered");
-    if(!list.length){ this.toast("ℹ︎","Nothing to buy on the list"); return; }
+    const list=(Store.state.procurement||[]).filter(p=>p.status!=="purchased");
+    if(!list.length){ this.toast("ℹ︎","Nothing left to buy on the list"); return; }
     const byStage={};
     list.forEach(p=>{ const k=p.stage||"other"; (byStage[k]=byStage[k]||[]).push(p); });
     let txt="*BuildTrack — Procurement Request*\nMurehwa Villa\n";
