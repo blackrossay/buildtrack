@@ -1146,10 +1146,11 @@ const SEED = {
         {n:"Washed River Sand", q:"20 m³"},
         {n:"19mm Crushed Quarry Stones", q:"25 m³"}
       ]},
-    { id:"s10", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11600,
-      objective:"Erect ground level walls and engineer the heavy floor structure supporting the upper-level bedrooms.",
+    { id:"s10", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11200,
+      objective:"Erect ground level walls and engineer the heavy floor structure supporting the upper-level bedrooms. Walling is split for cost: LOAD-BEARING external & structural walls stay in machine-pressed brick (they carry the mid-slab & roof), while internal NON-load-bearing partitions use cheaper hollow concrete blocks (faster to lay, less mortar, plastered to match).",
       steps:[
-        "Erect external & internal walls to 3 m height (machine-pressed bricks on load-bearing walls)",
+        "Erect load-bearing external & structural walls to 3 m in machine-pressed bricks",
+        "Build internal non-load-bearing partitions in hollow concrete blocks (cheaper & faster)",
         "Assemble steel scaffolding props & marine plywood shuttering",
         "Weave & tie dense dual-layer Y16 + Y12 reinforcement grid",
         "🔍 Inspection/party: Structural engineer inspects & signs off the slab rebar BEFORE the pour (critical hold-point)",
@@ -1161,12 +1162,15 @@ const SEED = {
         {n:"Y16 + Y12 Reinforcing Steel Bars", q:"2.5 tonnes"},
         {n:"Fine Clean River Sand", q:"18 m³"},
         {n:"19mm Structural Quarry Stones", q:"22 m³"},
-        {n:"Adjustable Steel Decking Props (rental)", q:"~250 props"}
+        {n:"Adjustable Steel Decking Props (rental)", q:"~250 props"},
+        {n:"Machine-pressed Bricks — load-bearing external/structural walls only", q:"structural walls"},
+        {n:"Hollow Concrete Blocks (200mm) — internal non-load-bearing partitions", q:"partition walls"}
       ]},
     { id:"s11", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
-      objective:"Build the upstairs private sanctuary and erect architectural screening to mimic a flat Dubai layout.",
+      objective:"Build the upstairs private sanctuary and erect architectural screening to mimic a flat Dubai layout. Load-bearing perimeter/parapet walls stay in brick; internal bedroom & bathroom partitions use cheaper hollow concrete blocks.",
       steps:[
-        "Build upper-level bedroom partitions, bathrooms & corridors",
+        "Build upper-level bedroom & bathroom partitions in hollow concrete blocks (non-load-bearing)",
+        "Build load-bearing perimeter & corridor walls in brick",
         "Extend perimeter walls 800–1000 mm above ceiling line (high parapet)",
         "Cast continuous concrete ring-beam along highest parapet course",
         "🔍 Inspection/party: Structural engineer checks ring-beam reinforcement & roof tie-downs",
@@ -1174,7 +1178,9 @@ const SEED = {
       ],
       materials:[
         {n:"50kg Cement (ring-beam & mortar)", q:"30 bags"},
-        {n:"Galvanized Hoop Iron Strapping Wire", q:"3 rolls"}
+        {n:"Galvanized Hoop Iron Strapping Wire", q:"3 rolls"},
+        {n:"Machine-pressed Bricks — load-bearing perimeter/parapet walls", q:"structural walls"},
+        {n:"Hollow Concrete Blocks (200mm) — internal non-load-bearing partitions", q:"partition walls"}
       ]},
     { id:"s12", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
       objective:"Install a lightweight, ultra-durable timber & steel roof hidden entirely inside the parapet framework, making the villa weather-tight before internal works begin.",
