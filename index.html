@@ -527,6 +527,9 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 .db-chip{background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:12px;padding:5px 11px;border-radius:999px}
 .db-hd{font-weight:700;font-size:13.5px;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
 .db-edit{font-size:13px;line-height:1.6;padding:5px 0;border-top:1px solid var(--surface-border)}
+.db-given{font-size:12.5px;line-height:1.55;background:rgba(58,125,68,.10);border:1px solid rgba(58,125,68,.35);color:var(--text);padding:9px 11px;border-radius:12px;margin:10px 0 4px}
+.db-rule{font-size:13px;line-height:1.6;padding:7px 10px;margin:5px 0;background:var(--surface-2,rgba(127,127,127,.06));border-left:3px solid #d98a2b;border-radius:8px}
+.db-rec{font-size:13px;line-height:1.6;padding:8px 11px;margin:6px 0;background:rgba(58,125,68,.07);border-left:3px solid #3a7d44;border-radius:8px}
 .db-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:520px){.db-cols{grid-template-columns:1fr}}
 .db-floor b{display:block;font-size:12.5px;font-weight:700;margin-bottom:6px}
@@ -1279,18 +1282,25 @@ const SEED = {
   designBrief:{
     basePlan:"Ocean Mansion — Typical “OM | 1”",
     source:"Jumeirah Asora Bay Villa Brochure (Dubai) — used as the design template / inspiration.",
-    storeys:"Ground + First floor only",
+    storeys:"Ground + First floor only — the brochure's old 1st & 2nd floors are COMBINED into one First floor",
     bedrooms:"7 bedrooms — 1 master + 2 guest rooms + 4 bedrooms",
     note:"Brochure room sizes are for a large Dubai mansion — treat dimensions as proportions to be scaled to the actual Murehwa plot by the architect. This is a rough brief and can be edited.",
+    given:"✅ The GROUND FLOOR plan is approved as-is — design & build from it. Only the upper level and the sightline rules below change.",
     edits:[
       "❌ Remove the BASEMENT entirely.",
-      "❌ Remove the SECOND FLOOR — build Ground + First floor only.",
+      "🔀 COMBINE the old FIRST + SECOND floors into ONE First floor — final build = Ground + this single combined First floor (no separate 2nd floor).",
       "❌ Remove the separate GYM PAVILION — the SAUNA moves into the main house instead.",
       "❌ Remove the LIFT — not needed, staircase only (saves cost).",
       "🚗 Garage → 3-car garage/car port built as an ATTACHED extension to the main house in normal brick, with a hidden IBR roof — no separate concrete base/slab.",
       "⬇️ Relocate WET KITCHEN, STAFF ROOM and LAUNDRY from the basement up to the GROUND floor.",
       "✅ Keep the STUDY.",
+      "👑 First-floor MASTER BEDROOM sits on the LEFT and stretches the FULL WIDTH end-to-end; mirror the same design top & bottom (symmetrical).",
       "🎯 7 bedrooms total: master + 2 guest rooms + 4 bedrooms."
+    ],
+    layoutRules:[
+      "👑 Master bed sits CENTRAL, facing the living area. Position the WIC (walk-in closet) and BA (bathroom) so they DON'T block either side — from the bed the owner must see the LEFT window and the RIGHT window with nothing obstructing the view.",
+      "🪟 Master bedroom spans end-to-end (full width); replicate the top layout at the bottom for a symmetrical design.",
+      "🛋️ Living Area: while seated, you must see STRAIGHT THROUGH both the top and bottom windows — a clear sightline to the front yard AND the back yard. Keep that axis unobstructed (no walls/closets in the line of sight)."
     ],
     ground:[
       "Living Room (12.3×7.6m)","Lounge","Dining (6.7×8.6m)",
@@ -1300,9 +1310,17 @@ const SEED = {
       "Store · Guest WC · Cloak","3-car Garage / Car Port — attached extension to main house (normal brick, hidden IBR roof; no separate concrete base)","Staircase"
     ],
     first:[
-      "Master Bedroom (4.8×6.4m) + walk-in closet + ensuite","Guest Room 2 (ensuite)",
+      "Master Bedroom — LEFT wing, full-width end-to-end; bed central facing the family living area, clear left & right window views","Guest Room 2 (ensuite)",
       "Bedroom 1 (ensuite + WIC)","Bedroom 2 (ensuite + WIC)","Bedroom 3 (ensuite + WIC)","Bedroom 4 (ensuite + WIC)",
-      "Family Living Area (5.6×7.3m)","Staircase"
+      "Family Living Area (5.6×7.3m) — through-view: front yard ↔ back yard windows aligned","Staircase"
+    ],
+    recommendations:[
+      "👑 Master sightlines: put the bed against a CENTRAL spine/headboard wall so the mattress floats in the middle of the room. Split the WIC + BA into TWO slim pods placed BEHIND the headboard wall (either side of the bed's centre-line) — this keeps both the left and right windows fully clear and gives a walk-through dressing lobby into the ensuite.",
+      "🚪 Alternative if space is tight: stack WIC + BA as a single service block on the CORRIDOR (entry) side of the master, so the entire window-facing half of the room stays open. Never place closets/bathrooms on the left or right window walls.",
+      "🛋️ Living-area through-view: align the front-yard and back-yard windows on ONE straight axis and keep that centre band free of furniture backs, columns or partitions. Use a low-back sofa (≤900mm) on the axis so the eye passes over it to both gardens.",
+      "🪟 Symmetry: mirror the top half of the master onto the bottom half (identical window + pod positions). It reads as a deliberate, high-end design and simplifies the structural grid (aligned beams/columns above ground-floor walls).",
+      "🏗️ Buildability check: because we merged two floors into one, confirm the new first-floor load-bearing walls sit OVER ground-floor walls/beams — ask the structural engineer to verify before the mid-slab pour (Stage 5). Moving walls off-grid later is expensive.",
+      "💡 Cost/decision note: full-width master + big glazing raises the Stage 11 glazing bill (~$150–$450/m²). Decide glazing spec early so the budget and aluminium lead-time are locked before walls go up."
     ]
   },
   seedVendors:[
@@ -2152,8 +2170,13 @@ const App={
     el.innerHTML=`<div class="db-base">${this.esc(d.basePlan)}</div>
       <div class="db-src">${this.esc(d.source)}</div>
       <div class="db-meta"><span class="db-chip">🏢 ${this.esc(d.storeys)}</span><span class="db-chip">🛏️ ${this.esc(d.bedrooms)}</span></div>
+      ${d.given?`<div class="db-given">${this.esc(d.given)}</div>`:""}
       <div class="db-hd">✏️ Owner's edits</div>
       ${d.edits.map(e=>`<div class="db-edit">${this.esc(e)}</div>`).join("")}
+      ${d.layoutRules?`<div class="db-hd">🎯 Layout &amp; sightline rules (for the architect)</div>
+        ${d.layoutRules.map(r=>`<div class="db-rule">${this.esc(r)}</div>`).join("")}`:""}
+      ${d.recommendations?`<div class="db-hd">🤖 AI recommendations — decision support</div>
+        ${d.recommendations.map(r=>`<div class="db-rec">${this.esc(r)}</div>`).join("")}`:""}
       <div class="db-hd">🗺️ Room programme</div>
       <div class="db-cols">
         <div class="db-floor"><b>Ground floor</b><ul>${d.ground.map(r=>`<li>${this.esc(r)}</li>`).join("")}</ul></div>
