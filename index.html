@@ -89,7 +89,7 @@
   }
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
-html,body{margin:0;padding:0;height:100%}
+html,body{margin:0;padding:0;height:100%;overflow-x:clip}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   background:var(--bg); color:var(--text);
@@ -133,7 +133,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.022em}
 .nav-btn svg{width:16px;height:16px;display:block}
 .large-title{padding:6px 16px 2px;max-width:720px;margin:0 auto}
 .large-title h1{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
-.large-title .loc{color:var(--muted);font-size:15px;font-weight:500;margin-top:3px;display:flex;align-items:center;gap:5px}
+.large-title .loc{color:var(--muted);font-size:15px;font-weight:500;margin-top:3px;line-height:1.3;text-wrap:pretty}
 
 /* ---------- Views + transitions ---------- */
 .view{display:none;padding-top:8px;animation:viewIn .45s var(--ease-ios) both}
@@ -192,7 +192,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.022em}
 .ring .pct{font-size:32px;font-weight:800;letter-spacing:-.04em}
 .ring .cap{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .ring-side{flex:1}
-.ring-side .big{font-size:15px;font-weight:600;margin-bottom:10px}
+.ring-side .big{font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
 
 /* ---------- Hero gradient card (project header) ---------- */
 .hero{position:relative;background:var(--hero-grad);border-radius:var(--radius-lg);
@@ -205,20 +205,27 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.022em}
 .hero-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1;margin-bottom:16px}
 .hero-top .chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);
   backdrop-filter:blur(8px);padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.01em}
-.hero-top .greet{margin-left:auto;font-size:12.5px;font-weight:500;opacity:.85;text-align:right}
+.hero-top .greet{margin-left:auto;font-size:12.5px;font-weight:500;opacity:.85;text-align:right;max-width:48%;line-height:1.32}
 .hero .ring-wrap{position:relative;z-index:1}
 .hero .ring .track{stroke:rgba(255,255,255,.22)}
 .hero .ring .prog{stroke:#fff}
 .hero .ring .pct{color:#fff}
 .hero .ring .cap{color:rgba(255,255,255,.8)}
-.hero .ring-side .big{color:rgba(255,255,255,.92)}
+.hero .ring-side .big{color:rgba(255,255,255,.72)}
 .hero .bar{background:rgba(255,255,255,.2)}
 .hero .small.muted{color:rgba(255,255,255,.72)!important}
-.hero-mini-row{display:flex;align-items:center;gap:8px;margin:5px 0}
-.hero-mini-row .dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
-.hero-mini-row .bar{flex:1;background:rgba(255,255,255,.22)}
+/* ring-side headline stats */
+.rs-stat{margin:9px 0}
+.rs-stat .v{display:block;font-size:21px;font-weight:750;letter-spacing:-.03em;line-height:1.08;color:#fff;font-variant-numeric:tabular-nums}
+.rs-stat .k{font-size:12px;color:rgba(255,255,255,.78);font-weight:500;letter-spacing:-.005em}
+/* full-width per-stage progress */
+.hero-stages{position:relative;z-index:1;margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.18)}
+.hero-mini-row{display:grid;grid-template-columns:auto minmax(0,1fr) 84px 34px;align-items:center;gap:10px;margin:8px 0}
+.hero-mini-row .dot{width:9px;height:9px;border-radius:3px;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.22)}
+.hero-mini-row .ml{min-width:0;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.94);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em}
+.hero-mini-row .bar{height:7px;background:rgba(255,255,255,.22)}
 .hero-mini-row .bar>span{background:#fff!important}
-.hero-mini-row .pv{width:34px;text-align:right;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
+.hero-mini-row .pv{width:34px;text-align:right;font-size:12px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
 
 /* ---------- KPI icon chips on tiles ---------- */
 .tile{position:relative}
@@ -514,9 +521,10 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
           </div>
           <div class="ring-side">
             <div class="big">Build Progress</div>
-            <div id="dashStageMini"></div>
+            <div id="dashSummary"></div>
           </div>
         </div>
+        <div class="hero-stages" id="dashStageMini"></div>
       </div>
 
       <div class="grid g2">
@@ -550,11 +558,11 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
         <div class="bar"><span id="tlBar"></span></div>
         <div class="grid g2" style="margin-top:16px">
           <div>
-            <div class="lbl" style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">Started</div>
+            <div class="lbl" style="font-size:13px;color:var(--muted);font-weight:590">Started</div>
             <div style="font-weight:600;font-size:15px;margin-top:2px" id="tlStart">—</div>
           </div>
           <div>
-            <div class="lbl" style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase">Projected Finish</div>
+            <div class="lbl" style="font-size:13px;color:var(--muted);font-weight:590">Projected Finish</div>
             <div style="font-weight:600;font-size:15px;margin-top:2px;color:var(--brand)" id="tlFinish">—</div>
           </div>
         </div>
@@ -909,10 +917,16 @@ const Photo={
   open(){
     return new Promise((resolve)=>{
       if(!("indexedDB" in window)){ resolve(null); return; }
-      const req=indexedDB.open("murehwa_villa_photos",1);
-      req.onupgradeneeded=e=>{ const db=e.target.result; if(!db.objectStoreNames.contains("photos")) db.createObjectStore("photos",{keyPath:"id"}); };
-      req.onsuccess=e=>{ this.db=e.target.result; resolve(this.db); };
-      req.onerror=()=>{ resolve(null); };
+      let settled=false;
+      const finish=v=>{ if(!settled){ settled=true; resolve(v); } };
+      setTimeout(()=>finish(null),1500); // never let a stuck IndexedDB block startup
+      try{
+        const req=indexedDB.open("murehwa_villa_photos",1);
+        req.onupgradeneeded=e=>{ const db=e.target.result; if(!db.objectStoreNames.contains("photos")) db.createObjectStore("photos",{keyPath:"id"}); };
+        req.onsuccess=e=>{ this.db=e.target.result; finish(this.db); };
+        req.onerror=()=>finish(null);
+        req.onblocked=()=>finish(null);
+      }catch(e){ finish(null); }
     });
   },
   _tx(mode){ return this.db.transaction("photos",mode).objectStore("photos"); },
@@ -1008,9 +1022,6 @@ const fmtN=n=>Number(n).toLocaleString("en-US");
 const App={
   async init(){
     Store.load();
-    await Photo.open();
-    await Photo.loadAll();
-    await this.migratePhotos();
     this.buildStageSelect();
     document.getElementById("expDate").value=todayISO();
     document.getElementById("actDate").value=todayISO();
@@ -1023,6 +1034,13 @@ const App={
     window.addEventListener("scroll",()=>{
       document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>60);
     },{passive:true});
+    // Photos load in the background — never block first paint on IndexedDB
+    try{
+      await Photo.open();
+      await Photo.loadAll();
+      await this.migratePhotos();
+      this.renderAll(false);
+    }catch(e){ /* app remains fully usable without photo persistence */ }
   },
 
   /* migrate legacy inline (localStorage) photos → IndexedDB */
@@ -1210,10 +1228,19 @@ const App={
       const sp=this.stageProgress(i);
       mini+=`<div class="hero-mini-row">
         <div class="dot" style="background:${SEED.stageColors[i]}"></div>
+        <div class="ml">${this.esc(st.name)}</div>
         <div class="bar"><span style="width:${sp}%"></span></div>
         <div class="pv">${sp}%</div></div>`;
     });
     document.getElementById("dashStageMini").innerHTML=mini;
+    const sumEl=document.getElementById("dashSummary");
+    if(sumEl){
+      const doneStages=SEED.stages.filter((s,i)=>this.stageProgress(i)===100).length;
+      const weeks=SEED.stageWeeks.reduce((a,b)=>a+b,0);
+      const budget=SEED.meta.budget, used=budget?Math.round(this.totalSpent()/budget*100):0;
+      sumEl.innerHTML=`<div class="rs-stat"><span class="v">${doneStages} / ${SEED.stages.length}</span><span class="k">stages complete</span></div>
+        <div class="rs-stat"><span class="v">${used}%</span><span class="k">of budget used</span></div>`;
+    }
     const gEl=document.getElementById("dashGreet");
     if(gEl){
       const h=new Date().getHours();
