@@ -1008,6 +1008,10 @@ const SEED = {
   stageColors:["#0d9488","#6366f1","#7c3aed","#a855f7","#0891b2","#fbbf24","#64748b","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#f59e0b","#c026d3","#f97316","#78716c","#92400e","#dc2626"],
   stageIcons:["🚧","📐","📏","🏛️","💧","🔆","🚽","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🪟","🎨","☀️","🚪","🗄️","🔥"],
   stageWeeks:[3,4,3,8,2,1,2,3,1,3,8,4,3,3,3,4,8,2,5,3,1],
+  // Predecessors (1-based stage numbers that must finish first). Empty = can start at project kickoff.
+  // Enables parallel scheduling: design/approval runs alongside site+borehole; plumbing∥electrical;
+  // solar, boundary wall & joinery overlap the finishing works.
+  stageDeps:[[],[],[2],[3],[1],[5],[5],[4,7],[8],[9],[10],[11],[12],[13],[13],[14,15],[16],[16],[13],[17],[17]],
   stages:[
     { id:"s1", name:"Site Establishment — Boundary Fencing & Cabin", short:"Site Setup", estCost:3500,
       objective:"The very FIRST thing on the ground: secure the whole ~0.8 ha (almost 1 ha) farm/plot with boundary fencing and put up a 2-roomed site cabin (IBR sheets, floored) — one room as a dry, lockable materials & cement store, the other as the builders' sleep room. This protects materials and houses the workers from day one, and can proceed while the drawings are being finalised.",
@@ -1874,14 +1878,23 @@ const App={
   /* ---------- Schedule / Gantt ---------- */
   scheduleFor(){
     const base=new Date((Store.state.startDate||todayISO())+"T00:00:00");
-    let cursor=new Date(base);
+    const deps=SEED.stageDeps||[];
     const out=[];
     SEED.stages.forEach((st,i)=>{
       const c=Store.state.stages[i];
-      const start=c.planStart? new Date(c.planStart+"T00:00:00") : new Date(cursor);
+      let start;
+      if(c.planStart){ start=new Date(c.planStart+"T00:00:00"); }
+      else {
+        const ds=deps[i]||[];
+        if(ds.length){
+          let t=0;
+          ds.forEach(d=>{ const pe=out[d-1]?out[d-1].end.getTime():base.getTime(); if(pe>t) t=pe; });
+          start=new Date((t||base.getTime())+86400000); // day after the latest predecessor finishes
+        } else start=new Date(base);
+      }
       const end=c.planEnd? new Date(c.planEnd+"T00:00:00") : new Date(start.getTime()+SEED.stageWeeks[i]*7*86400000);
       out.push({start,end,custom:!!(c.planStart||c.planEnd)});
-      cursor=new Date(end.getTime()+86400000);
+      // cursor no longer needed — dependencies drive start dates, allowing parallel stages
     });
     return out;
   },
@@ -2003,11 +2016,12 @@ const App={
     // timeline forecast
     const f=this.forecast();
     const fmtDate=d=>d?d.toLocaleDateString("en-US",{day:"numeric",month:"short",year:"numeric"}):"—";
-    // complexity-based planned schedule (sum of per-stage durations set by scope/curing/approvals)
+    // complexity-based planned schedule (parallelised by dependencies — critical path)
     const sched=this.scheduleFor();
     const planFinish=sched.length?new Date(Math.max(...sched.map(s=>s.end.getTime()))):null;
-    const totWeeks=SEED.stageWeeks.reduce((a,c)=>a+c,0);
-    const totMonths=(totWeeks/4.33).toFixed(1);
+    const seqWeeks=SEED.stageWeeks.reduce((a,c)=>a+c,0);
+    const critWeeks=planFinish?Math.max(1,Math.round((planFinish.getTime()-f.start.getTime())/(7*86400000))):seqWeeks;
+    const critMonths=(critWeeks/4.33).toFixed(1);
     document.getElementById("tlPct").textContent=f.progress+"%";
     setTimeout(()=>{const b=document.getElementById("tlBar"); if(b) b.style.width=f.progress+"%";},120);
     document.getElementById("tlStart").textContent=fmtDate(f.start);
@@ -2019,12 +2033,12 @@ const App={
       const wks=Math.round(f.daysLeft/7);
       const paceEnd=f.finish?f.finish.getTime():0;
       const delta=planFinish?Math.round((paceEnd-planFinish.getTime())/86400000):0;
-      const vs = planFinish ? ` Complexity-based plan targets <b>${fmtDate(planFinish)}</b> (${totWeeks}w / ~${totMonths} mo) — you're ${delta>7?`<b style="color:var(--red)">~${Math.round(delta/7)}w behind</b>`:delta<-7?`<b style="color:var(--green)">~${Math.round(-delta/7)}w ahead</b>`:"on track"}.` : "";
+      const vs = planFinish ? ` Complexity-based plan targets <b>${fmtDate(planFinish)}</b> (${critWeeks}w / ~${critMonths} mo, parallelised) — you're ${delta>7?`<b style="color:var(--red)">~${Math.round(delta/7)}w behind</b>`:delta<-7?`<b style="color:var(--green)">~${Math.round(-delta/7)}w ahead</b>`:"on track"}.` : "";
       document.getElementById("tlNote").innerHTML=`At your current pace (${f.progress}% in ${f.elapsed} day${f.elapsed===1?"":"s"}), about <b>${f.daysLeft} days</b> (~${wks} week${wks===1?"":"s"}) remaining.${vs}`;
     } else {
       document.getElementById("tlFinish").textContent=fmtDate(planFinish);
       document.getElementById("tlNote").innerHTML = f.progress>=100 ? "" :
-        `Complexity-based plan: <b>${totWeeks} weeks (~${totMonths} months)</b> across ${SEED.stages.length} stages — each stage timed by its scope, curing & approval lead times. Log progress over a day or two to also forecast from your real pace.`;
+        `Complexity-based plan: <b>${critWeeks} weeks (~${critMonths} months)</b> — parallelised critical path (design/approval overlap site works; plumbing∥electrical; solar, boundary wall & joinery overlap finishes). ${seqWeeks}w if run one-at-a-time. Log progress to also forecast from your real pace.`;
     }
     this.renderGantt();
   },
