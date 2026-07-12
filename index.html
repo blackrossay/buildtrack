@@ -1184,10 +1184,17 @@ const SEED = {
     {item:"5kVA hybrid solar (inverter+lithium+panels, installed)", price:"$2,800 – $3,500", cat:"Solar"}
   ],
   /* One-time seeded vendors & quotes (from user-supplied quotations). Bump seedVersion to add more. */
-  seedVersion:1,
+  seedVersion:2,
   seedVendors:[
     {id:"seed_tera",name:"TeraSolar Energy",cat:"Solar",phone:"078 995 3186",web:"instagram.com/terasolarenergy2",rating:0,note:"8 hybrid solar packages, each incl. inverter, 585W panels, lithium battery, protection + mounting kits & a borehole pump. Free quote."},
-    {id:"seed_bh",name:"Borehole Drilling (0711 391 161)",cat:"Borehole",phone:"+263 711 391 161",web:"wa.me/263711391161",rating:0,note:"80m drill + casing $1000, extra $25/m. FREE countrywide transport promo. Full combo incl. install $2300, no hidden costs."}
+    {id:"seed_bh",name:"Borehole Drilling (0711 391 161)",cat:"Borehole",phone:"+263 711 391 161",web:"wa.me/263711391161",rating:0,note:"80m drill + casing $1000, extra $25/m. FREE countrywide transport promo. Full combo incl. install $2300, no hidden costs."},
+    {id:"seed_nakiso_bh",name:"Nakiso Boreholes",cat:"Borehole",phone:"+263 78 876 6701",web:"nakisoboreholes.co.zw",rating:0,note:"Pro-forma S41410/S41411. Class 9/10 casing, dry-hole policy. Extra metres $38/m; mileage $2.50/km. Prices ex-VAT (15%)."},
+    {id:"seed_logos",name:"Logos Solartech",cat:"Solar",phone:"+263 242 755 786",web:"logossolar.store",rating:0,note:"Eastlea, Harare. Borehole equipment+install, drilling, and whole-house solar (Deye + JA panels). Transport 50km+ from Harare charged separately."},
+    {id:"seed_nakiso_fence",name:"Nakiso Fencing (Clearview)",cat:"Fencing",phone:"+263 77 543 8430",web:"nakisofencing.co.zw",rating:0,note:"Barbed-wire / diamond-mesh perimeter fencing supply & fix. 12-month warranty. 3 options quoted."},
+    {id:"seed_doer",name:"THE DOER (builder)",cat:"Labour",phone:"+263 77 805 4184",web:"",rating:0,note:"Full-project construction LABOUR only for the complete build. Estimate ≈ $18,000 – $22,000."},
+    {id:"seed_blessed",name:"Eng Blessed (architect)",cat:"Design",phone:"",web:"",rating:0,note:"Architectural plan drawing charged at $3 per m² of house area."},
+    {id:"seed_mukuvisi",name:"Mukuvisi Designs",cat:"Design",phone:"",web:"",rating:0,note:"Modern house plan ~$420 incl. 3D visualisation, 4 free plan copies, free BOQ (materials estimate) & site visit. Council submission +$80. Structural drawings excluded (done separately once plans ready). Plan takes 10 working days."},
+    {id:"seed_mututa",name:"Mututa Home Designs",cat:"Design",phone:"+263 71 424 2489",web:"",rating:0,note:"Architectural design $1200–$1400; structural drawings $800–$950. All prices exclude site visits."}
   ],
   seedQuotes:[
     {id:"sq_tera_32a",vendorId:"seed_tera",item:"Solar package — 3.2kVA (2×585W, 25.6V 100Ah)",qty:1,unit:"package",unitPrice:930,total:930,lead:"",date:"2026-07-12",note:"Lights, fans, TV, Wi-Fi, phone; pump 0.37kW"},
@@ -1201,7 +1208,23 @@ const SEED = {
     {id:"sq_bh_drill",vendorId:"seed_bh",item:"Borehole drilling & casing (80m)",qty:80,unit:"m",unitPrice:12.5,total:1000,lead:"free transport",date:"2026-07-12",note:"$1000 for 80m (≈$12.5/m); extra depth $25/m"},
     {id:"sq_bh_site",vendorId:"seed_bh",item:"Borehole siting / survey",qty:1,unit:"job",unitPrice:100,total:100,lead:"",date:"2026-07-12",note:"Site assessment"},
     {id:"sq_bh_combo",vendorId:"seed_bh",item:"Borehole full combo (drill + pump + tank, installed)",qty:1,unit:"combo",unitPrice:2300,total:2300,lead:"free transport",date:"2026-07-12",note:"No hidden costs"},
-    {id:"sq_bh_solar",vendorId:"seed_bh",item:"Borehole solar pump kit (2×370W, Franklin 0.75hp, 5000L JoJo + stand)",qty:1,unit:"kit",unitPrice:1300,total:1300,lead:"",date:"2026-07-12",note:"Incl. pressure tank, wiring, control box, manhole cover"}
+    {id:"sq_bh_solar",vendorId:"seed_bh",item:"Borehole solar pump kit (2×370W, Franklin 0.75hp, 5000L JoJo + stand)",qty:1,unit:"kit",unitPrice:1300,total:1300,lead:"",date:"2026-07-12",note:"Incl. pressure tank, wiring, control box, manhole cover"},
+    {id:"sq_nak_site",vendorId:"seed_nakiso_bh",item:"Borehole siting / survey",qty:1,unit:"job",unitPrice:150,total:150,lead:"",date:"2026-07-02",note:"Geophysical investigation + $90 mobilisation (90km)"},
+    {id:"sq_nak_drill",vendorId:"seed_nakiso_bh",item:"Borehole drilling & casing (40m)",qty:1,unit:"job",unitPrice:1560,total:1560,lead:"",date:"2026-07-02",note:"Class 9/10 casing; extra metres $38/m; double casing $38/m. Ex-VAT"},
+    {id:"sq_nak_solar",vendorId:"seed_nakiso_bh",item:"Borehole solar pump + 5000L tank install kit",qty:1,unit:"kit",unitPrice:3767.81,total:3767.81,lead:"",date:"2026-07-02",note:"Dongyin 1hp DC pump, 3×440W, 2×5000L tank+3m stand, cabling, labour. Incl 15% VAT. Excl aggregates"},
+    {id:"sq_log_site",vendorId:"seed_logos",item:"Borehole siting / survey",qty:1,unit:"job",unitPrice:150,total:150,lead:"",date:"2026-07-02",note:"PQWT-150 / GT Series geophysical survey"},
+    {id:"sq_log_drill",vendorId:"seed_logos",item:"Borehole drilling & casing (40m)",qty:1,unit:"job",unitPrice:1300,total:1300,lead:"",date:"2026-07-02",note:"First 40m with Class 10 casing"},
+    {id:"sq_log_bhkit",vendorId:"seed_logos",item:"Borehole equipment + install (pump, 2×5000L tank+stands, plumbing kit, labour)",qty:1,unit:"package",unitPrice:4000,total:4000,lead:"",date:"2026-07-02",note:"1.5HP AC pump, 2×5000L tank, 2×3.5m stand, full plumbing/electrical kit, labour, transport"},
+    {id:"sq_log_solar",vendorId:"seed_logos",item:"Solar system — 6.2kVA hybrid (2×Deye 5.12kWh, 12×450W)",qty:1,unit:"system",unitPrice:3820,total:3820,lead:"",date:"2026-07-02",note:"6.2kVA inverter, 2×51.2V Deye lithium 5.12kWh, 12×450W JA panels, protection kit, labour"},
+    {id:"sq_fence_a",vendorId:"seed_nakiso_fence",item:"Perimeter fencing — option A (diamond mesh + sliding gate)",qty:1,unit:"job",unitPrice:2028.44,total:2028.44,lead:"",date:"2026-07-02",note:"1.2m diamond mesh, posts, sliding + pedestrian gate, barbed wire. Tax incl"},
+    {id:"sq_fence_b",vendorId:"seed_nakiso_fence",item:"Perimeter fencing — option B",qty:1,unit:"job",unitPrice:1858.44,total:1858.44,lead:"",date:"2026-07-02",note:"Alternative fencing spec"},
+    {id:"sq_fence_c",vendorId:"seed_nakiso_fence",item:"Perimeter fencing — option C",qty:1,unit:"job",unitPrice:1638.44,total:1638.44,lead:"",date:"2026-07-02",note:"Alternative fencing spec"},
+    {id:"sq_doer_labour",vendorId:"seed_doer",item:"Full-project construction labour (complete build)",qty:1,unit:"project",unitPrice:20000,total:20000,lead:"",date:"2026-07-12",note:"Labour only, estimate $18,000 – $22,000"},
+    {id:"sq_blessed_plan",vendorId:"seed_blessed",item:"Architectural plan drawing (per m²)",qty:1,unit:"m²",unitPrice:3,total:3,lead:"",date:"2026-07-12",note:"$3 per m² of house area — multiply by total floor area"},
+    {id:"sq_muk_plan",vendorId:"seed_mukuvisi",item:"Architectural house plan design (full package)",qty:1,unit:"package",unitPrice:420,total:420,lead:"10 working days",date:"2026-07-09",note:"Incl. 3D visualisation, 4 plan copies, free BOQ & site visit. Structural excluded"},
+    {id:"sq_muk_council",vendorId:"seed_mukuvisi",item:"Council plan submission",qty:1,unit:"job",unitPrice:80,total:80,lead:"",date:"2026-07-09",note:"Optional add-on"},
+    {id:"sq_mut_arch",vendorId:"seed_mututa",item:"Architectural house plan design (full package)",qty:1,unit:"package",unitPrice:1300,total:1300,lead:"",date:"2026-07-12",note:"Range $1200–$1400; excludes site visit"},
+    {id:"sq_mut_struct",vendorId:"seed_mututa",item:"Structural drawings",qty:1,unit:"package",unitPrice:875,total:875,lead:"",date:"2026-07-12",note:"Range $800–$950; excludes site visit"}
   ]
 };
 SEED.meta.budget = SEED.stages.reduce((a,s)=>a+s.estCost,0) + SEED.brickCost;
