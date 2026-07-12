@@ -520,6 +520,18 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 .bg-row+.bg-row{border-top:1px solid var(--surface-border)}
 .bg-row b{display:block;font-size:13px;font-weight:700;color:var(--brand);margin-bottom:3px}
 .bg-row span{display:block;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.db-base{font-size:15px;font-weight:700}
+.db-src{font-size:12px;color:var(--muted);margin:2px 0 12px;line-height:1.45}
+.db-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.db-chip{background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:12px;padding:5px 11px;border-radius:999px}
+.db-hd{font-weight:700;font-size:13.5px;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.db-edit{font-size:13px;line-height:1.6;padding:5px 0;border-top:1px solid var(--surface-border)}
+.db-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.db-cols{grid-template-columns:1fr}}
+.db-floor b{display:block;font-size:12.5px;font-weight:700;margin-bottom:6px}
+.db-floor ul{margin:0;padding-left:16px}
+.db-floor li{font-size:12.5px;line-height:1.55;color:var(--muted);margin-bottom:2px}
+.db-note{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:12px;font-style:italic}
 </style>
 </head>
 <body>
@@ -669,6 +681,11 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 
       <div class="section-title">Procurement Checklist</div>
       <div id="materialsList"></div>
+
+      <!-- ===== Chosen Plan & Design Brief ===== -->
+      <div class="section-title">🏛️ Chosen Plan &amp; Design Brief</div>
+      <div class="section-sub">Your selected base plan and the edits to hand the architect. Rough draft — editable.</div>
+      <div class="card" id="designBrief"></div>
 
       <!-- ===== Design Drawings & BOQ ===== -->
       <div class="section-title">📐 Design Drawings &amp; BOQ</div>
@@ -1223,8 +1240,34 @@ const SEED = {
       {k:"Package deals", v:"Bundled combos (inverter+battery+panels+mounting+protection, installed) beat à-la-carte pricing. Compare the whole-system quote against the sum of individual parts — and check install labour & mounting are included."}
     ]}
   ],
-  /* One-time seeded vendors & quotes (from user-supplied quotations). Bump seedVersion to add more. */
-  seedVersion:2,
+  /* Chosen house plan & the owner's modifications — the brief for the architect. */
+  designBrief:{
+    basePlan:"Ocean Mansion — Typical “OM | 1”",
+    source:"Jumeirah Asora Bay Villa Brochure (Dubai) — used as the design template / inspiration.",
+    storeys:"Ground + First floor only",
+    bedrooms:"7 bedrooms — 1 master + 2 guest rooms + 4 bedrooms",
+    note:"Brochure room sizes are for a large Dubai mansion — treat dimensions as proportions to be scaled to the actual Murehwa plot by the architect. This is a rough brief and can be edited.",
+    edits:[
+      "❌ Remove the BASEMENT entirely.",
+      "❌ Remove the SECOND FLOOR — build Ground + First floor only.",
+      "❌ Remove the separate GYM PAVILION — the SAUNA moves into the main house instead.",
+      "⬇️ Relocate WET KITCHEN, STAFF ROOM and LAUNDRY from the basement up to the GROUND floor.",
+      "✅ Keep the STUDY.",
+      "🎯 7 bedrooms total: master + 2 guest rooms + 4 bedrooms."
+    ],
+    ground:[
+      "Living Room (12.3×7.6m)","Lounge","Dining (6.7×8.6m)",
+      "Show / Dry Kitchen (3.7×7.7m)","Wet Kitchen (5.5×2.5m) — moved down",
+      "Laundry (4.2×3.1m) — moved down","Staff Room (2.3×3.8m) + staff bathroom — moved down",
+      "Study (8.0×5.2m) — kept","Sauna — moved into main house","Guest Room 1 (ensuite)",
+      "Store · Guest WC · Cloak","2-car Garage (relocated from basement)","Lift + staircase"
+    ],
+    first:[
+      "Master Bedroom (4.8×6.4m) + walk-in closet + ensuite","Guest Room 2 (ensuite)",
+      "Bedroom 1 (ensuite + WIC)","Bedroom 2 (ensuite + WIC)","Bedroom 3 (ensuite + WIC)","Bedroom 4 (ensuite + WIC)",
+      "Family Living Area (5.6×7.3m)","Lift + staircase"
+    ]
+  },
   seedVendors:[
     {id:"seed_tera",name:"TeraSolar Energy",cat:"Solar",phone:"078 995 3186",web:"instagram.com/terasolarenergy2",rating:0,note:"8 hybrid solar packages, each incl. inverter, 585W panels, lithium battery, protection + mounting kits & a borehole pump. Free quote."},
     {id:"seed_bh",name:"Borehole Drilling (0711 391 161)",cat:"Borehole",phone:"+263 711 391 161",web:"wa.me/263711391161",rating:0,note:"80m drill + casing $1000, extra $25/m. FREE countrywide transport promo. Full combo incl. install $2300, no hidden costs."},
@@ -1999,6 +2042,21 @@ const App={
   },
   stars(n){ return n>0?'<span class="stars">'+"★".repeat(n)+"</span>":""; },
   vendorName(id){ const v=Store.state.vendors.find(x=>x.id===id); return v?v.name:"—"; },
+  renderDesignBrief(){
+    const el=document.getElementById("designBrief"); if(!el) return;
+    const d=SEED.designBrief; if(!d){ el.innerHTML=""; return; }
+    el.innerHTML=`<div class="db-base">${this.esc(d.basePlan)}</div>
+      <div class="db-src">${this.esc(d.source)}</div>
+      <div class="db-meta"><span class="db-chip">🏢 ${this.esc(d.storeys)}</span><span class="db-chip">🛏️ ${this.esc(d.bedrooms)}</span></div>
+      <div class="db-hd">✏️ Owner's edits</div>
+      ${d.edits.map(e=>`<div class="db-edit">${this.esc(e)}</div>`).join("")}
+      <div class="db-hd">🗺️ Room programme</div>
+      <div class="db-cols">
+        <div class="db-floor"><b>Ground floor</b><ul>${d.ground.map(r=>`<li>${this.esc(r)}</li>`).join("")}</ul></div>
+        <div class="db-floor"><b>First floor</b><ul>${d.first.map(r=>`<li>${this.esc(r)}</li>`).join("")}</ul></div>
+      </div>
+      <div class="db-note">${this.esc(d.note)}</div>`;
+  },
   renderVendors(){
     const pg=document.getElementById("priceGuide");
     if(pg){ pg.innerHTML=(SEED.priceGuide||[]).map(p=>`<div class="pg-row">
@@ -2009,6 +2067,7 @@ const App={
       <div class="bg-hd">${this.esc(g.group)}</div>
       ${g.rows.map(r=>`<div class="bg-row"><b>${this.esc(r.k)}</b><span>${this.esc(r.v)}</span></div>`).join("")}
     </div>`).join(""); }
+    this.renderDesignBrief();
     const sg=document.getElementById("vendorSuggest");
     if(sg){ sg.innerHTML=(SEED.vendorSuggestions||[]).map((s,i)=>{
       const added=Store.state.vendors.some(v=>v.name===s.name);
