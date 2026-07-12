@@ -1942,7 +1942,7 @@ const App={
     this.buzz(nv?8:4);
     const before=this.stageProgress(i);
     this.renderDash(false); this.renderStages();
-    if(changed){ this.renderBudget(); this.renderProcurement(); this.toast(nv?"🛒":"↩︎",nv?"Matching purchase logged to budget":"Purchase reverted"); }
+    if(changed){ this.renderBudget(); this.renderProcurement(); this.toast(nv?"🛒":"↩︎",nv?"Material cost logged to budget":"Material cost removed"); }
     // update counts
     let done=0,total=0;
     SEED.stages.forEach((st,k)=>st.materials.forEach((m,l)=>{total++;if(Store.state.stages[k].materials[l])done++;}));
@@ -2070,7 +2070,7 @@ const App={
       <div class="exp">
         <div class="ico">💵</div>
         <div class="l"><div class="t">${this.esc(e.item)}</div>
-          <div class="s">${e.date||""} · ${this.stageLabel(e.stage)}${e.supplier?" · "+this.esc(e.supplier):""}${e.fromActivity?" · 📋 activity":""}${e.fromProc?" · 🛒 procurement":""}</div></div>
+          <div class="s">${e.date||""} · ${this.stageLabel(e.stage)}${e.supplier?" · "+this.esc(e.supplier):""}${e.fromActivity?" · 📋 activity":""}${e.fromProc?" · 🛒 procurement":""}${e.fromMat?" · 📦 material used":""}</div></div>
         <div class="amt tnum">${fmt(e.amt)}</div>
         <button class="del" onclick="App.delExpense('${e.id}')">Delete</button>
       </div>`).join("");
@@ -2311,16 +2311,34 @@ const App={
         supplier:sup==="—"?"":sup,date:todayISO(),fromProc:true});
     }
   },
+  materialCost(i,j){
+    const st=SEED.stages[i], m=st.materials[j];
+    const q=this.quoteForItem(m.n); if(q && +q.price>0) return +q.price;
+    const n=st.materials.length||1; return Math.round((+st.estCost||0)/n);
+  },
   syncProcFromMaterial(i,j,delivered){
     const name=SEED.stages[i].materials[j].n, stage="s"+(i+1);
     const p=(Store.state.procurement||[]).find(x=>x.item===name && x.stage===stage);
-    if(!p) return false;
-    if(delivered){
-      if(p.status!=="purchased"){ p.status="purchased"; if(!(+p.price>0)){ const q=this.quoteForItem(p.item); if(q) p.price=q.price; } this.syncProcExpense(p); return true; }
-    } else {
-      if(p.status==="purchased"){ p.status="todo"; this.syncProcExpense(p); return true; }
+    if(p){
+      if(delivered){
+        if(p.status!=="purchased"){ p.status="purchased"; if(!(+p.price>0)){ const q=this.quoteForItem(p.item); p.price=q?q.price:this.materialCost(i,j); } this.syncProcExpense(p); return true; }
+      } else {
+        if(p.status==="purchased"){ p.status="todo"; this.syncProcExpense(p); return true; }
+      }
+      return false;
     }
-    return false;
+    // No procurement row for this material: a checked material means it was bought & used,
+    // so log (or remove) its cost directly against the budget.
+    const eid="mat_"+i+"_"+j;
+    const existed=Store.state.expenses.some(e=>e.id===eid);
+    Store.state.expenses=Store.state.expenses.filter(e=>e.id!==eid);
+    if(delivered){
+      const q=this.quoteForItem(name), sup=q?this.vendorName(q.vendorId):"";
+      Store.state.expenses.unshift({id:eid,item:name,amt:this.materialCost(i,j),stage,
+        supplier:sup==="—"?"":sup,date:todayISO(),fromMat:true});
+      return true;
+    }
+    return existed;
   },
   delProcItem(id){
     Store.state.expenses=Store.state.expenses.filter(e=>e.id!=="proc_"+id);
