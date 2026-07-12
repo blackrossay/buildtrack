@@ -1903,12 +1903,15 @@ const App={
   },
   tapMat(elDiv,i,j){
     const nv=!Store.state.stages[i].materials[j];
-    Store.state.stages[i].materials[j]=nv; Store.save();
+    Store.state.stages[i].materials[j]=nv;
+    const changed=this.syncProcFromMaterial(i,j,nv);
+    Store.save();
     elDiv.classList.toggle("on",nv);
     const row=elDiv.closest(".row"); if(row) row.classList.toggle("checked",nv);
     this.buzz(nv?8:4);
     const before=this.stageProgress(i);
     this.renderDash(false); this.renderStages();
+    if(changed){ this.renderBudget(); this.renderProcurement(); this.toast(nv?"🛒":"↩︎",nv?"Matching purchase logged to budget":"Purchase reverted"); }
     // update counts
     let done=0,total=0;
     SEED.stages.forEach((st,k)=>st.materials.forEach((m,l)=>{total++;if(Store.state.stages[k].materials[l])done++;}));
@@ -2276,6 +2279,17 @@ const App={
       Store.state.expenses.unshift({id:eid,item:p.item,amt:+p.price,stage:p.stage||"general",
         supplier:sup==="—"?"":sup,date:todayISO(),fromProc:true});
     }
+  },
+  syncProcFromMaterial(i,j,delivered){
+    const name=SEED.stages[i].materials[j].n, stage="s"+(i+1);
+    const p=(Store.state.procurement||[]).find(x=>x.item===name && x.stage===stage);
+    if(!p) return false;
+    if(delivered){
+      if(p.status!=="purchased"){ p.status="purchased"; if(!(+p.price>0)){ const q=this.quoteForItem(p.item); if(q) p.price=q.price; } this.syncProcExpense(p); return true; }
+    } else {
+      if(p.status==="purchased"){ p.status="todo"; this.syncProcExpense(p); return true; }
+    }
+    return false;
   },
   delProcItem(id){
     Store.state.expenses=Store.state.expenses.filter(e=>e.id!=="proc_"+id);
