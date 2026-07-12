@@ -1182,6 +1182,26 @@ const SEED = {
     {item:"5,000L tank + steel stand", price:"$1,000 – $1,200", cat:"Water"},
     {item:"JoJo septic tank 2000L / 2500L", price:"~$500 / ~$635", cat:"Septic"},
     {item:"5kVA hybrid solar (inverter+lithium+panels, installed)", price:"$2,800 – $3,500", cat:"Solar"}
+  ],
+  /* One-time seeded vendors & quotes (from user-supplied quotations). Bump seedVersion to add more. */
+  seedVersion:1,
+  seedVendors:[
+    {id:"seed_tera",name:"TeraSolar Energy",cat:"Solar",phone:"078 995 3186",web:"instagram.com/terasolarenergy2",rating:0,note:"8 hybrid solar packages, each incl. inverter, 585W panels, lithium battery, protection + mounting kits & a borehole pump. Free quote."},
+    {id:"seed_bh",name:"Borehole Drilling (0711 391 161)",cat:"Borehole",phone:"+263 711 391 161",web:"wa.me/263711391161",rating:0,note:"80m drill + casing $1000, extra $25/m. FREE countrywide transport promo. Full combo incl. install $2300, no hidden costs."}
+  ],
+  seedQuotes:[
+    {id:"sq_tera_32a",vendorId:"seed_tera",item:"Solar package — 3.2kVA (2×585W, 25.6V 100Ah)",qty:1,unit:"package",unitPrice:930,total:930,lead:"",date:"2026-07-12",note:"Lights, fans, TV, Wi-Fi, phone; pump 0.37kW"},
+    {id:"sq_tera_32b",vendorId:"seed_tera",item:"Solar package — 3.2kVA+ (3×585W, +decoder)",qty:1,unit:"package",unitPrice:990,total:990,lead:"",date:"2026-07-12",note:"Adds decoder; pump 0.37kW"},
+    {id:"sq_tera_42",vendorId:"seed_tera",item:"Solar package — 4.2kVA (4×585W, 25.6V 100Ah)",qty:1,unit:"package",unitPrice:1200,total:1200,lead:"",date:"2026-07-12",note:"+fridge; pump 0.55kW"},
+    {id:"sq_tera_52",vendorId:"seed_tera",item:"Solar package — 5.2kVA (5×585W, 51.2V 100Ah)",qty:1,unit:"package",unitPrice:1550,total:1550,lead:"",date:"2026-07-12",note:"+laptop; pump 0.75kW"},
+    {id:"sq_tera_62",vendorId:"seed_tera",item:"Solar package — 6.2kVA (6×585W, 51.2V 100Ah)",qty:1,unit:"package",unitPrice:1650,total:1650,lead:"",date:"2026-07-12",note:"+washing machine; pump 0.75kW"},
+    {id:"sq_tera_82",vendorId:"seed_tera",item:"Solar package — 8.2kVA (8×585W, 51.2V 100Ah)",qty:1,unit:"package",unitPrice:1900,total:1900,lead:"",date:"2026-07-12",note:"+borehole pump load; pump 1.1kW"},
+    {id:"sq_tera_102",vendorId:"seed_tera",item:"Solar package — 10.2kVA (10×585W, 51.2V 100Ah)",qty:1,unit:"package",unitPrice:3000,total:3000,lead:"",date:"2026-07-12",note:"Heavy load; pump 1.5kW"},
+    {id:"sq_tera_12",vendorId:"seed_tera",item:"Solar package — 12kVA (12×585W, whole house)",qty:1,unit:"package",unitPrice:4500,total:4500,lead:"",date:"2026-07-12",note:"All appliances incl. aircon; pump 1.5kW"},
+    {id:"sq_bh_drill",vendorId:"seed_bh",item:"Borehole drilling & casing (80m)",qty:80,unit:"m",unitPrice:12.5,total:1000,lead:"free transport",date:"2026-07-12",note:"$1000 for 80m (≈$12.5/m); extra depth $25/m"},
+    {id:"sq_bh_site",vendorId:"seed_bh",item:"Borehole siting / survey",qty:1,unit:"job",unitPrice:100,total:100,lead:"",date:"2026-07-12",note:"Site assessment"},
+    {id:"sq_bh_combo",vendorId:"seed_bh",item:"Borehole full combo (drill + pump + tank, installed)",qty:1,unit:"combo",unitPrice:2300,total:2300,lead:"free transport",date:"2026-07-12",note:"No hidden costs"},
+    {id:"sq_bh_solar",vendorId:"seed_bh",item:"Borehole solar pump kit (2×370W, Franklin 0.75hp, 5000L JoJo + stand)",qty:1,unit:"kit",unitPrice:1300,total:1300,lead:"",date:"2026-07-12",note:"Incl. pressure tank, wiring, control box, manhole cover"}
   ]
 };
 SEED.meta.budget = SEED.stages.reduce((a,s)=>a+s.estCost,0) + SEED.brickCost;
@@ -1311,6 +1331,11 @@ const Store={
     if(!Array.isArray(this.state.quotes)) this.state.quotes=[];
     if(!Array.isArray(this.state.procurement)) this.state.procurement=[];
     if(!this.state.chosen||typeof this.state.chosen!=="object") this.state.chosen={};
+    if((this.state.seedVersion||0) < (SEED.seedVersion||0)){
+      (SEED.seedVendors||[]).forEach(sv=>{ if(!this.state.vendors.some(v=>v.id===sv.id||v.name===sv.name)) this.state.vendors.push(Object.assign({},sv)); });
+      (SEED.seedQuotes||[]).forEach(sq=>{ if(!this.state.quotes.some(q=>q.id===sq.id)) this.state.quotes.push(Object.assign({},sq)); });
+      this.state.seedVersion=SEED.seedVersion;
+    }
     if(!this.state.startDate) this.state.startDate=todayISO();
     if(typeof this.state.notes!=="string") this.state.notes="";
   },
