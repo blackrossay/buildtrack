@@ -1005,17 +1005,79 @@ const TAB_EMOJI={dash:"📊",stages:"🏗️",materials:"📦",budget:"💵",act
    ============================================================ */
 const SEED = {
   meta:{ budget:36160 },
-  stageColors:["#0891b2","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#64748b","#f59e0b","#f97316","#92400e","#dc2626"],
-  stageIcons:["💧","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🚽","🪟","☀️","🗄️","🔥"],
-  stageWeeks:[3,3,1,2,6,3,2,2,2,2,4,2,2,1],
+  stageColors:["#0d9488","#6366f1","#7c3aed","#a855f7","#0891b2","#fbbf24","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#64748b","#f59e0b","#f97316","#78716c","#92400e","#dc2626"],
+  stageIcons:["🚧","📐","📏","🏛️","💧","🔆","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🚽","🪟","☀️","🚪","🗄️","🔥"],
+  stageWeeks:[2,2,2,3,3,1,3,1,2,6,3,2,2,2,2,4,2,3,2,1],
   stages:[
-    { id:"s1", name:"Borehole & Water Supply", short:"Borehole", estCost:5200,
+    { id:"s1", name:"Site Establishment — Boundary Fencing & Cabin", short:"Site Setup", estCost:3500,
+      objective:"The very FIRST thing on the ground: secure the whole ~0.8 ha (almost 1 ha) farm/plot with boundary fencing and put up a 2-roomed site cabin (IBR sheets, floored) — one room as a dry, lockable materials & cement store, the other as the builders' sleep room. This protects materials and houses the workers from day one, and can proceed while the drawings are being finalised.",
+      steps:[
+        "Clear, peg & set out the ~0.8 ha plot boundary corners (≈360 m perimeter for an ~89×89 m square)",
+        "Erect the perimeter/boundary fence around the whole plot with a lockable gate",
+        "Build a 2-roomed site cabin: IBR-sheet walls & roof on a floored (screed/timber) base",
+        "Fit out Room 1 as a dry, lockable materials & cement store (off the ground)",
+        "Fit out Room 2 as the builders' sleep room; add basic solar light & a temporary water point"
+      ],
+      materials:[
+        {n:"Game/Diamond-mesh fence 2.4m + galvanized posts (Mandy Wires)", q:"~360 m (0.8 ha)"},
+        {n:"Barbed wire (2.5mm, 200m rolls) — top strands (Mandy Wires)", q:"~4 rolls"},
+        {n:"Galvanized straining/corner posts & standards (Mandy Wires)", q:"perimeter"},
+        {n:"Lockable galvanized site gate (Mandy Wires)", q:"1 unit"},
+        {n:"IBR Sheets — cabin walls & roof", q:"1 lot"},
+        {n:"Cabin timber frame, purlins & fixings", q:"1 lot"},
+        {n:"Floor screed / timber flooring", q:"2 rooms"},
+        {n:"Doors, padlocks & window", q:"2 rooms"}
+      ]},
+    { id:"s2", name:"Architectural Drawings", short:"Architectural", estCost:1300,
+      objective:"Commission the full architectural design & drawings from the appointed architect — the approved concept, floor plans, elevations, sections and 3D visualisation the whole build is measured against. Nothing on site starts until these are agreed.",
+      steps:[
+        "Appoint architect & sign brief (base plan + owner's edits: Ground+First only, master sightlines)",
+        "Architect site visit / measure-up of the Murehwa plot",
+        "Produce floor plans, elevations, sections & 3D visualisation",
+        "Owner review & sign-off of the architectural drawings",
+        "🔍 Inspection/party: Architect issues final stamped drawing set + BOQ (materials estimate)"
+      ],
+      materials:[
+        {n:"Architectural design & drawings (full package)", q:"1 set"},
+        {n:"3D visualisation images", q:"1 set"},
+        {n:"Bill of Quantities (BOQ) — materials estimate", q:"1 doc"},
+        {n:"Printed plan copies", q:"4 copies"}
+      ]},
+    { id:"s3", name:"Structural / Engineering Drawings", short:"Structural", estCost:900,
+      objective:"Once architectural plans are fixed, commission the structural engineer to design the load paths — foundations, the suspended mid-slab, ring beams and roof structure — for a safe double-storey build. Required for council submission.",
+      steps:[
+        "Appoint structural engineer once architectural drawings are approved",
+        "Engineer designs foundations, suspended slab, ring beams & roof structure",
+        "Produce stamped structural drawings & reinforcement schedules",
+        "Confirm merged-floor grid: first-floor load-bearing walls sit over ground-floor walls/beams",
+        "🔍 Inspection/party: Structural engineer stamps & signs off the structural set"
+      ],
+      materials:[
+        {n:"Structural engineering drawings & calculations", q:"1 set"},
+        {n:"Reinforcement schedules & specifications", q:"1 set"}
+      ]},
+    { id:"s4", name:"Council Submission & Approval", short:"Council Approval", estCost:450,
+      objective:"Submit the stamped architectural + structural drawings to the local authority / RDC, pay fees, and obtain approved plans and a permit to build. Building without approval risks demolition orders and fines.",
+      steps:[
+        "Compile submission set (architectural + structural + forms + fees)",
+        "Lodge plans with the Rural District Council / local authority",
+        "Respond to any council queries or required amendments",
+        "🔍 Inspection/party: Council plan examiner approves & stamps the plans",
+        "Collect approved plans + building permit; note the inspection hold-points council requires on site"
+      ],
+      materials:[
+        {n:"Council plan submission & scrutiny fees", q:"1 lot"},
+        {n:"Building permit", q:"1 permit"},
+        {n:"Approved & stamped plan set", q:"1 set"}
+      ]},
+    { id:"s5", name:"Borehole & Water Supply", short:"Borehole", estCost:5200,
       objective:"Drill and equip a private borehole with pump, storage tank and reticulation FIRST — so there is a reliable water source on site for block-making, concrete mixing and the long curing periods that follow. No serious work can proceed without water.",
       steps:[
         "Siting survey (resistivity/seismic), then drill & case the borehole to yield depth",
         "Install submersible pump, riser pipe, cable & control box",
         "Erect elevated tank stand and mount the storage tank(s)",
-        "Run supply piping from borehole to tank and tank to the site/main house"
+        "Run supply piping from borehole to tank and tank to the site/main house",
+        "🔍 Inspection/party: Driller issues borehole completion/yield certificate (depth, yield, casing class)"
       ],
       materials:[
         {n:"Borehole Drilling & Casing (per metre)", q:"~40 m"},
@@ -1024,11 +1086,27 @@ const SEED = {
         {n:"Steel/Brick Tank Stand", q:"1 unit"},
         {n:"HDPE / PVC Supply Piping & Valves", q:"1 lot"}
       ]},
-    { id:"s2", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
+    { id:"s6", name:"Borehole & Farming Solar System", short:"Borehole Solar", estCost:2000,
+      objective:"A DEDICATED, standalone solar system to power the borehole pump and future farming/irrigation loads — separate from the main-house solar so the water & farm side keeps running independently. Housed at the same compound as the borehole, close to the water source.",
+      steps:[
+        "Mount the borehole/farming solar array on a stand near the borehole & tank",
+        "Install the solar pump inverter/controller sized to the submersible pump",
+        "Wire pump direct-drive (and optional small battery for controls/irrigation timers)",
+        "Provision spare capacity for future farming/irrigation loads",
+        "Commission & test pumping yield across the day"
+      ],
+      materials:[
+        {n:"Solar Panels — borehole/farming array (2–4 panels)", q:"1 array"},
+        {n:"Solar Pump Inverter / Controller (borehole pump)", q:"1 unit"},
+        {n:"Mounting Stand, DC Cable, Isolators & Breakers", q:"1 lot"},
+        {n:"Optional Battery + Timer for irrigation controls", q:"1 set"}
+      ]},
+    { id:"s7", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
       objective:"Excavate load-bearing trenches to carry the vertical weight of a double-storey structure, avoiding ground settling or wall cracking.",
       steps:[
         "Excavate trenches exactly 1 m deep and 600 mm wide",
         "Assemble and bind heavy steel rebar reinforcement cages",
+        "🔍 Inspection/party: Council & structural engineer inspect open trenches/footing depth & rebar BEFORE concrete",
         "Mix and pour thick structural strip-footing concrete inside trenches",
         "Lay high-strength foundation brickwork courses up to floor line"
       ],
@@ -1038,7 +1116,7 @@ const SEED = {
         {n:"19mm Quarry Stones", q:"15 m³"},
         {n:"Coarse Pit Sand", q:"12 m³"}
       ]},
-    { id:"s3", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
+    { id:"s8", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
       objective:"Chemically poison the soil in the foundation trenches and under-floor fill BEFORE the slab seals the ground — this is the only chance to lay a continuous barrier under the building. Roof timbers, wall plates & door frames are then spot-treated as they are installed in later stages.",
       steps:[
         "Trench & drench the foundation perimeter and footings with termiticide",
@@ -1051,12 +1129,13 @@ const SEED = {
         {n:"Knapsack / Drench Sprayer (rental)", q:"1 unit"},
         {n:"Applicator Labour & Treatment Certificate", q:"1 job"}
       ]},
-    { id:"s4", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
+    { id:"s9", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
       objective:"Cast a solid concrete surface bed across the full living area and the attached single-storey vehicle wing (295 m²).",
       steps:[
         "Backfill internal foundation pockets in 150 mm layers, water & compact heavily",
         "Set below-slab sewer & water stub connections before pouring (coordinate with drainage stage)",
         "Lay plastic Damp-Proof Membrane (DPC) to block ground moisture",
+        "🔍 Inspection/party: Council DPC / damp-proof inspection before the slab pour",
         "Lay steel anti-crack reinforcing mesh across the ground footprint",
         "Pour continuous 100 mm concrete slab across combined 295 m² zone"
       ],
@@ -1067,12 +1146,13 @@ const SEED = {
         {n:"Washed River Sand", q:"20 m³"},
         {n:"19mm Crushed Quarry Stones", q:"25 m³"}
       ]},
-    { id:"s5", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11600,
+    { id:"s10", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11600,
       objective:"Erect ground level walls and engineer the heavy floor structure supporting the upper-level bedrooms.",
       steps:[
         "Erect external & internal walls to 3 m height (machine-pressed bricks on load-bearing walls)",
         "Assemble steel scaffolding props & marine plywood shuttering",
         "Weave & tie dense dual-layer Y16 + Y12 reinforcement grid",
+        "🔍 Inspection/party: Structural engineer inspects & signs off the slab rebar BEFORE the pour (critical hold-point)",
         "Pour solid 150 mm suspended concrete deck over 225 m² footprint",
         "Keep slab wet & propped for 28 consecutive days (full curing)"
       ],
@@ -1083,19 +1163,20 @@ const SEED = {
         {n:"19mm Structural Quarry Stones", q:"22 m³"},
         {n:"Adjustable Steel Decking Props (rental)", q:"~250 props"}
       ]},
-    { id:"s6", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
+    { id:"s11", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
       objective:"Build the upstairs private sanctuary and erect architectural screening to mimic a flat Dubai layout.",
       steps:[
         "Build upper-level bedroom partitions, bathrooms & corridors",
         "Extend perimeter walls 800–1000 mm above ceiling line (high parapet)",
         "Cast continuous concrete ring-beam along highest parapet course",
+        "🔍 Inspection/party: Structural engineer checks ring-beam reinforcement & roof tie-downs",
         "Embed heavy-duty hoop-iron strapping into ring-beam as roof tie-downs"
       ],
       materials:[
         {n:"50kg Cement (ring-beam & mortar)", q:"30 bags"},
         {n:"Galvanized Hoop Iron Strapping Wire", q:"3 rolls"}
       ]},
-    { id:"s7", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
+    { id:"s12", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
       objective:"Install a lightweight, ultra-durable timber & steel roof hidden entirely inside the parapet framework, making the villa weather-tight before internal works begin.",
       steps:[
         "Construct sloped timber truss network inside parapet, pitched to backyard",
@@ -1111,14 +1192,15 @@ const SEED = {
         {n:"Galvanized Box Gutters & Downpipes", q:"custom set"},
         {n:"Roofing Screws, Washers & Weatherproof Silicone", q:"1 lot"}
       ]},
-    { id:"s8", name:"Plumbing & Water Reticulation", short:"Plumbing Pipes", estCost:2800,
+    { id:"s13", name:"Plumbing & Water Reticulation", short:"Plumbing Pipes", estCost:2800,
       objective:"First-fix all hot & cold water supply piping and internal waste/soil pipework to kitchens, bathrooms and the laundry — chased into walls & floors BEFORE ceilings and plastering close everything up.",
       steps:[
         "Chase walls & floors and lay first-fix PEX/PPR supply piping",
         "Install waste, soil & vent pipework to all wet points",
         "Fit and stand the geyser(s) with pressure-relief & vacuum valves",
         "Fit shower/bathroom extractor fans & ventilation to keep showers dry and mould-free",
-        "Pressure-test the system, then second-fix taps, showers & sanitaryware"
+        "Pressure-test the system, then second-fix taps, showers & sanitaryware",
+        "🔍 Inspection/party: Council/plumber pressure-test & drainage inspection before walls/ceilings close up"
       ],
       materials:[
         {n:"PPR / PEX Hot & Cold Supply Pipe & Fittings", q:"1 lot"},
@@ -1128,13 +1210,14 @@ const SEED = {
         {n:"Taps, Mixers, Showers & Sanitaryware", q:"full house"},
         {n:"Pipe Clips, Solvent Cement & Thread Tape", q:"1 lot"}
       ]},
-    { id:"s9", name:"Electrical Installation", short:"Electricals", estCost:3800,
+    { id:"s14", name:"Electrical Installation", short:"Electricals", estCost:3800,
       objective:"First-fix the full electrical system — conduits, wiring and back-boxes chased into walls BEFORE ceilings close up — then second-fix and certify to a safe, ready-to-energise standard.",
       steps:[
         "First-fix: chase walls & cast conduits, draw-boxes and back-boxes",
         "Pull cabling for lighting, power, geyser, stove & dedicated circuits",
         "Mount & wire the distribution (DB) board with breakers & earth/RCD",
-        "Second-fix light fittings, switches, sockets; test, certify & label"
+        "Second-fix light fittings, switches, sockets; test, certify & label",
+        "🔍 Inspection/party: Licensed electrician issues Certificate of Compliance (COC); ZETDC meter application"
       ],
       materials:[
         {n:"20mm PVC Conduit, Draw-boxes & Back-boxes", q:"1 lot"},
@@ -1143,13 +1226,14 @@ const SEED = {
         {n:"Light Fittings, Switches & Sockets", q:"full house"},
         {n:"Earth Rod, Cable Ties & Terminations", q:"1 lot"}
       ]},
-    { id:"s10", name:"Septic Tank, Soakaway & Drainage", short:"Sewer & Drainage", estCost:2600,
+    { id:"s15", name:"Septic Tank, Soakaway & Drainage", short:"Sewer & Drainage", estCost:2600,
       objective:"Build the on-site foul-water treatment (septic tank + soakaway) and connect all external sewer and storm-water drainage from the soil stacks laid during plumbing first-fix.",
       steps:[
         "Excavate & cast/lay the septic tank chambers with baffle & access covers",
         "Dig and charge the soakaway pit with hardcore & filter stone",
         "Lay external 110mm sewer runs at fall from all soil stacks to the tank",
-        "Install inspection chambers, gully traps & storm-water drainage channels"
+        "Install inspection chambers, gully traps & storm-water drainage channels",
+        "🔍 Inspection/party: Council drainage/health inspection of sewer & septic before backfill"
       ],
       materials:[
         {n:"Septic Tank — JoJo poly 2500L (double-storey) or brick-built + covers", q:"1 unit"},
@@ -1158,7 +1242,7 @@ const SEED = {
         {n:"Hardcore, Filter Stone & Pit Sand (soakaway)", q:"10 m³"},
         {n:"Cement & Bricks (tank base & chambers)", q:"1 lot"}
       ]},
-    { id:"s11", name:"Windows, Doors, Ceilings & Security Screens", short:"Glazing & Security", estCost:18000,
+    { id:"s16", name:"Windows, Doors, Ceilings & Security Screens", short:"Glazing & Security", estCost:18000,
       objective:"With plumbing & electrical first-fix complete, close up the house: install premium slim-frame aluminium glazing (toughened/shatter-proof, floor-to-ceiling sliders — Dubai/Tilal Al Ghaf look), external & internal doors, full CEILING works (only now that wiring & pipework are in), plus security hardening — Trellidor screens and burglar bars on the lower level. Glazing ≈74m² is the main cost driver (~$150–$250/m² standard, up to $450/m² for minimal-frame).",
       steps:[
         "Install aluminium window frames with toughened / shatter-proof safety glass throughout",
@@ -1178,22 +1262,39 @@ const SEED = {
         {n:"Trellidor Retractable Security Screens / Gates", q:"external doors + openings"},
         {n:"Ceiling Boards, Brandering, Cornices & Trims", q:"1 lot"}
       ]},
-    { id:"s12", name:"Solar Power System", short:"Solar & Backup", estCost:6500,
-      objective:"Install solar generation for both the borehole pump and the main house — panels, inverter and battery backup — for energy independence from the grid.",
+    { id:"s17", name:"Main House Solar System", short:"House Solar", estCost:6500,
+      objective:"Install the MAIN HOUSE solar system — panels, hybrid inverter and battery backup for the villa's lights, sockets, geysers and appliances. Separate from the borehole/farming solar, but its panels & batteries are housed at the same compound near the water source. Sized independently so the house and the water/farm side never compete for power.",
       steps:[
-        "Mount roof/ground solar panel array with rails & DC isolators",
+        "Mount the main-house solar panel array with rails & DC isolators",
         "Install hybrid inverter, charge controller & battery bank for the house",
-        "Fit a dedicated solar pump controller/inverter for the borehole pump",
-        "Wire changeover, commission, and test yield & backup runtime"
+        "Wire grid/generator changeover & house distribution integration",
+        "Commission and test house yield & backup runtime"
       ],
       materials:[
         {n:"Solar Panels (main house array)", q:"~12 panels"},
         {n:"Hybrid Inverter & Charge Controller", q:"1 unit"},
         {n:"Lithium/Gel Battery Bank", q:"1 bank"},
-        {n:"Solar Pump Inverter/Controller (borehole)", q:"1 unit"},
+        {n:"Changeover Switch & House Integration", q:"1 set"},
         {n:"Mounting Rails, DC Cable, Isolators & Breakers", q:"1 lot"}
       ]},
-    { id:"s13", name:"Joinery — Cabinets & Wardrobes", short:"Cabinetry", estCost:4800,
+    { id:"s18", name:"House Boundary Wall & Gate", short:"Boundary Wall", estCost:7500,
+      objective:"Enclose the ~2000 m² (0.2 ha) HOME AREA set out within the 0.8 ha farm with a solid 2.5 m-high boundary wall and a secure vehicle + pedestrian gate. Built late so deliveries/machinery aren't blocked during the main build, giving the near-complete house its own secure inner perimeter (separate from the outer farm fence).",
+      steps:[
+        "Set out the ~2000 m² home-area boundary (≈179 m perimeter for a ~45×45 m square)",
+        "Excavate & cast the wall footing/foundation for a 2.5 m-high wall",
+        "Erect the 2.5 m boundary wall (precast durawall panels or brick) around the home area",
+        "Plaster, cap & paint the wall; add wall-top security (electric fence / spikes) if required",
+        "Install the main vehicle gate (sliding/swing) + pedestrian gate — lockable, automation optional"
+      ],
+      materials:[
+        {n:"2.5 m Boundary Wall — precast durawall panels or brick", q:"~179 m"},
+        {n:"Wall Footing Concrete & Reinforcement", q:"1 lot"},
+        {n:"Galvanized Steel Vehicle Gate (sliding/swing) — Mandy Wires", q:"1 unit"},
+        {n:"Pedestrian Gate — Mandy Wires", q:"1 unit"},
+        {n:"Gate Motor / Automation & Locks (optional)", q:"1 set"},
+        {n:"Wall-top Electric Fence / Razor Wire (optional) — Mandy Wires", q:"~179 m"}
+      ]},
+    { id:"s19", name:"Joinery — Cabinets & Wardrobes", short:"Cabinetry", estCost:4800,
       objective:"Design, build and fit all fitted joinery — kitchen cabinets for the wet & dry kitchens plus built-in wardrobes in every bedroom.",
       steps:[
         "Measure & template kitchens and bedrooms; agree cabinet/wardrobe layouts",
@@ -1209,14 +1310,15 @@ const SEED = {
         {n:"Hinges, Runners, Handles & Edging", q:"1 lot"},
         {n:"Board, MDF, Glue & Fixings", q:"1 lot"}
       ]},
-    { id:"s14", name:"Gas Installation & Reticulation", short:"Gas System", estCost:650,
+    { id:"s20", name:"Gas Installation & Reticulation", short:"Gas System", estCost:650,
       objective:"Mount twin 9kg LPG cylinders outside in a secure cage and pipe gas into both the wet and dry kitchens, tested and leak-certified.",
       steps:[
         "Build/fit an external steel security cage and mount 2 × 9kg cylinders",
         "Fit twin-cylinder changeover regulator & manifold",
         "Run rated copper/gas pipe to wet-kitchen and dry-kitchen appliance points",
         "Fit isolation valves and bayonet points at each hob/cooker location",
-        "Pressure-test the line, leak-check and issue a gas compliance record"
+        "Pressure-test the line, leak-check and issue a gas compliance record",
+        "🔍 Inspection/party: Council FINAL / occupation inspection of the whole build → Certificate of Occupation"
       ],
       materials:[
         {n:"9kg LPG Gas Cylinders", q:"2 bottles"},
@@ -1323,7 +1425,9 @@ const SEED = {
       "💡 Cost/decision note: full-width master + big glazing raises the Stage 11 glazing bill (~$150–$450/m²). Decide glazing spec early so the budget and aluminium lead-time are locked before walls go up."
     ]
   },
+  seedVersion:3,
   seedVendors:[
+    {id:"seed_mandy",name:"Mandy Wires (fencing & gates)",cat:"Fencing",phone:"",web:"mandywires.com/shop",rating:0,note:"Galvanized fencing & custom gates (SABS/SAZ). Diamond mesh (0.9-2.4m, 2-4mm), game fence (knotted, 1.2-2.4m), barbed wire (2.5mm, 100/200m rolls), razor wire (BTO-22), clearview/welded mesh, galvanized posts (1.2-2.4m)+straining fittings, and custom sliding/double-leaf/pedestrian gates. Prices quote-on-request. Use for the 0.8ha farm fence + house gates/wall-top security."},
     {id:"seed_tera",name:"TeraSolar Energy",cat:"Solar",phone:"078 995 3186",web:"instagram.com/terasolarenergy2",rating:0,note:"8 hybrid solar packages, each incl. inverter, 585W panels, lithium battery, protection + mounting kits & a borehole pump. Free quote."},
     {id:"seed_bh",name:"Borehole Drilling (0711 391 161)",cat:"Borehole",phone:"+263 711 391 161",web:"wa.me/263711391161",rating:0,note:"80m drill + casing $1000, extra $25/m. FREE countrywide transport promo. Full combo incl. install $2300, no hidden costs."},
     {id:"seed_nakiso_bh",name:"Nakiso Boreholes",cat:"Borehole",phone:"+263 78 876 6701",web:"nakisoboreholes.co.zw",rating:0,note:"Pro-forma S41410/S41411. Class 9/10 casing, dry-hole policy. Extra metres $38/m; mileage $2.50/km. Prices ex-VAT (15%)."},
@@ -1469,7 +1573,7 @@ const Store={
     this.migrate(); return this.state;
   },
   fresh(){
-    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{}, stageOrder:1 };
+    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{}, stageOrder:1, stageVer:2 };
     SEED.stages.forEach(st=> s.stages.push({id:st.id,steps:st.steps.map(()=>false),materials:st.materials.map(()=>false),notes:"",photos:[]}));
     SEED.bricks.forEach(()=> s.bricks.push({delivered:0}));
     return s;
@@ -1488,6 +1592,34 @@ const Store={
       (this.state.procurement||[]).forEach(p=>{ if(p.stage) p.stage=rm(p.stage); });
       (this.state.labour||[]).forEach(l=>{ if(l.stage) l.stage=rm(l.stage); });
       this.state.stageOrder=1;
+    }
+    // Second resequencing: insert Site Setup, Design (×3), Farming Solar & House Boundary Wall
+    // stages, remapping the 14-stage layout to the new 20-stage layout.
+    if((this.state.stageVer||0) < 2 && Array.isArray(this.state.stages) && this.state.stages.length){
+      const oldToNew={1:5,2:7,3:8,4:9,5:10,6:11,7:12,8:13,9:14,10:15,11:16,12:17,13:19,14:20};
+      const NEW=20;
+      const byOldPos={}; this.state.stages.forEach((s,idx)=> byOldPos[idx+1]=s);
+      const newToOld={}; for(const k in oldToNew) newToOld[oldToNew[k]]=+k;
+      const newStages=[];
+      for(let np=1; np<=NEW; np++){
+        const op=newToOld[np];
+        const s=(op && byOldPos[op]) ? byOldPos[op] : {steps:[],materials:[],notes:"",photos:[]};
+        s.id="s"+np; newStages.push(s);
+      }
+      this.state.stages=newStages;
+      const codeMap={}; for(const k in oldToNew) codeMap["s"+k]="s"+oldToNew[k];
+      const rm=c=>(c&&codeMap[c])||c;
+      const idxMap={}; for(const k in oldToNew) idxMap[(+k-1)]=(oldToNew[k]-1);
+      (this.state.expenses||[]).forEach(e=>{
+        if(typeof e.id==="string" && e.id.indexOf("mat_")===0){
+          const p=e.id.split("_"); const oi=+p[1];
+          if(idxMap[oi]!=null) e.id="mat_"+idxMap[oi]+"_"+p[2];
+        }
+        if(e.stage) e.stage=rm(e.stage);
+      });
+      (this.state.procurement||[]).forEach(p=>{ if(p.stage) p.stage=rm(p.stage); });
+      (this.state.labour||[]).forEach(l=>{ if(l.stage) l.stage=rm(l.stage); });
+      this.state.stageVer=2;
     }
     SEED.stages.forEach((st,i)=>{
       if(!this.state.stages[i]) this.state.stages[i]={id:st.id,steps:[],materials:[],notes:"",photos:[]};
