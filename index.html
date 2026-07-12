@@ -811,6 +811,25 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
         <div class="bar money"><span id="bBar"></span></div>
       </div>
 
+      <div class="section-title">💵 Cash in Hand</div>
+      <div class="section-sub">Track the actual liquid cash you've put toward the build — separate from the full project budget.</div>
+      <div class="grid g3">
+        <div class="tile"><div class="lbl">Allocated</div><div class="val sm tnum" id="bAllocated">$0</div></div>
+        <div class="tile"><div class="lbl">Spent</div><div class="val sm tnum" id="bSpentCash">$0</div></div>
+        <div class="tile"><div class="lbl">In Hand</div><div class="val sm tnum" id="bInHand">$0</div></div>
+      </div>
+      <div class="card">
+        <div class="hint" id="cashHint" style="margin-bottom:12px"></div>
+        <div class="group-hd" style="margin-top:0">Add cash to the pot</div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Amount (USD)</label><input id="fundAmt" type="number" inputmode="decimal" placeholder="0.00"></div>
+          <div class="field"><label class="fl">Date</label><input id="fundDate" type="date"></div>
+        </div>
+        <div class="field"><label class="fl">Source / note</label><input id="fundNote" placeholder="e.g. salary, savings, sold asset"></div>
+        <button class="btn green wide" onclick="App.addFund()">Add Cash</button>
+        <div id="fundLog" style="margin-top:12px"></div>
+      </div>
+
       <div class="section-title">Log an Expense</div>
       <div class="card">
         <div class="field"><label class="fl">Item / description</label><input id="expItem" placeholder="e.g. 50 bags cement"></div>
@@ -1416,7 +1435,7 @@ const Store={
     this.migrate(); return this.state;
   },
   fresh(){
-    const s={ stages:[], expenses:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{} };
+    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{} };
     SEED.stages.forEach(st=> s.stages.push({id:st.id,steps:st.steps.map(()=>false),materials:st.materials.map(()=>false),notes:"",photos:[]}));
     SEED.bricks.forEach(()=> s.bricks.push({delivered:0}));
     return s;
@@ -1432,6 +1451,7 @@ const Store={
     if(!this.state.bricks) this.state.bricks=[];
     SEED.bricks.forEach((b,i)=>{ if(!this.state.bricks[i]) this.state.bricks[i]={delivered:0}; });
     if(!this.state.expenses) this.state.expenses=[];
+    if(!Array.isArray(this.state.funds)) this.state.funds=[];
     if(!this.state.activity) this.state.activity=[];
     if(!this.state.labour) this.state.labour=[];
     if(!Array.isArray(this.state.docs)) this.state.docs=[];
@@ -1555,6 +1575,8 @@ const App={
     return t?Math.round(d/t*100):0;
   },
   totalSpent(){ return Store.state.expenses.reduce((a,e)=>a+(+e.amt||0),0); },
+  totalFunds(){ return (Store.state.funds||[]).reduce((a,f)=>a+(+f.amt||0),0); },
+  cashInHand(){ return this.totalFunds()-this.totalSpent(); },
   totalBricks(){ return SEED.bricks.reduce((a,b)=>a+b.q,0); },
   bricksDelivered(){ return Store.state.bricks.reduce((a,b)=>a+(+b.delivered||0),0); },
   badge(p){
@@ -1931,6 +1953,45 @@ const App={
     Store.state.expenses=Store.state.expenses.filter(e=>String(e.id)!==String(id));
     Store.save(); this.renderDash(false); this.renderBudget(); this.buzz(6);
   },
+  addFund(){
+    const amt=parseFloat(document.getElementById("fundAmt").value);
+    const note=document.getElementById("fundNote").value.trim();
+    const date=document.getElementById("fundDate").value||todayISO();
+    if(!(amt>0)){ this.toast("⚠︎","Enter a valid amount"); return; }
+    if(!Array.isArray(Store.state.funds)) Store.state.funds=[];
+    Store.state.funds.unshift({id:Date.now(),amt,note,date});
+    document.getElementById("fundAmt").value="";
+    document.getElementById("fundNote").value="";
+    Store.save(); this.renderBudget(); this.renderDash(false);
+    this.buzz(10); this.toast("✅","Cash added");
+  },
+  delFund(id){
+    Store.state.funds=(Store.state.funds||[]).filter(f=>String(f.id)!==String(id));
+    Store.save(); this.renderBudget(); this.renderDash(false); this.buzz(6);
+  },
+  renderFunds(){
+    const alloc=this.totalFunds(), spent=this.totalSpent(), hand=alloc-spent;
+    const a=document.getElementById("bAllocated"); if(a) a.textContent=fmt(alloc);
+    const s2=document.getElementById("bSpentCash"); if(s2) s2.textContent=fmt(spent);
+    const h=document.getElementById("bInHand"); if(h){ h.textContent=fmt(hand); h.style.color=hand<0?"var(--red)":""; }
+    const hint=document.getElementById("cashHint");
+    if(hint){ const b=SEED.meta.budget;
+      hint.innerHTML=hand<0
+        ? `⚠︎ You've spent <b>${fmt(-hand)}</b> more than the cash added — top up the pot.`
+        : `You have <b>${fmt(hand)}</b> cash available to spend now · <b>${fmt(alloc)}</b> put in so far of the <b>${fmt(b)}</b> total budget (${b?Math.round(alloc/b*100):0}% funded).`;
+    }
+    const log=document.getElementById("fundLog"); if(!log) return;
+    const funds=Store.state.funds||[];
+    if(!funds.length){ log.innerHTML='<div class="row center" style="justify-content:center;color:var(--muted)">No cash added yet</div>'; return; }
+    log.innerHTML=funds.map(f=>`
+      <div class="exp">
+        <div class="ico">💰</div>
+        <div class="l"><div class="t">${this.esc(f.note||"Cash added")}</div>
+          <div class="s">${f.date||""}</div></div>
+        <div class="amt tnum">${fmt(f.amt)}</div>
+        <button class="del" onclick="App.delFund('${f.id}')">Delete</button>
+      </div>`).join("");
+  },
   stageLabel(code){
     if(code==="general") return "General";
     if(code==="bricks") return "Bricks";
@@ -1943,6 +2004,7 @@ const App={
     document.getElementById("bSpent").textContent=fmt(spent);
     document.getElementById("bRemain").textContent=fmt(budget-spent);
     setTimeout(()=>document.getElementById("bBar").style.width=Math.min(100,budget?spent/budget*100:0)+"%",80);
+    this.renderFunds();
 
     const buckets={};
     Store.state.expenses.forEach(e=>buckets[e.stage]=(buckets[e.stage]||0)+(+e.amt||0));
