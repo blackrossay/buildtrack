@@ -507,6 +507,12 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 .proc-status{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 8px;border-radius:6px;flex:0 0 auto}
 .proc-status.todo{background:var(--fill);color:var(--muted)}
 .proc-status.ordered{background:var(--brand-soft);color:var(--brand)}
+.pg-row{display:flex;align-items:center;gap:12px;padding:9px 0}
+.pg-row+.pg-row{border-top:1px solid var(--surface-border)}
+.pg-i{flex:1;min-width:0}
+.pg-i b{font-size:13.5px;font-weight:600;display:block;line-height:1.25}
+.pg-i small{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.pg-p{font-variant-numeric:tabular-nums;font-weight:700;font-size:13.5px;color:var(--brand);white-space:nowrap;text-align:right}
 </style>
 </head>
 <body>
@@ -682,6 +688,10 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
       <!-- ===== Vendors & Quotations ===== -->
       <div class="section-title">🏷️ Vendors &amp; Quotations</div>
       <div class="section-sub">Add suppliers, record their quotes per item, then compare side-by-side to pick the best.</div>
+
+      <div class="group-hd">📊 Zimbabwe reference prices</div>
+      <div class="section-sub">Ballpark 2024/25 figures from public sources — use as a sanity-check against your quotes. Verify before ordering.</div>
+      <div class="card" id="priceGuide"></div>
 
       <div class="card">
         <div class="group-hd" style="margin-top:0">Add a vendor</div>
@@ -1159,6 +1169,19 @@ const SEED = {
     {name:"Bromel Hardware", cats:["Roofing","Plumbing","Electrical","Paint","Tools","General"], phone:"+263 771 357 327", web:"bromelhardware.co.zw", note:"Workington, Harare. Roofing, building & safety gear."},
     {name:"Khulabuild Hardware", cats:["Cement","Timber","Electrical","Solar","Plumbing","Paint","General"], phone:"", web:"khulabuildhardware.co.zw", note:"Online hardware & building supplies, Harare."},
     {name:"Roofing Mega Store", cats:["Roofing","Cement","Timber","Plumbing","Electrical"], phone:"", web:"roofing.co.zw", note:"Specialist in IBR, QTiles & Harvey roofing; bulk supply."}
+  ],
+  /* Reference prices — Zimbabwe 2024/25 (public sources; verify before ordering) */
+  priceGuide:[
+    {item:"Cement — 50kg bag", price:"$10 – $12", cat:"Cement"},
+    {item:"IBR 0.47mm Chromadek roof sheet", price:"~$8.50 / m", cat:"Roofing"},
+    {item:"Borehole siting / survey", price:"$70 – $130", cat:"Borehole"},
+    {item:"Borehole drilling + casing (40m)", price:"$900 – $1,200", cat:"Borehole"},
+    {item:"Borehole — extra depth beyond 40m", price:"$30 – $45 / m", cat:"Borehole"},
+    {item:"Electric pump + install", price:"$900 – $1,200", cat:"Borehole"},
+    {item:"Solar pump + install", price:"$1,300 – $1,850", cat:"Solar"},
+    {item:"5,000L tank + steel stand", price:"$1,000 – $1,200", cat:"Water"},
+    {item:"JoJo septic tank 2000L / 2500L", price:"~$500 / ~$635", cat:"Septic"},
+    {item:"5kVA hybrid solar (inverter+lithium+panels, installed)", price:"$2,800 – $3,500", cat:"Solar"}
   ]
 };
 SEED.meta.budget = SEED.stages.reduce((a,s)=>a+s.estCost,0) + SEED.brickCost;
@@ -1889,6 +1912,10 @@ const App={
   stars(n){ return n>0?'<span class="stars">'+"★".repeat(n)+"</span>":""; },
   vendorName(id){ const v=Store.state.vendors.find(x=>x.id===id); return v?v.name:"—"; },
   renderVendors(){
+    const pg=document.getElementById("priceGuide");
+    if(pg){ pg.innerHTML=(SEED.priceGuide||[]).map(p=>`<div class="pg-row">
+      <div class="pg-i"><b>${this.esc(p.item)}</b><small>${this.esc(p.cat)}</small></div>
+      <div class="pg-p">${this.esc(p.price)}</div></div>`).join(""); }
     const sg=document.getElementById("vendorSuggest");
     if(sg){ sg.innerHTML=(SEED.vendorSuggestions||[]).map((s,i)=>{
       const added=Store.state.vendors.some(v=>v.name===s.name);
