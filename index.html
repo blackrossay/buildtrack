@@ -513,6 +513,13 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 .pg-i b{font-size:13.5px;font-weight:600;display:block;line-height:1.25}
 .pg-i small{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
 .pg-p{font-variant-numeric:tabular-nums;font-weight:700;font-size:13.5px;color:var(--brand);white-space:nowrap;text-align:right}
+.bg-grp{margin-top:6px}
+.bg-grp+.bg-grp{margin-top:18px;padding-top:16px;border-top:1px solid var(--surface-border)}
+.bg-hd{font-weight:700;font-size:14.5px;margin-bottom:8px}
+.bg-row{padding:9px 0}
+.bg-row+.bg-row{border-top:1px solid var(--surface-border)}
+.bg-row b{display:block;font-size:13px;font-weight:700;color:var(--brand);margin-bottom:3px}
+.bg-row span{display:block;font-size:12.5px;line-height:1.5;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -692,6 +699,10 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
       <div class="group-hd">📊 Zimbabwe reference prices</div>
       <div class="section-sub">Ballpark 2024/25 figures from public sources — use as a sanity-check against your quotes. Verify before ordering.</div>
       <div class="card" id="priceGuide"></div>
+
+      <div class="group-hd">🧭 Borehole &amp; solar buying guide</div>
+      <div class="section-sub">The specs that actually separate one quote from another — check these before you commit.</div>
+      <div class="card" id="bhSolarGuide"></div>
 
       <div class="card">
         <div class="group-hd" style="margin-top:0">Add a vendor</div>
@@ -1017,19 +1028,23 @@ const SEED = {
         {n:"Galvanized Box Gutters & Downpipes", q:"custom set"},
         {n:"Roofing Screws, Washers & Weatherproof Silicone", q:"1 lot"}
       ]},
-    { id:"s6", name:"Windows, Doors & Ceilings", short:"Glazing & Ceilings", estCost:5200,
-      objective:"Install aluminium-framed glazing, external & internal doors, and full ceiling works to bring the villa to a weather-tight lock-up state.",
+    { id:"s6", name:"Windows, Doors, Ceilings & Security Screens", short:"Glazing & Security", estCost:6700,
+      objective:"Install aluminium-framed glazing (toughened/shatter-proof), external & internal doors, full ceiling works, plus security hardening — Trellidor screens and burglar bars on the lower level — to bring the villa to a secure, weather-tight lock-up state.",
       steps:[
-        "Install aluminium window frames & glass glazing throughout",
+        "Install aluminium window frames with toughened / shatter-proof safety glass throughout",
         "Fit aluminium/glass external doors & internal doors",
+        "Fit burglar bars to all lower-level (ground-floor) windows to restrict access",
+        "Install Trellidor (retractable security gates/screens) to external doors & vulnerable openings",
         "Install ceiling boards, suspended/bulkhead ceilings & cornices throughout",
         "Fit skirtings, trims and lock-up ironmongery (locks, handles)"
       ],
       materials:[
         {n:"Aluminium Window Frames (assorted sizes)", q:"1 set"},
-        {n:"Glass Glazing Panels (windows & doors)", q:"1 lot"},
+        {n:"Toughened / Shatter-proof Safety Glass Panels", q:"1 lot"},
         {n:"Aluminium & Glass Doors", q:"assorted"},
         {n:"Internal Doors, Frames & Ironmongery", q:"full house"},
+        {n:"Burglar Bars — lower level windows (steel, powder-coated)", q:"ground floor"},
+        {n:"Trellidor Retractable Security Screens / Gates", q:"external doors + openings"},
         {n:"Ceiling Boards, Brandering, Cornices & Trims", q:"1 lot"}
       ]},
     { id:"s7", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
@@ -1183,6 +1198,24 @@ const SEED = {
     {item:"JoJo septic tank 2000L / 2500L", price:"~$500 / ~$635", cat:"Septic"},
     {item:"5kVA hybrid solar (inverter+lithium+panels, installed)", price:"$2,800 – $3,500", cat:"Solar"}
   ],
+  /* Curated decision guide — the specs that actually differentiate borehole & solar quotes. */
+  buyingGuide:[
+    {group:"💧 Borehole — what to compare", rows:[
+      {k:"Siting / survey method", v:"Electrical resistivity (PQWT/GT) is the ZW standard ($70–$150). Seismic / magnetic reads deeper & suits rocky granite ground. Drone / satellite hydro-survey maps fracture lines on big plots (premium). Always get a written siting report + Authority-to-Drill from the catchment council before drilling."},
+      {k:"Drill depth", v:"Quotes usually cover the first 40m; extra is charged per metre ($25–$45/m). Murehwa's granite belt often needs 60–100m — budget for the extra depth, don't assume 40m is enough."},
+      {k:"Casing class & size", v:"PVC casing class = lifespan. Class 6 = cheapest, short life (~3-month warranty). Class 9 = recommended (~1yr). Class 10 = strongest, deep/unstable holes (~2yr). Standard 140mm (5.5\") bore. Double casing may be needed in loose ground (extra $/m)."},
+      {k:"Dry-hole vs Wet-hole policy", v:"Dry-hole = you pay even if no water is struck. Wet-hole (costs extra) = water guaranteed or partial refund. Confirm which policy the price assumes."},
+      {k:"Pump type", v:"AC electric pump needs ZESA/genset power. DC solar pump (Franklin / Dongyin) runs straight off panels. Size the HP to depth + tank height — a deeper hole needs a stronger pump."},
+      {k:"What's excluded", v:"Watch for excluded transport (50km+ from Harare billed separately), aggregates (¾ stone / river sand), install labour, and VAT (15%). A 'full combo' bundle (drill+pump+tank installed ≈$2,300) usually beats buying piecemeal."}
+    ]},
+    {group:"☀️ Solar — what to compare", rows:[
+      {k:"Inverter size (kVA) = what runs at once", v:"3.2kVA: lights, fans, TV, Wi-Fi, phones. 4.2kVA: + fridge. 5.2kVA: + laptop/tools. 6.2kVA: + washing machine. 8.2kVA+: + borehole pump load. 10–12kVA: whole house incl. aircon."},
+      {k:"Battery (kWh) = backup duration", v:"51.2V 100Ah ≈ 5.1kWh usable. More batteries = longer overnight/cloudy-day autonomy. Deye lithium 5.12kWh units are common; 2× gives ~10kWh."},
+      {k:"Panels (W) = daytime harvest", v:"More/bigger panels recharge faster & run heavier daytime loads. 585W and 450W mono panels are the current ZW norm."},
+      {k:"Can one system also power the borehole?", v:"Yes — if the inverter handles the pump's surge. A 0.75hp (0.56kW) DC pump runs off a 6.2kVA+ system; a 1.5hp pump wants 8.2kVA+. Alternatively fit a dedicated small solar-pump kit (~$1,300) just for the borehole, kept separate from the house system."},
+      {k:"Package deals", v:"Bundled combos (inverter+battery+panels+mounting+protection, installed) beat à-la-carte pricing. Compare the whole-system quote against the sum of individual parts — and check install labour & mounting are included."}
+    ]}
+  ],
   /* One-time seeded vendors & quotes (from user-supplied quotations). Bump seedVersion to add more. */
   seedVersion:2,
   seedVendors:[
@@ -1205,8 +1238,8 @@ const SEED = {
     {id:"sq_tera_82",vendorId:"seed_tera",item:"Solar package — 8.2kVA (8×585W, 51.2V 100Ah)",qty:1,unit:"package",unitPrice:1900,total:1900,lead:"",date:"2026-07-12",note:"+borehole pump load; pump 1.1kW"},
     {id:"sq_tera_102",vendorId:"seed_tera",item:"Solar package — 10.2kVA (10×585W, 51.2V 100Ah)",qty:1,unit:"package",unitPrice:3000,total:3000,lead:"",date:"2026-07-12",note:"Heavy load; pump 1.5kW"},
     {id:"sq_tera_12",vendorId:"seed_tera",item:"Solar package — 12kVA (12×585W, whole house)",qty:1,unit:"package",unitPrice:4500,total:4500,lead:"",date:"2026-07-12",note:"All appliances incl. aircon; pump 1.5kW"},
-    {id:"sq_bh_drill",vendorId:"seed_bh",item:"Borehole drilling & casing (80m)",qty:80,unit:"m",unitPrice:12.5,total:1000,lead:"free transport",date:"2026-07-12",note:"$1000 for 80m (≈$12.5/m); extra depth $25/m"},
-    {id:"sq_bh_site",vendorId:"seed_bh",item:"Borehole siting / survey",qty:1,unit:"job",unitPrice:100,total:100,lead:"",date:"2026-07-12",note:"Site assessment"},
+    {id:"sq_bh_drill",vendorId:"seed_bh",item:"Borehole drilling & casing (80m)",qty:80,unit:"m",unitPrice:12.5,total:1000,lead:"free transport",date:"2026-07-12",note:"$1000 for 80m (≈$12.5/m); extra depth $25/m. ⚠️ Casing class NOT stated — confirm Class 9/10 & diameter (140mm)"},
+    {id:"sq_bh_site",vendorId:"seed_bh",item:"Borehole siting / survey",qty:1,unit:"job",unitPrice:100,total:100,lead:"",date:"2026-07-12",note:"Site assessment. ⚠️ Method not stated — confirm resistivity vs seismic/drone; ask for written siting report"},
     {id:"sq_bh_combo",vendorId:"seed_bh",item:"Borehole full combo (drill + pump + tank, installed)",qty:1,unit:"combo",unitPrice:2300,total:2300,lead:"free transport",date:"2026-07-12",note:"No hidden costs"},
     {id:"sq_bh_solar",vendorId:"seed_bh",item:"Borehole solar pump kit (2×370W, Franklin 0.75hp, 5000L JoJo + stand)",qty:1,unit:"kit",unitPrice:1300,total:1300,lead:"",date:"2026-07-12",note:"Incl. pressure tank, wiring, control box, manhole cover"},
     {id:"sq_nak_site",vendorId:"seed_nakiso_bh",item:"Borehole siting / survey",qty:1,unit:"job",unitPrice:150,total:150,lead:"",date:"2026-07-02",note:"Geophysical investigation + $90 mobilisation (90km)"},
@@ -1964,6 +1997,11 @@ const App={
     if(pg){ pg.innerHTML=(SEED.priceGuide||[]).map(p=>`<div class="pg-row">
       <div class="pg-i"><b>${this.esc(p.item)}</b><small>${this.esc(p.cat)}</small></div>
       <div class="pg-p">${this.esc(p.price)}</div></div>`).join(""); }
+    const bg=document.getElementById("bhSolarGuide");
+    if(bg){ bg.innerHTML=(SEED.buyingGuide||[]).map(g=>`<div class="bg-grp">
+      <div class="bg-hd">${this.esc(g.group)}</div>
+      ${g.rows.map(r=>`<div class="bg-row"><b>${this.esc(r.k)}</b><span>${this.esc(r.v)}</span></div>`).join("")}
+    </div>`).join(""); }
     const sg=document.getElementById("vendorSuggest");
     if(sg){ sg.innerHTML=(SEED.vendorSuggestions||[]).map((s,i)=>{
       const added=Store.state.vendors.some(v=>v.name===s.name);
