@@ -1403,7 +1403,17 @@ const SEED = {
     {item:"Diamond-mesh / game farm fence 2.4m (supply & fix)", price:"$6 – $12 / m", cat:"Fencing"},
     {item:"Common building brick (delivered)", price:"$0.10 – $0.16 ea", cat:"Bricks"},
     {item:"Build rate — standard double-storey (all-in)", price:"$80 – $200 / m²", cat:"Benchmark"},
-    {item:"Build rate — luxury / high-end finishes (all-in)", price:"$300 – $550 / m²", cat:"Benchmark"}
+    {item:"Build rate — luxury / high-end finishes (all-in)", price:"$300 – $550 / m²", cat:"Benchmark"},
+    {item:"Rebar Y10 / Y12 / Y16 (6m length) — Steel Centre", price:"$3 / $4 / $7 ea", cat:"Steel"},
+    {item:"Rebar Y20 (6m) · Round bar 8-10mm (6m)", price:"$12 · $3–$4", cat:"Steel"},
+    {item:"Brickforce 230mm (20m roll) — Steel Centre", price:"$1.50", cat:"Steel"},
+    {item:"Weld mesh 50×50 (1.2×2.4m sheet)", price:"$17", cat:"Steel"},
+    {item:"Damp Proof Course (DPC) 115mm / 230mm roll", price:"$3 / $5", cat:"Steel"},
+    {item:"IBR Wide Span 0.4mm / Chromadek 0.47mm (per m) — Steel Centre", price:"$5 / $8.50 / m", cat:"Roofing"},
+    {item:"Roll-top ridge · Bullnose 1.5mm", price:"$10 · $9", cat:"Roofing"},
+    {item:"Steel window section F7 (6m) · Flat sheet 0.6mm (1.2×2.4m)", price:"$7 · $21", cat:"Steel"},
+    {item:"Termite poison 5L — Steel Centre", price:"$5", cat:"Chemicals"},
+    {item:"Gate steel: square tube 25×25 (6m) · gate wheel kit 80mm", price:"$8 · $15", cat:"Gates"}
   ],
   /* Curated decision guide — the specs that actually differentiate borehole & solar quotes. */
   buyingGuide:[
@@ -1468,8 +1478,9 @@ const SEED = {
       "💡 Cost/decision note: full-width master + big glazing raises the Stage 11 glazing bill (~$150–$450/m²). Decide glazing spec early so the budget and aluminium lead-time are locked before walls go up."
     ]
   },
-  seedVersion:3,
+  seedVersion:4,
   seedVendors:[
+    {id:"seed_steelcentre",name:"Steel Centre",cat:"Steel",phone:"",web:"steelcentre.co.zw",rating:0,note:"Online steel merchant (WooCommerce). Rebar/deformed bar (Y6–Y20, 6m & 12m), brickforce & weld mesh, IBR/Chromadek/corrugated/Q-tile roofing sheets, ridges & bullnose, DPC, angle/flat/round/square bar, square/rectangle/round tube, window sections, flat sheets, plus gate wheels, hook bolts, welding rods & termite poison. Prices live on site — verify before ordering & confirm Harare→Murehwa delivery."},
     {id:"seed_mandy",name:"Mandy Wires (fencing & gates)",cat:"Fencing",phone:"",web:"mandywires.com/shop",rating:0,note:"Galvanized fencing & custom gates (SABS/SAZ). Diamond mesh (0.9-2.4m, 2-4mm), game fence (knotted, 1.2-2.4m), barbed wire (2.5mm, 100/200m rolls), razor wire (BTO-22), clearview/welded mesh, galvanized posts (1.2-2.4m)+straining fittings, and custom sliding/double-leaf/pedestrian gates. Prices quote-on-request. Use for the 0.8ha farm fence + house gates/wall-top security."},
     {id:"seed_tera",name:"TeraSolar Energy",cat:"Solar",phone:"078 995 3186",web:"instagram.com/terasolarenergy2",rating:0,note:"8 hybrid solar packages, each incl. inverter, 585W panels, lithium battery, protection + mounting kits & a borehole pump. Free quote."},
     {id:"seed_bh",name:"Borehole Drilling (0711 391 161)",cat:"Borehole",phone:"+263 711 391 161",web:"wa.me/263711391161",rating:0,note:"80m drill + casing $1000, extra $25/m. FREE countrywide transport promo. Full combo incl. install $2300, no hidden costs."},
@@ -1509,7 +1520,24 @@ const SEED = {
     {id:"sq_muk_plan",vendorId:"seed_mukuvisi",item:"Architectural house plan design (full package)",qty:1,unit:"package",unitPrice:420,total:420,lead:"10 working days",date:"2026-07-09",note:"Incl. 3D visualisation, 4 plan copies, free BOQ & site visit. Structural excluded"},
     {id:"sq_muk_council",vendorId:"seed_mukuvisi",item:"Council plan submission",qty:1,unit:"job",unitPrice:80,total:80,lead:"",date:"2026-07-09",note:"Optional add-on"},
     {id:"sq_mut_arch",vendorId:"seed_mututa",item:"Architectural house plan design (full package)",qty:1,unit:"package",unitPrice:1300,total:1300,lead:"",date:"2026-07-12",note:"Range $1200–$1400; excludes site visit"},
-    {id:"sq_mut_struct",vendorId:"seed_mututa",item:"Structural drawings",qty:1,unit:"package",unitPrice:875,total:875,lead:"",date:"2026-07-12",note:"Range $800–$950; excludes site visit"}
+    {id:"sq_mut_struct",vendorId:"seed_mututa",item:"Structural drawings",qty:1,unit:"package",unitPrice:875,total:875,lead:"",date:"2026-07-12",note:"Range $800–$950; excludes site visit"},
+    {id:"sq_sc_y10",vendorId:"seed_steelcentre",item:"Deformed bar Y10 × 6m (rebar)",qty:1,unit:"length",unitPrice:3,total:3,lead:"",date:"2026-07-13",note:"Slab/foundation rebar. Y10×12m also $6"},
+    {id:"sq_sc_y12",vendorId:"seed_steelcentre",item:"Deformed bar Y12 × 6m (rebar)",qty:1,unit:"length",unitPrice:4,total:4,lead:"",date:"2026-07-13",note:"Y12×12m $8"},
+    {id:"sq_sc_y16",vendorId:"seed_steelcentre",item:"Deformed bar Y16 × 6m (rebar)",qty:1,unit:"length",unitPrice:7,total:7,lead:"",date:"2026-07-13",note:"Suspended mid-slab main bars. Y16×12m $14"},
+    {id:"sq_sc_y20",vendorId:"seed_steelcentre",item:"Deformed bar Y20 × 6m (rebar)",qty:1,unit:"length",unitPrice:12,total:12,lead:"",date:"2026-07-13",note:"Heavy structural bars"},
+    {id:"sq_sc_bforce",vendorId:"seed_steelcentre",item:"Brickforce 230mm (20m roll)",qty:1,unit:"roll",unitPrice:1.5,total:1.5,lead:"",date:"2026-07-13",note:"Bed-joint reinforcement for block/brick walls"},
+    {id:"sq_sc_weldmesh",vendorId:"seed_steelcentre",item:"Weld mesh 50×50 (1.2×2.4m sheet)",qty:1,unit:"sheet",unitPrice:17,total:17,lead:"",date:"2026-07-13",note:"Slab mesh / mesh fence panels"},
+    {id:"sq_sc_dpc",vendorId:"seed_steelcentre",item:"Damp Proof Course (DPC) 230mm roll",qty:1,unit:"roll",unitPrice:5,total:5,lead:"",date:"2026-07-13",note:"115mm roll $3"},
+    {id:"sq_sc_ibr04",vendorId:"seed_steelcentre",item:"IBR Wide Span roofing sheet 0.4mm (per m)",qty:1,unit:"m",unitPrice:5,total:5,lead:"",date:"2026-07-13",note:"Budget hidden-roof option. Corrugated & Q-tile 0.4mm also ~$5–6/m"},
+    {id:"sq_sc_ibr047",vendorId:"seed_steelcentre",item:"IBR Chromadek 0.47mm (per m)",qty:1,unit:"m",unitPrice:8.5,total:8.5,lead:"",date:"2026-07-13",note:"Premium charcoal Chromadek — matches the villa roof spec"},
+    {id:"sq_sc_ridge",vendorId:"seed_steelcentre",item:"Roll-top ridge",qty:1,unit:"length",unitPrice:10,total:10,lead:"",date:"2026-07-13",note:"Bullnose 1.5mm $9"},
+    {id:"sq_sc_winf7",vendorId:"seed_steelcentre",item:"Steel window section F7 × 6m",qty:1,unit:"length",unitPrice:7,total:7,lead:"",date:"2026-07-13",note:"For steel frames / burglar bars. RT6 $7.50, Fx7 $9"},
+    {id:"sq_sc_flatsheet",vendorId:"seed_steelcentre",item:"Flat sheet 0.6mm (1.2×2.4m)",qty:1,unit:"sheet",unitPrice:21,total:21,lead:"",date:"2026-07-13",note:"Gate infill / fabrication"},
+    {id:"sq_sc_sqtube",vendorId:"seed_steelcentre",item:"Square tube 25×25×1.2mm × 6m",qty:1,unit:"length",unitPrice:8,total:8,lead:"",date:"2026-07-13",note:"Gate & security frame steel. 20×20 $5, 40×40×1.6 $17"},
+    {id:"sq_sc_rectube",vendorId:"seed_steelcentre",item:"Rectangle tube 40×20×1.6mm × 6m",qty:1,unit:"length",unitPrice:10,total:10,lead:"",date:"2026-07-13",note:"Gate frames"},
+    {id:"sq_sc_angle",vendorId:"seed_steelcentre",item:"Angle iron 40×40×3mm × 6m",qty:1,unit:"length",unitPrice:9.5,total:9.5,lead:"",date:"2026-07-13",note:"Frames/bracing. 50×50×3 $14"},
+    {id:"sq_sc_gatewheel",vendorId:"seed_steelcentre",item:"Gate wheel kit (80mm)",qty:1,unit:"kit",unitPrice:15,total:15,lead:"",date:"2026-07-13",note:"Sliding-gate hardware"},
+    {id:"sq_sc_termite",vendorId:"seed_steelcentre",item:"Termite poison 5L",qty:1,unit:"unit",unitPrice:5,total:5,lead:"",date:"2026-07-13",note:"Soil poisoning for the termite stage"}
   ]
 };
 SEED.meta.budget = SEED.stages.reduce((a,s)=>a+s.estCost,0) + SEED.brickCost;
