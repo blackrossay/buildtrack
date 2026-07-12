@@ -1277,22 +1277,22 @@ const SEED = {
         {n:"Changeover Switch & House Integration", q:"1 set"},
         {n:"Mounting Rails, DC Cable, Isolators & Breakers", q:"1 lot"}
       ]},
-    { id:"s18", name:"House Boundary Wall & Gate", short:"Boundary Wall", estCost:7500,
-      objective:"Enclose the ~2000 m² (0.2 ha) HOME AREA set out within the 0.8 ha farm with a solid 2.5 m-high boundary wall and a secure vehicle + pedestrian gate. Built late so deliveries/machinery aren't blocked during the main build, giving the near-complete house its own secure inner perimeter (separate from the outer farm fence).",
+    { id:"s18", name:"House Boundary Wall & Gate", short:"Boundary Wall", estCost:26000,
+      objective:"Enclose the ~2000 m² (0.2 ha) HOME AREA set out within the 0.8 ha farm with a solid 2.5 m-high boundary wall and a secure automated gate. ⚠️ COST DRIVER: a plastered BRICK wall runs ~$98–$235/m supply&fix (2025 Harare rates) — at ~180 m that's ~$18k–$32k for the wall ALONE, before gates. A precast DURAWALL 2.4–2.7 m is only ~$28–$36/m (~$5k–$6.5k) — ~70% cheaper. Aluminium/steel sliding gate + Centurion motor package ≈ $2,800–$3,800; pedestrian gate ≈ $500. Built late so deliveries/machinery aren't blocked during the build.",
       steps:[
-        "Set out the ~2000 m² home-area boundary (≈179 m perimeter for a ~45×45 m square)",
+        "Set out the ~2000 m² home-area boundary (≈180 m perimeter for a ~45×45 m square)",
         "Excavate & cast the wall footing/foundation for a 2.5 m-high wall",
-        "Erect the 2.5 m boundary wall (precast durawall panels or brick) around the home area",
-        "Plaster, cap & paint the wall; add wall-top security (electric fence / spikes) if required",
-        "Install the main vehicle gate (sliding/swing) + pedestrian gate — lockable, automation optional"
+        "Erect the 2.5 m boundary wall — BRICK (premium, ~$120/m) or precast DURAWALL (~$32/m, ~70% cheaper)",
+        "Plaster both faces, cap & paint the wall; add wall-top security (electric fence / spikes) if required",
+        "Install the main automated sliding gate (aluminium/steel + Centurion motor) + pedestrian gate"
       ],
       materials:[
-        {n:"2.5 m Boundary Wall — precast durawall panels or brick", q:"~179 m"},
-        {n:"Wall Footing Concrete & Reinforcement", q:"1 lot"},
-        {n:"Galvanized Steel Vehicle Gate (sliding/swing) — Mandy Wires", q:"1 unit"},
+        {n:"2.5 m Brick Boundary Wall — supply, build & plaster both faces (~$120/m)", q:"~180 m"},
+        {n:"[Alternative] Precast Durawall 2.4–2.7 m — supply & fix (~$32/m)", q:"~180 m option"},
+        {n:"Wall Footing — trench, concrete & reinforcement", q:"~180 m"},
+        {n:"Automated Aluminium/Steel Sliding Gate + Centurion motor (installed)", q:"1 unit"},
         {n:"Pedestrian Gate — Mandy Wires", q:"1 unit"},
-        {n:"Gate Motor / Automation & Locks (optional)", q:"1 set"},
-        {n:"Wall-top Electric Fence / Razor Wire (optional) — Mandy Wires", q:"~179 m"}
+        {n:"Wall-top Electric Fence / Razor Wire (optional) — Mandy Wires (~$15/m)", q:"~180 m"}
       ]},
     { id:"s19", name:"Joinery — Cabinets & Wardrobes", short:"Cabinetry", estCost:4800,
       objective:"Design, build and fit all fitted joinery — kitchen cabinets for the wet & dry kitchens plus built-in wardrobes in every bedroom.",
@@ -1360,7 +1360,17 @@ const SEED = {
     {item:"Solar pump + install", price:"$1,300 – $1,850", cat:"Solar"},
     {item:"5,000L tank + steel stand", price:"$1,000 – $1,200", cat:"Water"},
     {item:"JoJo septic tank 2000L / 2500L", price:"~$500 / ~$635", cat:"Septic"},
-    {item:"5kVA hybrid solar (inverter+lithium+panels, installed)", price:"$2,800 – $3,500", cat:"Solar"}
+    {item:"5kVA hybrid solar (inverter+lithium+panels, installed)", price:"$2,800 – $3,500", cat:"Solar"},
+    {item:"Brick boundary wall 2.4m — supply & fix (plastered)", price:"$98 – $235 / m", cat:"Walling"},
+    {item:"Precast durawall 2.4–2.7m — supply & fix", price:"$28 – $36 / m", cat:"Walling"},
+    {item:"Aluminium/steel sliding gate + Centurion motor (installed)", price:"$2,800 – $3,800", cat:"Gates"},
+    {item:"Gate motor only — Centurion D5/D10 (supply & install)", price:"$500 – $840", cat:"Gates"},
+    {item:"Pedestrian gate", price:"$300 – $600", cat:"Gates"},
+    {item:"Wall-top electric fence (energizer + wires, installed)", price:"$12 – $18 / m", cat:"Security"},
+    {item:"Diamond-mesh / game farm fence 2.4m (supply & fix)", price:"$6 – $12 / m", cat:"Fencing"},
+    {item:"Common building brick (delivered)", price:"$0.10 – $0.16 ea", cat:"Bricks"},
+    {item:"Build rate — standard double-storey (all-in)", price:"$80 – $200 / m²", cat:"Benchmark"},
+    {item:"Build rate — luxury / high-end finishes (all-in)", price:"$300 – $550 / m²", cat:"Benchmark"}
   ],
   /* Curated decision guide — the specs that actually differentiate borehole & solar quotes. */
   buyingGuide:[
