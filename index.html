@@ -992,11 +992,26 @@ const TAB_EMOJI={dash:"📊",stages:"🏗️",materials:"📦",budget:"💵",act
    ============================================================ */
 const SEED = {
   meta:{ budget:36160 },
-  stageColors:["#276F27","#499A13","#8ECA3C","#BBDC12","#30b0c7","#f59e0b","#b45309","#0ea5e9","#64748b","#eab308","#0891b2","#f97316","#92400e","#dc2626"],
-  stageIcons:["⛏️","🧱","🏗️","🧱","🏠","🪟","🐜","🚰","🚽","⚡","💧","☀️","🗄️","🔥"],
-  stageWeeks:[3,2,6,3,2,4,1,2,2,2,3,2,2,1],
+  stageColors:["#0891b2","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#64748b","#f59e0b","#f97316","#92400e","#dc2626"],
+  stageIcons:["💧","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🚽","🪟","☀️","🗄️","🔥"],
+  stageWeeks:[3,3,1,2,6,3,2,2,2,2,4,2,2,1],
   stages:[
-    { id:"s1", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
+    { id:"s1", name:"Borehole & Water Supply", short:"Borehole", estCost:5200,
+      objective:"Drill and equip a private borehole with pump, storage tank and reticulation FIRST — so there is a reliable water source on site for block-making, concrete mixing and the long curing periods that follow. No serious work can proceed without water.",
+      steps:[
+        "Siting survey (resistivity/seismic), then drill & case the borehole to yield depth",
+        "Install submersible pump, riser pipe, cable & control box",
+        "Erect elevated tank stand and mount the storage tank(s)",
+        "Run supply piping from borehole to tank and tank to the site/main house"
+      ],
+      materials:[
+        {n:"Borehole Drilling & Casing (per metre)", q:"~40 m"},
+        {n:"Submersible Pump, Riser Pipe & Cable", q:"1 set"},
+        {n:"Storage Tank(s) 5000L + Fittings", q:"2 tanks"},
+        {n:"Steel/Brick Tank Stand", q:"1 unit"},
+        {n:"HDPE / PVC Supply Piping & Valves", q:"1 lot"}
+      ]},
+    { id:"s2", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
       objective:"Excavate load-bearing trenches to carry the vertical weight of a double-storey structure, avoiding ground settling or wall cracking.",
       steps:[
         "Excavate trenches exactly 1 m deep and 600 mm wide",
@@ -1010,10 +1025,24 @@ const SEED = {
         {n:"19mm Quarry Stones", q:"15 m³"},
         {n:"Coarse Pit Sand", q:"12 m³"}
       ]},
-    { id:"s2", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
+    { id:"s3", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
+      objective:"Chemically poison the soil in the foundation trenches and under-floor fill BEFORE the slab seals the ground — this is the only chance to lay a continuous barrier under the building. Roof timbers, wall plates & door frames are then spot-treated as they are installed in later stages.",
+      steps:[
+        "Trench & drench the foundation perimeter and footings with termiticide",
+        "Treat all under-floor fill and service trenches before back-filling & slab pour",
+        "Reserve termiticide to spot-treat roof timbers, wall plates & door frames when installed (later stages)",
+        "Log chemical batch, dilution rate & guarantee period from applicator"
+      ],
+      materials:[
+        {n:"Termiticide Concentrate (e.g. Chlorpyrifos/Fipronil)", q:"20 L"},
+        {n:"Knapsack / Drench Sprayer (rental)", q:"1 unit"},
+        {n:"Applicator Labour & Treatment Certificate", q:"1 job"}
+      ]},
+    { id:"s4", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
       objective:"Cast a solid concrete surface bed across the full living area and the attached single-storey vehicle wing (295 m²).",
       steps:[
         "Backfill internal foundation pockets in 150 mm layers, water & compact heavily",
+        "Set below-slab sewer & water stub connections before pouring (coordinate with drainage stage)",
         "Lay plastic Damp-Proof Membrane (DPC) to block ground moisture",
         "Lay steel anti-crack reinforcing mesh across the ground footprint",
         "Pour continuous 100 mm concrete slab across combined 295 m² zone"
@@ -1025,7 +1054,7 @@ const SEED = {
         {n:"Washed River Sand", q:"20 m³"},
         {n:"19mm Crushed Quarry Stones", q:"25 m³"}
       ]},
-    { id:"s3", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11600,
+    { id:"s5", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11600,
       objective:"Erect ground level walls and engineer the heavy floor structure supporting the upper-level bedrooms.",
       steps:[
         "Erect external & internal walls to 3 m height (machine-pressed bricks on load-bearing walls)",
@@ -1041,7 +1070,7 @@ const SEED = {
         {n:"19mm Structural Quarry Stones", q:"22 m³"},
         {n:"Adjustable Steel Decking Props (rental)", q:"~250 props"}
       ]},
-    { id:"s4", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
+    { id:"s6", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
       objective:"Build the upstairs private sanctuary and erect architectural screening to mimic a flat Dubai layout.",
       steps:[
         "Build upper-level bedroom partitions, bathrooms & corridors",
@@ -1053,8 +1082,8 @@ const SEED = {
         {n:"50kg Cement (ring-beam & mortar)", q:"30 bags"},
         {n:"Galvanized Hoop Iron Strapping Wire", q:"3 rolls"}
       ]},
-    { id:"s5", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
-      objective:"Install a lightweight, ultra-durable timber & steel roof hidden entirely inside the parapet framework.",
+    { id:"s7", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
+      objective:"Install a lightweight, ultra-durable timber & steel roof hidden entirely inside the parapet framework, making the villa weather-tight before internal works begin.",
       steps:[
         "Construct sloped timber truss network inside parapet, pitched to backyard",
         "Secure 0.47mm Charcoal Chromadek sheets over timber framing",
@@ -1069,41 +1098,8 @@ const SEED = {
         {n:"Galvanized Box Gutters & Downpipes", q:"custom set"},
         {n:"Roofing Screws, Washers & Weatherproof Silicone", q:"1 lot"}
       ]},
-    { id:"s6", name:"Windows, Doors, Ceilings & Security Screens", short:"Glazing & Security", estCost:18000,
-      objective:"Install premium slim-frame aluminium glazing (toughened/shatter-proof, floor-to-ceiling sliders in living areas & bedrooms — Dubai/Tilal Al Ghaf look), external & internal doors, full ceiling works, plus security hardening — Trellidor screens and burglar bars on the lower level — to bring the villa to a secure, weather-tight lock-up state. Glazing ≈74m² is the main cost driver (~$150–$250/m² standard, up to $450/m² for minimal-frame).",
-      steps:[
-        "Install aluminium window frames with toughened / shatter-proof safety glass throughout",
-        "Fit aluminium/glass external doors & internal doors",
-        "Fit burglar bars to all lower-level (ground-floor) windows to restrict access",
-        "Install Trellidor (retractable security gates/screens) to external doors & vulnerable openings",
-        "Install ceiling boards, suspended/bulkhead ceilings & cornices throughout",
-        "Fit skirtings, trims and lock-up ironmongery (locks, handles)"
-      ],
-      materials:[
-        {n:"Aluminium Window Frames — slim-frame, matte black (assorted)", q:"1 set"},
-        {n:"Floor-to-ceiling Aluminium Sliding Door Systems (living areas & bedrooms)", q:"feature openings"},
-        {n:"Toughened / Shatter-proof Safety Glass Panels", q:"~74 m²"},
-        {n:"Aluminium & Glass Doors", q:"assorted"},
-        {n:"Internal Doors, Frames & Ironmongery", q:"full house"},
-        {n:"Burglar Bars — lower level windows (steel, powder-coated)", q:"ground floor"},
-        {n:"Trellidor Retractable Security Screens / Gates", q:"external doors + openings"},
-        {n:"Ceiling Boards, Brandering, Cornices & Trims", q:"1 lot"}
-      ]},
-    { id:"s7", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
-      objective:"Chemically poison the soil beneath and around the structure to create a lasting barrier against subterranean termites that attack timber roofing, ceilings & doors.",
-      steps:[
-        "Trench & drench external foundation perimeter with termiticide",
-        "Treat all under-floor fill and service trenches before back-filling",
-        "Spot-treat around timber roof bearings, wall plates & door frames",
-        "Log chemical batch, dilution rate & guarantee period from applicator"
-      ],
-      materials:[
-        {n:"Termiticide Concentrate (e.g. Chlorpyrifos/Fipronil)", q:"20 L"},
-        {n:"Knapsack / Drench Sprayer (rental)", q:"1 unit"},
-        {n:"Applicator Labour & Treatment Certificate", q:"1 job"}
-      ]},
     { id:"s8", name:"Plumbing & Water Reticulation", short:"Plumbing Pipes", estCost:2800,
-      objective:"Run all hot & cold water supply piping and internal waste/soil pipework to kitchens, bathrooms and the laundry, ready for fittings.",
+      objective:"First-fix all hot & cold water supply piping and internal waste/soil pipework to kitchens, bathrooms and the laundry — chased into walls & floors BEFORE ceilings and plastering close everything up.",
       steps:[
         "Chase walls & floors and lay first-fix PEX/PPR supply piping",
         "Install waste, soil & vent pipework to all wet points",
@@ -1119,23 +1115,8 @@ const SEED = {
         {n:"Taps, Mixers, Showers & Sanitaryware", q:"full house"},
         {n:"Pipe Clips, Solvent Cement & Thread Tape", q:"1 lot"}
       ]},
-    { id:"s9", name:"Septic Tank, Soakaway & Drainage", short:"Sewer & Drainage", estCost:2600,
-      objective:"Build the on-site foul-water treatment (septic tank + soakaway) and run all external sewer and storm-water drainage away from the villa.",
-      steps:[
-        "Excavate & cast/lay the septic tank chambers with baffle & access covers",
-        "Dig and charge the soakaway pit with hardcore & filter stone",
-        "Lay external 110mm sewer runs at fall from all soil stacks to the tank",
-        "Install inspection chambers, gully traps & storm-water drainage channels"
-      ],
-      materials:[
-        {n:"Septic Tank — JoJo poly 2500L (double-storey) or brick-built + covers", q:"1 unit"},
-        {n:"110mm PVC Sewer Pipe, Bends & Junctions", q:"1 lot"},
-        {n:"Inspection Chambers & Gully Traps", q:"assorted"},
-        {n:"Hardcore, Filter Stone & Pit Sand (soakaway)", q:"10 m³"},
-        {n:"Cement & Bricks (tank base & chambers)", q:"1 lot"}
-      ]},
-    { id:"s10", name:"Electrical Installation", short:"Electricals", estCost:3800,
-      objective:"Install the full electrical system — conduits, wiring, distribution board, lights, sockets and switches — certified to a safe, ready-to-energise standard.",
+    { id:"s9", name:"Electrical Installation", short:"Electricals", estCost:3800,
+      objective:"First-fix the full electrical system — conduits, wiring and back-boxes chased into walls BEFORE ceilings close up — then second-fix and certify to a safe, ready-to-energise standard.",
       steps:[
         "First-fix: chase walls & cast conduits, draw-boxes and back-boxes",
         "Pull cabling for lighting, power, geyser, stove & dedicated circuits",
@@ -1149,20 +1130,40 @@ const SEED = {
         {n:"Light Fittings, Switches & Sockets", q:"full house"},
         {n:"Earth Rod, Cable Ties & Terminations", q:"1 lot"}
       ]},
-    { id:"s11", name:"Borehole & Water Supply", short:"Borehole", estCost:5200,
-      objective:"Drill and equip a private borehole with pump, storage tank and reticulation so the villa has a reliable independent water supply.",
+    { id:"s10", name:"Septic Tank, Soakaway & Drainage", short:"Sewer & Drainage", estCost:2600,
+      objective:"Build the on-site foul-water treatment (septic tank + soakaway) and connect all external sewer and storm-water drainage from the soil stacks laid during plumbing first-fix.",
       steps:[
-        "Siting survey, then drill & case the borehole to yield depth",
-        "Install submersible pump, riser pipe, cable & control box",
-        "Erect elevated tank stand and mount the storage tank(s)",
-        "Run supply piping from borehole to tank and tank to the main house"
+        "Excavate & cast/lay the septic tank chambers with baffle & access covers",
+        "Dig and charge the soakaway pit with hardcore & filter stone",
+        "Lay external 110mm sewer runs at fall from all soil stacks to the tank",
+        "Install inspection chambers, gully traps & storm-water drainage channels"
       ],
       materials:[
-        {n:"Borehole Drilling & Casing (per metre)", q:"~40 m"},
-        {n:"Submersible Pump, Riser Pipe & Cable", q:"1 set"},
-        {n:"Storage Tank(s) 5000L + Fittings", q:"2 tanks"},
-        {n:"Steel/Brick Tank Stand", q:"1 unit"},
-        {n:"HDPE / PVC Supply Piping & Valves", q:"1 lot"}
+        {n:"Septic Tank — JoJo poly 2500L (double-storey) or brick-built + covers", q:"1 unit"},
+        {n:"110mm PVC Sewer Pipe, Bends & Junctions", q:"1 lot"},
+        {n:"Inspection Chambers & Gully Traps", q:"assorted"},
+        {n:"Hardcore, Filter Stone & Pit Sand (soakaway)", q:"10 m³"},
+        {n:"Cement & Bricks (tank base & chambers)", q:"1 lot"}
+      ]},
+    { id:"s11", name:"Windows, Doors, Ceilings & Security Screens", short:"Glazing & Security", estCost:18000,
+      objective:"With plumbing & electrical first-fix complete, close up the house: install premium slim-frame aluminium glazing (toughened/shatter-proof, floor-to-ceiling sliders — Dubai/Tilal Al Ghaf look), external & internal doors, full CEILING works (only now that wiring & pipework are in), plus security hardening — Trellidor screens and burglar bars on the lower level. Glazing ≈74m² is the main cost driver (~$150–$250/m² standard, up to $450/m² for minimal-frame).",
+      steps:[
+        "Install aluminium window frames with toughened / shatter-proof safety glass throughout",
+        "Fit aluminium/glass external doors & internal doors",
+        "Fit burglar bars to all lower-level (ground-floor) windows to restrict access",
+        "Install Trellidor (retractable security gates/screens) to external doors & vulnerable openings",
+        "Install ceiling boards, suspended/bulkhead ceilings & cornices (after first-fix services)",
+        "Fit skirtings, trims and lock-up ironmongery (locks, handles)"
+      ],
+      materials:[
+        {n:"Aluminium Window Frames — slim-frame, matte black (assorted)", q:"1 set"},
+        {n:"Floor-to-ceiling Aluminium Sliding Door Systems (living areas & bedrooms)", q:"feature openings"},
+        {n:"Toughened / Shatter-proof Safety Glass Panels", q:"~74 m²"},
+        {n:"Aluminium & Glass Doors", q:"assorted"},
+        {n:"Internal Doors, Frames & Ironmongery", q:"full house"},
+        {n:"Burglar Bars — lower level windows (steel, powder-coated)", q:"ground floor"},
+        {n:"Trellidor Retractable Security Screens / Gates", q:"external doors + openings"},
+        {n:"Ceiling Boards, Brandering, Cornices & Trims", q:"1 lot"}
       ]},
     { id:"s12", name:"Solar Power System", short:"Solar & Backup", estCost:6500,
       objective:"Install solar generation for both the borehole pump and the main house — panels, inverter and battery backup — for energy independence from the grid.",
@@ -1440,12 +1441,26 @@ const Store={
     this.migrate(); return this.state;
   },
   fresh(){
-    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{} };
+    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{}, stageOrder:1 };
     SEED.stages.forEach(st=> s.stages.push({id:st.id,steps:st.steps.map(()=>false),materials:st.materials.map(()=>false),notes:"",photos:[]}));
     SEED.bricks.forEach(()=> s.bricks.push({delivered:0}));
     return s;
   },
   migrate(){
+    // One-time stage resequencing: remap saved progress/expenses from the old order to the new logical order.
+    if((this.state.stageOrder||0) < 1 && Array.isArray(this.state.stages) && this.state.stages.length){
+      const newOrder=[11,1,7,2,3,4,5,8,10,9,6,12,13,14]; // old stage numbers in the new sequence
+      const savedById={}; this.state.stages.forEach(s=>{ if(s&&s.id) savedById[s.id]=s; });
+      const reordered=newOrder.map((oldN,i)=> savedById["s"+oldN] || {id:"s"+(i+1),steps:[],materials:[],notes:"",photos:[]});
+      reordered.forEach((s,i)=> s.id="s"+(i+1));
+      this.state.stages=reordered;
+      const codeMap={}; newOrder.forEach((oldN,i)=> codeMap["s"+oldN]="s"+(i+1));
+      const rm=c=>(c&&codeMap[c])||c;
+      (this.state.expenses||[]).forEach(e=>{ if(e.stage) e.stage=rm(e.stage); });
+      (this.state.procurement||[]).forEach(p=>{ if(p.stage) p.stage=rm(p.stage); });
+      (this.state.labour||[]).forEach(l=>{ if(l.stage) l.stage=rm(l.stage); });
+      this.state.stageOrder=1;
+    }
     SEED.stages.forEach((st,i)=>{
       if(!this.state.stages[i]) this.state.stages[i]={id:st.id,steps:[],materials:[],notes:"",photos:[]};
       const c=this.state.stages[i];
