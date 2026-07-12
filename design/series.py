@@ -96,7 +96,7 @@ def plate2():
     p.rect(bx-5,split,10,fh*(1-mach/(cols*rows)),fill=G3,op=.9)
     p.txt(bx-12,fy+fh*mach/(cols*rows)/2,"64%",9,"Mono",anchor="end",op=.6)
     p.txt(bx-12,split+fh*(1-mach/(cols*rows))/2,"36%",9,"Mono",anchor="end",op=.6)
-    p.txt(W/2,fy+fh+96,"HYBRID SUPPLY&#8194;·&#8194;BETA / WILLDALE + LOCAL KILN&#8194;·&#8194;HAULED TO MUREHWA",10.5,"Mono",anchor="middle",op=.6,ls=1)
+    p.txt(W/2,fy+fh+156,"HYBRID SUPPLY&#8194;·&#8194;BETA / WILLDALE + LOCAL KILN&#8194;·&#8194;HAULED TO MUREHWA",10.5,"Mono",anchor="middle",op=.6,ls=1)
     p.figrow([("51,000","MACHINE-PRESSED"),("29,000","RURAL-MOULDED"),("USD 9,610","SUPPLY & HAULAGE"),("02","SOURCES")])
     return p.svg()
 
