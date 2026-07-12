@@ -167,7 +167,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.022em}
 
 /* ---------- Grid stats ---------- */
 .grid{display:grid;gap:12px}
-.g2{grid-template-columns:1fr 1fr}
+.g1{grid-template-columns:1fr}.g2{grid-template-columns:1fr 1fr}
 .g3{grid-template-columns:repeat(3,1fr)}
 .tile{
   position:relative;isolation:isolate;
@@ -617,6 +617,16 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
       <div class="grid g2">
         <div class="tile"><div class="kpi-ico g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm5-7h.01M2 8v1a2 2 0 0 0 2 2h1"/></svg></div><div class="lbl">Remaining Budget</div><div class="val sm tnum" id="tRemain">$36,160</div></div>
         <div class="tile"><div class="kpi-ico b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7l-8.5 8.5l-5-5L2 17"/></svg></div><div class="lbl">Est. Investment</div><div class="val sm tnum" id="tInvest">$36,160</div></div>
+      </div>
+
+      <div class="grid g1">
+        <div class="tile">
+          <div class="kpi-ico o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+          <div class="lbl">Est. Value Built <span style="font-weight:500;opacity:.6">— by progress</span></div>
+          <div class="val sm tnum" id="tBuilt">$0</div>
+          <div class="foot"><span id="tBuiltPct">0%</span> of scope complete · not money spent</div>
+          <div class="bar" style="margin-top:9px"><span id="tBuiltBar" style="background:linear-gradient(90deg,#3a7d44,#5aa469)"></span></div>
+        </div>
       </div>
 
       <div class="section-title">Timeline &amp; Forecast</div>
@@ -1595,6 +1605,7 @@ const App={
     return t?Math.round(d/t*100):0;
   },
   totalSpent(){ return Store.state.expenses.reduce((a,e)=>a+(+e.amt||0),0); },
+  estValueBuilt(){ return SEED.stages.reduce((a,st,i)=>a+(this.stageProgress(i)/100)*(+st.estCost||0),0); },
   totalFunds(){ return (Store.state.funds||[]).reduce((a,f)=>a+(+f.amt||0),0); },
   cashInHand(){ return this.totalFunds()-this.totalSpent(); },
   totalBricks(){ return SEED.bricks.reduce((a,b)=>a+b.q,0); },
@@ -1721,6 +1732,11 @@ const App={
     this.countUp(document.getElementById("tRemain"),budget-spent,"$");
     document.getElementById("tBudget").textContent=fmt(budget);
     setTimeout(()=>document.getElementById("tSpentBar").style.width=Math.min(100,budget?spent/budget*100:0)+"%",100);
+
+    const built=this.estValueBuilt(), builtPct=budget?Math.round(built/budget*100):0;
+    this.countUp(document.getElementById("tBuilt"),Math.round(built),"$");
+    document.getElementById("tBuiltPct").textContent=builtPct+"%";
+    setTimeout(()=>document.getElementById("tBuiltBar").style.width=Math.min(100,builtPct)+"%",100);
 
     const bd=this.bricksDelivered(), bt=this.totalBricks();
     this.countUp(document.getElementById("tBricks"),bd,"");
