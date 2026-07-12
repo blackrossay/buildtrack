@@ -1005,9 +1005,9 @@ const TAB_EMOJI={dash:"📊",stages:"🏗️",materials:"📦",budget:"💵",act
    ============================================================ */
 const SEED = {
   meta:{ budget:36160 },
-  stageColors:["#0d9488","#6366f1","#7c3aed","#a855f7","#0891b2","#fbbf24","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#64748b","#f59e0b","#f97316","#78716c","#92400e","#dc2626"],
-  stageIcons:["🚧","📐","📏","🏛️","💧","🔆","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🚽","🪟","☀️","🚪","🗄️","🔥"],
-  stageWeeks:[2,2,2,3,3,1,3,1,2,6,3,2,2,2,2,4,2,3,2,1],
+  stageColors:["#0d9488","#6366f1","#7c3aed","#a855f7","#0891b2","#fbbf24","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#64748b","#f59e0b","#c026d3","#f97316","#78716c","#92400e","#dc2626"],
+  stageIcons:["🚧","📐","📏","🏛️","💧","🔆","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🚽","🪟","🎨","☀️","🚪","🗄️","🔥"],
+  stageWeeks:[2,2,2,3,3,1,3,1,2,6,3,2,2,2,2,4,4,2,3,2,1],
   stages:[
     { id:"s1", name:"Site Establishment — Boundary Fencing & Cabin", short:"Site Setup", estCost:3500,
       objective:"The very FIRST thing on the ground: secure the whole ~0.8 ha (almost 1 ha) farm/plot with boundary fencing and put up a 2-roomed site cabin (IBR sheets, floored) — one room as a dry, lockable materials & cement store, the other as the builders' sleep room. This protects materials and houses the workers from day one, and can proceed while the drawings are being finalised.",
@@ -1262,7 +1262,27 @@ const SEED = {
         {n:"Trellidor Retractable Security Screens / Gates", q:"external doors + openings"},
         {n:"Ceiling Boards, Brandering, Cornices & Trims", q:"1 lot"}
       ]},
-    { id:"s17", name:"Main House Solar System", short:"House Solar", estCost:6500,
+    { id:"s17", name:"Internal Finishes — Plaster, Screed, Tiling & Paint", short:"Finishes", estCost:30000,
+      objective:"The biggest 'hidden' cost on any luxury build — and previously missing from the budget. Once services are in and the house is closed up, apply all wet & decorative finishes: plaster every internal (and external) wall, screed & level floors, lay porcelain/tile flooring, tile bathrooms & kitchen splashbacks, and paint inside & out. Benchmark for a ~520 m² double-storey at mid-luxury finish is ~$50–$70/m² of floor for plaster+tile+paint combined (~$26k–$36k). This is typically 20–30% of a build, so getting it costed properly is what makes the total 'add up'.",
+      steps:[
+        "Plaster all internal walls (and external where required); make good openings & reveals",
+        "Screed, level & waterproof floors (bathrooms, balconies, wet areas)",
+        "Supply & lay porcelain/ceramic floor tiles throughout living areas & bedrooms",
+        "Tile bathrooms, ensuite, kitchen splashback & feature walls",
+        "🔍 Waterproofing / wet-area inspection before tiling over (leak test)",
+        "Prime, undercoat & apply 2 top-coats interior paint; exterior weathershield paint",
+        "Final snag: touch-ups, silicone sealing, grout clean-up"
+      ],
+      materials:[
+        {n:"Plaster Sand, Cement & Lime — internal/external plaster (~1,300 m² wall area)", q:"1 lot"},
+        {n:"Floor Screed & Self-Levelling Compound", q:"~520 m²"},
+        {n:"Porcelain Floor Tiles (supply & lay, ~$20/m²)", q:"~400 m²"},
+        {n:"Wall Tiles — bathrooms, kitchen & features", q:"~80 m²"},
+        {n:"Tile Adhesive, Grout, Trims & Waterproofing Membrane", q:"1 lot"},
+        {n:"Interior Paint — primer + 2 coats (~1,300 m²)", q:"1 lot"},
+        {n:"Exterior Weathershield Paint", q:"1 lot"}
+      ]},
+    { id:"s18", name:"Main House Solar System", short:"House Solar", estCost:6500,
       objective:"Install the MAIN HOUSE solar system — panels, hybrid inverter and battery backup for the villa's lights, sockets, geysers and appliances. Separate from the borehole/farming solar, but its panels & batteries are housed at the same compound near the water source. Sized independently so the house and the water/farm side never compete for power.",
       steps:[
         "Mount the main-house solar panel array with rails & DC isolators",
@@ -1277,7 +1297,7 @@ const SEED = {
         {n:"Changeover Switch & House Integration", q:"1 set"},
         {n:"Mounting Rails, DC Cable, Isolators & Breakers", q:"1 lot"}
       ]},
-    { id:"s18", name:"House Boundary Wall & Gate", short:"Boundary Wall", estCost:26000,
+    { id:"s19", name:"House Boundary Wall & Gate", short:"Boundary Wall", estCost:26000,
       objective:"Enclose the ~2000 m² (0.2 ha) HOME AREA set out within the 0.8 ha farm with a solid 2.5 m-high boundary wall and a secure automated gate. ⚠️ COST DRIVER: a plastered BRICK wall runs ~$98–$235/m supply&fix (2025 Harare rates) — at ~180 m that's ~$18k–$32k for the wall ALONE, before gates. A precast DURAWALL 2.4–2.7 m is only ~$28–$36/m (~$5k–$6.5k) — ~70% cheaper. Aluminium/steel sliding gate + Centurion motor package ≈ $2,800–$3,800; pedestrian gate ≈ $500. Built late so deliveries/machinery aren't blocked during the build.",
       steps:[
         "Set out the ~2000 m² home-area boundary (≈180 m perimeter for a ~45×45 m square)",
@@ -1294,7 +1314,7 @@ const SEED = {
         {n:"Pedestrian Gate — Mandy Wires", q:"1 unit"},
         {n:"Wall-top Electric Fence / Razor Wire (optional) — Mandy Wires (~$15/m)", q:"~180 m"}
       ]},
-    { id:"s19", name:"Joinery — Cabinets & Wardrobes", short:"Cabinetry", estCost:4800,
+    { id:"s20", name:"Joinery — Cabinets & Wardrobes", short:"Cabinetry", estCost:4800,
       objective:"Design, build and fit all fitted joinery — kitchen cabinets for the wet & dry kitchens plus built-in wardrobes in every bedroom.",
       steps:[
         "Measure & template kitchens and bedrooms; agree cabinet/wardrobe layouts",
@@ -1310,7 +1330,7 @@ const SEED = {
         {n:"Hinges, Runners, Handles & Edging", q:"1 lot"},
         {n:"Board, MDF, Glue & Fixings", q:"1 lot"}
       ]},
-    { id:"s20", name:"Gas Installation & Reticulation", short:"Gas System", estCost:650,
+    { id:"s21", name:"Gas Installation & Reticulation", short:"Gas System", estCost:650,
       objective:"Mount twin 9kg LPG cylinders outside in a secure cage and pipe gas into both the wet and dry kitchens, tested and leak-certified.",
       steps:[
         "Build/fit an external steel security cage and mount 2 × 9kg cylinders",
@@ -1583,7 +1603,7 @@ const Store={
     this.migrate(); return this.state;
   },
   fresh(){
-    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{}, stageOrder:1, stageVer:2 };
+    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{}, stageOrder:1, stageVer:3 };
     SEED.stages.forEach(st=> s.stages.push({id:st.id,steps:st.steps.map(()=>false),materials:st.materials.map(()=>false),notes:"",photos:[]}));
     SEED.bricks.forEach(()=> s.bricks.push({delivered:0}));
     return s;
@@ -1630,6 +1650,17 @@ const Store={
       (this.state.procurement||[]).forEach(p=>{ if(p.stage) p.stage=rm(p.stage); });
       (this.state.labour||[]).forEach(l=>{ if(l.stage) l.stage=rm(l.stage); });
       this.state.stageVer=2;
+    }
+    if((this.state.stageVer||0) < 3 && Array.isArray(this.state.stages) && this.state.stages.length){
+      const INS=16;
+      const shiftCode=c=>{ if(typeof c==="string" && /^s\d+$/.test(c)){ const n=+c.slice(1); if(n>=INS+1) return "s"+(n+1); } return c; };
+      const shiftMat=id=>{ if(typeof id==="string" && id.indexOf("mat_")===0){ const p=id.split("_"); const oi=+p[1]; if(oi>=INS) return "mat_"+(oi+1)+"_"+p[2]; } return id; };
+      (this.state.expenses||[]).forEach(e=>{ e.id=shiftMat(e.id); if(e.stage) e.stage=shiftCode(e.stage); });
+      (this.state.procurement||[]).forEach(p=>{ if(p.stage) p.stage=shiftCode(p.stage); });
+      (this.state.labour||[]).forEach(l=>{ if(l.stage) l.stage=shiftCode(l.stage); });
+      this.state.stages.splice(INS,0,{steps:[],materials:[],notes:"",photos:[]});
+      this.state.stages.forEach((s,i)=> s.id="s"+(i+1));
+      this.state.stageVer=3;
     }
     SEED.stages.forEach((st,i)=>{
       if(!this.state.stages[i]) this.state.stages[i]={id:st.id,steps:[],materials:[],notes:"",photos:[]};
