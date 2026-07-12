@@ -15,7 +15,7 @@
    =================================================================== */
 :root{
   /* Brand palette — ColorHunt greens */
-  --brand:#499A13; --brand-dark:#276F27; --brand-light:#8ECA3C; --lime:#BBDC12;
+  --brand:#499A13; --brand-dark:#276F27; --brand-light:#8ECA3C; --lime:#BBDC12; --brand-soft:rgba(73,154,19,.12);
   --blue:#499A13; --green:#8ECA3C; --orange:#ff9500; --red:#ff3b30;
   --purple:#8ECA3C; --teal:#30b0c7; --pink:#BBDC12; --indigo:#276F27; --yellow:#ffcc00;
 
@@ -64,6 +64,7 @@
     --card2:#1f2622;
     --fill:rgba(140,150,140,.16);
     --fill2:rgba(140,150,140,.24);
+    --brand-soft:rgba(142,202,60,.16);
     --text:#ffffff;
     --text2:#e7ece9;
     --muted:rgba(230,238,232,.6);
@@ -463,6 +464,49 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 .gantt-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:11px;color:var(--muted)}
 .gantt-legend span{display:flex;align-items:center;gap:4px}
 .gantt-legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+
+/* ===== Documents, Vendors, Quotes, Procurement ===== */
+.doc-drop{border:1.5px dashed var(--surface-border);border-radius:14px;padding:22px 16px;text-align:center;cursor:pointer;transition:background .2s,border-color .2s}
+.doc-drop:active{background:var(--fill)}
+.doc-drop-ic{font-size:26px;line-height:1}
+.doc-drop-t{font-size:15px;font-weight:650;margin-top:8px}
+.doc-drop-s{font-size:12.5px;color:var(--muted);margin-top:3px}
+.doc-list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.doc-row{display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--fill);border-radius:12px}
+.doc-row .di{font-size:20px;flex:0 0 auto}
+.doc-row .dn{flex:1;min-width:0}
+.doc-row .dn b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-row .dn small{color:var(--muted);font-size:11.5px}
+.doc-row .dx{flex:0 0 auto;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;padding:4px 6px}
+.doc-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 7px;border-radius:6px;background:var(--brand-soft);color:var(--brand);flex:0 0 auto}
+.sugg-list{display:flex;flex-direction:column;gap:9px;margin-bottom:4px}
+.sugg{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;background:var(--surface);border:1px solid var(--surface-border);border-radius:14px;box-shadow:var(--surface-shadow)}
+.sugg .sinfo{flex:1;min-width:0}
+.sugg .sinfo b{font-size:14.5px;font-weight:650}
+.sugg .scats{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 5px}
+.sugg .scats i{font-style:normal;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--fill);color:var(--muted)}
+.sugg .snote{font-size:12px;color:var(--muted);line-height:1.35;text-wrap:pretty}
+.sugg .smeta{font-size:11.5px;color:var(--brand);font-weight:600;margin-top:5px;word-break:break-word}
+.sugg .sadd{flex:0 0 auto;align-self:center;background:var(--brand);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:650;padding:8px 13px;cursor:pointer}
+.stars{color:#f5a623;font-size:12.5px;letter-spacing:1px}
+.cmp{background:var(--surface);border:1px solid var(--surface-border);border-radius:14px;box-shadow:var(--surface-shadow);padding:13px 14px;margin-bottom:11px}
+.cmp>.ci{font-size:14.5px;font-weight:700;margin-bottom:9px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cmp>.ci small{font-weight:500;color:var(--muted);font-size:11.5px}
+.cmp-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--surface-border)}
+.cmp-row .cv{min-width:0}
+.cmp-row .cv b{font-size:13.5px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp-row .cv small{color:var(--muted);font-size:11.5px}
+.cmp-row .cp{font-variant-numeric:tabular-nums;font-weight:750;font-size:14px;text-align:right;white-space:nowrap}
+.cmp-row.best{position:relative}
+.cmp-row.best .cp{color:var(--brand)}
+.cmp-row .pick{border:1px solid var(--surface-border);background:transparent;color:var(--text);border-radius:9px;font-size:12px;font-weight:650;padding:6px 11px;cursor:pointer;white-space:nowrap}
+.cmp-row.chosen .pick{background:var(--brand);color:#fff;border-color:var(--brand)}
+.tag-best{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--brand);background:var(--brand-soft);padding:1px 6px;border-radius:5px;margin-left:6px;vertical-align:middle}
+.row .del{background:none;border:0;color:var(--red);font-size:14px;cursor:pointer;padding:4px 8px;border-radius:8px;flex:0 0 auto;font-weight:600}
+.row .mini-btn{background:var(--fill);border:0;color:var(--text);font-size:12.5px;font-weight:650;cursor:pointer;padding:6px 11px;border-radius:9px;flex:0 0 auto}
+.proc-status{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 8px;border-radius:6px;flex:0 0 auto}
+.proc-status.todo{background:var(--fill);color:var(--muted)}
+.proc-status.ordered{background:var(--brand-soft);color:var(--brand)}
 </style>
 </head>
 <body>
@@ -612,6 +656,107 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
 
       <div class="section-title">Procurement Checklist</div>
       <div id="materialsList"></div>
+
+      <!-- ===== Design Drawings & BOQ ===== -->
+      <div class="section-title">📐 Design Drawings &amp; BOQ</div>
+      <div class="section-sub">Upload architectural drawings, structural plans or a Bill of Quantities. Stored privately on this device.</div>
+      <div class="card">
+        <input type="file" id="docInput" accept="image/*,application/pdf" class="hidden" multiple onchange="App.pickDocs(this)">
+        <div class="doc-drop" onclick="document.getElementById('docInput').click()">
+          <div class="doc-drop-ic">⬆️</div>
+          <div class="doc-drop-t">Upload drawings / BOQ</div>
+          <div class="doc-drop-s">PDF or images · tap to choose files</div>
+        </div>
+        <div class="field" style="margin-top:12px"><label class="fl">Document type</label>
+          <select id="docKind">
+            <option value="drawing">Architectural / Structural Drawing</option>
+            <option value="boq">Bill of Quantities (BOQ)</option>
+            <option value="permit">Permit / Approval</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div id="docList" class="doc-list"></div>
+        <div class="hint" style="margin-top:6px">Tip: attach your BOQ or drawings to the chat and I can extract the stages, quantities &amp; costs for you.</div>
+      </div>
+
+      <!-- ===== Vendors & Quotations ===== -->
+      <div class="section-title">🏷️ Vendors &amp; Quotations</div>
+      <div class="section-sub">Add suppliers, record their quotes per item, then compare side-by-side to pick the best.</div>
+
+      <div class="card">
+        <div class="group-hd" style="margin-top:0">Add a vendor</div>
+        <div class="field"><label class="fl">Vendor / supplier name</label><input id="venName" placeholder="e.g. Halsteds Msasa"></div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Category</label>
+            <select id="venCat">
+              <option>General</option><option>Cement</option><option>Roofing</option><option>Plumbing</option>
+              <option>Electrical</option><option>Solar</option><option>Water</option><option>Septic</option>
+              <option>Borehole</option><option>Timber</option><option>Doors &amp; Windows</option><option>Joinery</option>
+              <option>Gas</option><option>Paint</option><option>Tools</option><option>Labour</option>
+            </select>
+          </div>
+          <div class="field"><label class="fl">Phone / WhatsApp</label><input id="venPhone" placeholder="+263…"></div>
+        </div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Website (optional)</label><input id="venWeb" placeholder="example.co.zw"></div>
+          <div class="field"><label class="fl">Rating</label>
+            <select id="venRating"><option value="0">— not rated —</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>
+          </div>
+        </div>
+        <div class="field"><label class="fl">Notes (optional)</label><input id="venNote" placeholder="e.g. Fast delivery, good on roofing"></div>
+        <button class="btn wide" onclick="App.addVendor()">Add Vendor</button>
+      </div>
+
+      <div class="group-hd">💡 Recommended suppliers (Zimbabwe)</div>
+      <div class="section-sub">Curated from public sources — verify prices &amp; stock before ordering. Tap to add to your vendor list.</div>
+      <div id="vendorSuggest" class="sugg-list"></div>
+
+      <div class="group-hd">Your vendors</div>
+      <div id="vendorList" class="list"></div>
+
+      <div class="group-hd">Record a quotation</div>
+      <div class="card">
+        <div class="field"><label class="fl">Vendor</label><select id="qVendor"></select></div>
+        <div class="field"><label class="fl">Item / description</label><input id="qItem" placeholder="e.g. 50kg cement"></div>
+        <div class="grid g3">
+          <div class="field"><label class="fl">Qty</label><input id="qQty" type="number" inputmode="decimal" placeholder="1"></div>
+          <div class="field"><label class="fl">Unit</label><input id="qUnit" placeholder="bags"></div>
+          <div class="field"><label class="fl">Unit price $</label><input id="qPrice" type="number" inputmode="decimal" placeholder="0.00"></div>
+        </div>
+        <div class="grid g2">
+          <div class="field"><label class="fl">Lead time</label><input id="qLead" placeholder="e.g. 3 days"></div>
+          <div class="field"><label class="fl">Date</label><input id="qDate" type="date"></div>
+        </div>
+        <div class="field">
+          <label class="fl">Attach quote (optional)</label>
+          <input type="file" id="qDocInput" accept="image/*,application/pdf" class="hidden" onchange="App.pickQuoteDoc(this)">
+          <button class="btn gray sm" type="button" onclick="document.getElementById('qDocInput').click()">📎 Attach file</button>
+          <span id="qDocName" class="small muted" style="margin-left:8px"></span>
+        </div>
+        <button class="btn wide" onclick="App.addQuote()">Add Quotation</button>
+      </div>
+
+      <div class="group-hd">Compare quotes</div>
+      <div class="section-sub">Grouped by item · lowest price highlighted. Tap “Pick” to select a vendor.</div>
+      <div id="quoteCompare"></div>
+
+      <!-- ===== Procurement List ===== -->
+      <div class="section-title">🛒 Procurement List</div>
+      <div class="section-sub">Build a purchase list to send to vendors. Pull outstanding items straight from your stages.</div>
+      <div class="card">
+        <div class="btn-row" style="margin-bottom:12px">
+          <button class="btn green sm" onclick="App.buildProcurementFromStages()">⤵️ Pull from stages</button>
+          <button class="btn gray sm" onclick="App.shareProcurement()">📤 Share list</button>
+        </div>
+        <div class="field"><label class="fl">Add an item manually</label><input id="procItem" placeholder="e.g. 20 × 6m Y12 rebar"></div>
+        <div class="grid g3">
+          <div class="field"><label class="fl">Qty</label><input id="procQty" placeholder="1"></div>
+          <div class="field"><label class="fl">Unit</label><input id="procUnit" placeholder="e.g. lengths"></div>
+          <div class="field"><label class="fl">For stage</label><select id="procStage"></select></div>
+        </div>
+        <button class="btn sm wide" onclick="App.addProcItem()">Add to List</button>
+      </div>
+      <div id="procList" class="list"></div>
     </div>
   </section>
 
@@ -750,7 +895,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.45}
         <button class="btn danger sm wide" onclick="App.resetAll()">Reset All Progress</button>
       </div>
 
-      <div class="hint center" style="margin-top:20px">BuildTrack · Murehwa Villa · works offline · v2.0</div>
+      <div class="hint center" style="margin-top:20px">BuildTrack · Murehwa Villa · works offline · v3.0</div>
     </div>
   </section>
 
@@ -785,9 +930,9 @@ const TAB_EMOJI={dash:"📊",stages:"🏗️",materials:"📦",budget:"💵",act
    ============================================================ */
 const SEED = {
   meta:{ budget:36160 },
-  stageColors:["#276F27","#499A13","#8ECA3C","#BBDC12","#30b0c7","#f59e0b"],
-  stageIcons:["⛏️","🧱","🏗️","🧱","🏠","🪟"],
-  stageWeeks:[3,2,6,3,2,4],
+  stageColors:["#276F27","#499A13","#8ECA3C","#BBDC12","#30b0c7","#f59e0b","#b45309","#0ea5e9","#64748b","#eab308","#0891b2","#f97316","#92400e","#dc2626"],
+  stageIcons:["⛏️","🧱","🏗️","🧱","🏠","🪟","🐜","🚰","🚽","⚡","💧","☀️","🗄️","🔥"],
+  stageWeeks:[3,2,6,3,2,4,1,2,2,2,3,2,2,1],
   stages:[
     { id:"s1", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
       objective:"Excavate load-bearing trenches to carry the vertical weight of a double-storey structure, avoiding ground settling or wall cracking.",
@@ -862,31 +1007,159 @@ const SEED = {
         {n:"Galvanized Box Gutters & Downpipes", q:"custom set"},
         {n:"Roofing Screws, Washers & Weatherproof Silicone", q:"1 lot"}
       ]},
-    { id:"s6", name:"Windows, Glazing & Fittings", short:"Glazing & Fittings", estCost:7800,
-      objective:"Install aluminium-framed glazing, doors, and full electrical lights & fittings to bring the villa to a livable, finished lock-up state.",
+    { id:"s6", name:"Windows, Doors & Ceilings", short:"Glazing & Ceilings", estCost:5200,
+      objective:"Install aluminium-framed glazing, external & internal doors, and full ceiling works to bring the villa to a weather-tight lock-up state.",
       steps:[
         "Install aluminium window frames & glass glazing throughout",
         "Fit aluminium/glass external doors & internal doors",
-        "First-fix electrical wiring, conduits & distribution (DB) board",
-        "Mount light fittings, switches, sockets & fixtures",
-        "Fit plumbing fixtures, taps & bathroom fittings",
-        "Fit ceilings, cornices & final trims"
+        "Install ceiling boards, suspended/bulkhead ceilings & cornices throughout",
+        "Fit skirtings, trims and lock-up ironmongery (locks, handles)"
       ],
       materials:[
         {n:"Aluminium Window Frames (assorted sizes)", q:"1 set"},
         {n:"Glass Glazing Panels (windows & doors)", q:"1 lot"},
         {n:"Aluminium & Glass Doors", q:"assorted"},
-        {n:"Electrical Cabling, Conduits & DB Board", q:"1 lot"},
+        {n:"Internal Doors, Frames & Ironmongery", q:"full house"},
+        {n:"Ceiling Boards, Brandering, Cornices & Trims", q:"1 lot"}
+      ]},
+    { id:"s7", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
+      objective:"Chemically poison the soil beneath and around the structure to create a lasting barrier against subterranean termites that attack timber roofing, ceilings & doors.",
+      steps:[
+        "Trench & drench external foundation perimeter with termiticide",
+        "Treat all under-floor fill and service trenches before back-filling",
+        "Spot-treat around timber roof bearings, wall plates & door frames",
+        "Log chemical batch, dilution rate & guarantee period from applicator"
+      ],
+      materials:[
+        {n:"Termiticide Concentrate (e.g. Chlorpyrifos/Fipronil)", q:"20 L"},
+        {n:"Knapsack / Drench Sprayer (rental)", q:"1 unit"},
+        {n:"Applicator Labour & Treatment Certificate", q:"1 job"}
+      ]},
+    { id:"s8", name:"Plumbing & Water Reticulation", short:"Plumbing Pipes", estCost:2800,
+      objective:"Run all hot & cold water supply piping and internal waste/soil pipework to kitchens, bathrooms and the laundry, ready for fittings.",
+      steps:[
+        "Chase walls & floors and lay first-fix PEX/PPR supply piping",
+        "Install waste, soil & vent pipework to all wet points",
+        "Fit and stand the geyser(s) with pressure-relief & vacuum valves",
+        "Fit shower/bathroom extractor fans & ventilation to keep showers dry and mould-free",
+        "Pressure-test the system, then second-fix taps, showers & sanitaryware"
+      ],
+      materials:[
+        {n:"PPR / PEX Hot & Cold Supply Pipe & Fittings", q:"1 lot"},
+        {n:"110mm / 50mm PVC Waste & Soil Pipe", q:"1 lot"},
+        {n:"Geyser(s) + Valves & Trays", q:"2 units"},
+        {n:"Bathroom Extractor Fans & Vent Ducting (anti-mould)", q:"per bathroom"},
+        {n:"Taps, Mixers, Showers & Sanitaryware", q:"full house"},
+        {n:"Pipe Clips, Solvent Cement & Thread Tape", q:"1 lot"}
+      ]},
+    { id:"s9", name:"Septic Tank, Soakaway & Drainage", short:"Sewer & Drainage", estCost:2600,
+      objective:"Build the on-site foul-water treatment (septic tank + soakaway) and run all external sewer and storm-water drainage away from the villa.",
+      steps:[
+        "Excavate & cast/lay the septic tank chambers with baffle & access covers",
+        "Dig and charge the soakaway pit with hardcore & filter stone",
+        "Lay external 110mm sewer runs at fall from all soil stacks to the tank",
+        "Install inspection chambers, gully traps & storm-water drainage channels"
+      ],
+      materials:[
+        {n:"Septic Tank (pre-cast or brick-built + covers)", q:"1 unit"},
+        {n:"110mm PVC Sewer Pipe, Bends & Junctions", q:"1 lot"},
+        {n:"Inspection Chambers & Gully Traps", q:"assorted"},
+        {n:"Hardcore, Filter Stone & Pit Sand (soakaway)", q:"10 m³"},
+        {n:"Cement & Bricks (tank & chambers)", q:"1 lot"}
+      ]},
+    { id:"s10", name:"Electrical Installation", short:"Electricals", estCost:3800,
+      objective:"Install the full electrical system — conduits, wiring, distribution board, lights, sockets and switches — certified to a safe, ready-to-energise standard.",
+      steps:[
+        "First-fix: chase walls & cast conduits, draw-boxes and back-boxes",
+        "Pull cabling for lighting, power, geyser, stove & dedicated circuits",
+        "Mount & wire the distribution (DB) board with breakers & earth/RCD",
+        "Second-fix light fittings, switches, sockets; test, certify & label"
+      ],
+      materials:[
+        {n:"20mm PVC Conduit, Draw-boxes & Back-boxes", q:"1 lot"},
+        {n:"1.5 / 2.5 / 4mm² Electrical Cable", q:"assorted rolls"},
+        {n:"Distribution Board, Breakers & RCD", q:"1 board"},
         {n:"Light Fittings, Switches & Sockets", q:"full house"},
-        {n:"Plumbing & Bathroom Fittings", q:"1 set"},
-        {n:"Ceiling Boards, Cornices & Trims", q:"1 lot"}
+        {n:"Earth Rod, Cable Ties & Terminations", q:"1 lot"}
+      ]},
+    { id:"s11", name:"Borehole & Water Supply", short:"Borehole", estCost:5200,
+      objective:"Drill and equip a private borehole with pump, storage tank and reticulation so the villa has a reliable independent water supply.",
+      steps:[
+        "Siting survey, then drill & case the borehole to yield depth",
+        "Install submersible pump, riser pipe, cable & control box",
+        "Erect elevated tank stand and mount the storage tank(s)",
+        "Run supply piping from borehole to tank and tank to the main house"
+      ],
+      materials:[
+        {n:"Borehole Drilling & Casing (per metre)", q:"~40 m"},
+        {n:"Submersible Pump, Riser Pipe & Cable", q:"1 set"},
+        {n:"Storage Tank(s) 5000L + Fittings", q:"2 tanks"},
+        {n:"Steel/Brick Tank Stand", q:"1 unit"},
+        {n:"HDPE / PVC Supply Piping & Valves", q:"1 lot"}
+      ]},
+    { id:"s12", name:"Solar Power System", short:"Solar & Backup", estCost:6500,
+      objective:"Install solar generation for both the borehole pump and the main house — panels, inverter and battery backup — for energy independence from the grid.",
+      steps:[
+        "Mount roof/ground solar panel array with rails & DC isolators",
+        "Install hybrid inverter, charge controller & battery bank for the house",
+        "Fit a dedicated solar pump controller/inverter for the borehole pump",
+        "Wire changeover, commission, and test yield & backup runtime"
+      ],
+      materials:[
+        {n:"Solar Panels (main house array)", q:"~12 panels"},
+        {n:"Hybrid Inverter & Charge Controller", q:"1 unit"},
+        {n:"Lithium/Gel Battery Bank", q:"1 bank"},
+        {n:"Solar Pump Inverter/Controller (borehole)", q:"1 unit"},
+        {n:"Mounting Rails, DC Cable, Isolators & Breakers", q:"1 lot"}
+      ]},
+    { id:"s13", name:"Joinery — Cabinets & Wardrobes", short:"Cabinetry", estCost:4800,
+      objective:"Design, build and fit all fitted joinery — kitchen cabinets for the wet & dry kitchens plus built-in wardrobes in every bedroom.",
+      steps:[
+        "Measure & template kitchens and bedrooms; agree cabinet/wardrobe layouts",
+        "Fabricate carcasses, doors & drawers (MDF/board + preferred finish)",
+        "Install wet-kitchen & dry-kitchen base and wall units + worktops",
+        "Fit built-in bedroom wardrobes with shelving, hanging rails & mirrors",
+        "Fit handles, soft-close hinges, edging & final adjustments"
+      ],
+      materials:[
+        {n:"Kitchen Cabinets — Wet & Dry Kitchens (carcass + doors)", q:"2 kitchens"},
+        {n:"Worktops (granite/laminate) & Splashbacks", q:"1 lot"},
+        {n:"Built-in Bedroom Wardrobes", q:"per bedroom"},
+        {n:"Hinges, Runners, Handles & Edging", q:"1 lot"},
+        {n:"Board, MDF, Glue & Fixings", q:"1 lot"}
+      ]},
+    { id:"s14", name:"Gas Installation & Reticulation", short:"Gas System", estCost:650,
+      objective:"Mount twin 9kg LPG cylinders outside in a secure cage and pipe gas into both the wet and dry kitchens, tested and leak-certified.",
+      steps:[
+        "Build/fit an external steel security cage and mount 2 × 9kg cylinders",
+        "Fit twin-cylinder changeover regulator & manifold",
+        "Run rated copper/gas pipe to wet-kitchen and dry-kitchen appliance points",
+        "Fit isolation valves and bayonet points at each hob/cooker location",
+        "Pressure-test the line, leak-check and issue a gas compliance record"
+      ],
+      materials:[
+        {n:"9kg LPG Gas Cylinders", q:"2 bottles"},
+        {n:"External Lockable Steel Gas Cage", q:"1 unit"},
+        {n:"Twin-Cylinder Changeover Regulator & Manifold", q:"1 set"},
+        {n:"Rated Copper/Gas Piping & Fittings", q:"1 lot"},
+        {n:"Isolation Valves & Bayonet Appliance Points", q:"2+ points"}
       ]}
   ],
   bricks:[
     {n:"External & Parapet (double skin) — Machine-pressed (Beta/Willdale)", q:51000},
     {n:"Internal Partitions (single skin) — Local molded farm bricks", q:29000}
   ],
-  brickCost:9610
+  brickCost:9610,
+  /* Curated Zimbabwe supplier recommendations (from public sources — verify before ordering) */
+  vendorSuggestions:[
+    {name:"Halsteds Builders Express", cats:["General","Roofing","Plumbing","Electrical","Solar","Water","Septic","Timber","Doors & Windows"], phone:"+263 242 486 200", web:"halsteds.co.zw", note:"Nationwide branches (Msasa, Harare). Online ordering & delivery. Good for septic tanks & water tanks."},
+    {name:"Electrosales Hardware", cats:["Electrical","Plumbing","Solar","General","Tools"], phone:"+263 8677 222 000", web:"electrosales.co.zw", note:"Strong on electrical, plumbing & alternative power. Branches countrywide."},
+    {name:"Zimbabwe Building Materials (ZBMS)", cats:["Cement","Roofing","Plumbing","Electrical","Water","Timber","General"], phone:"+263 778 767 374", web:"zbms.co.zw", note:"SAZ-certified, bulk & retail, site delivery. Belvedere, Harare."},
+    {name:"Vakisa Builders Express", cats:["Cement","Roofing","Plumbing","Electrical","Solar","Water","Septic","Borehole","Timber"], phone:"", web:"vakisa.co.zw", note:"Broad range incl. borehole drilling & septic tanks. Request a quote online."},
+    {name:"Bromel Hardware", cats:["Roofing","Plumbing","Electrical","Paint","Tools","General"], phone:"+263 771 357 327", web:"bromelhardware.co.zw", note:"Workington, Harare. Roofing, building & safety gear."},
+    {name:"Khulabuild Hardware", cats:["Cement","Timber","Electrical","Solar","Plumbing","Paint","General"], phone:"", web:"khulabuildhardware.co.zw", note:"Online hardware & building supplies, Harare."},
+    {name:"Roofing Mega Store", cats:["Roofing","Cement","Timber","Plumbing","Electrical"], phone:"", web:"roofing.co.zw", note:"Specialist in IBR, QTiles & Harvey roofing; bulk supply."}
+  ]
 };
 SEED.meta.budget = SEED.stages.reduce((a,s)=>a+s.estCost,0) + SEED.brickCost;
 const todayISO=()=>new Date().toISOString().slice(0,10);
@@ -921,9 +1194,12 @@ const Photo={
       const finish=v=>{ if(!settled){ settled=true; resolve(v); } };
       setTimeout(()=>finish(null),1500); // never let a stuck IndexedDB block startup
       try{
-        const req=indexedDB.open("murehwa_villa_photos",1);
-        req.onupgradeneeded=e=>{ const db=e.target.result; if(!db.objectStoreNames.contains("photos")) db.createObjectStore("photos",{keyPath:"id"}); };
-        req.onsuccess=e=>{ this.db=e.target.result; finish(this.db); };
+        const req=indexedDB.open("murehwa_villa_photos",2);
+        req.onupgradeneeded=e=>{ const db=e.target.result;
+          if(!db.objectStoreNames.contains("photos")) db.createObjectStore("photos",{keyPath:"id"});
+          if(!db.objectStoreNames.contains("files")) db.createObjectStore("files",{keyPath:"id"});
+        };
+        req.onsuccess=e=>{ this.db=e.target.result; Docs.db=this.db; finish(this.db); };
         req.onerror=()=>finish(null);
         req.onblocked=()=>finish(null);
       }catch(e){ finish(null); }
@@ -953,6 +1229,29 @@ const Photo={
   }
 };
 
+/* ---------- IndexedDB document/attachment store (drawings, BOQ, quotes) ---------- */
+const Docs={
+  db:null,
+  _tx(mode){ return this.db.transaction("files",mode).objectStore("files"); },
+  put(id,dataURL){
+    return new Promise(res=>{ if(!this.db){res(false);return;} const r=this._tx("readwrite").put({id,dataURL}); r.onsuccess=()=>res(true); r.onerror=()=>res(false); });
+  },
+  get(id){
+    return new Promise(res=>{ if(!this.db){res(null);return;} const r=this._tx("readonly").get(id); r.onsuccess=()=>res(r.result?r.result.dataURL:null); r.onerror=()=>res(null); });
+  },
+  del(id){
+    return new Promise(res=>{ if(!this.db){res();return;} const r=this._tx("readwrite").delete(id); r.onsuccess=()=>res(); r.onerror=()=>res(); });
+  },
+  clear(){
+    return new Promise(res=>{ if(!this.db){res();return;} const r=this._tx("readwrite").clear(); r.onsuccess=()=>res(); r.onerror=()=>res(); });
+  }
+};
+/* Read any File as a dataURL (for storing PDFs, images, drawings) */
+function fileToDataURL(file){
+  return new Promise((resolve,reject)=>{ const r=new FileReader(); r.onload=()=>resolve(r.result); r.onerror=reject; r.readAsDataURL(file); });
+}
+function humanSize(b){ if(!b) return ""; if(b<1024) return b+" B"; if(b<1048576) return (b/1024).toFixed(0)+" KB"; return (b/1048576).toFixed(1)+" MB"; }
+
 /* ============================================================
    STORE — localStorage persistence (backward compatible)
    ============================================================ */
@@ -966,7 +1265,7 @@ const Store={
     this.migrate(); return this.state;
   },
   fresh(){
-    const s={ stages:[], expenses:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO() };
+    const s={ stages:[], expenses:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{} };
     SEED.stages.forEach(st=> s.stages.push({id:st.id,steps:st.steps.map(()=>false),materials:st.materials.map(()=>false),notes:"",photos:[]}));
     SEED.bricks.forEach(()=> s.bricks.push({delivered:0}));
     return s;
@@ -984,6 +1283,11 @@ const Store={
     if(!this.state.expenses) this.state.expenses=[];
     if(!this.state.activity) this.state.activity=[];
     if(!this.state.labour) this.state.labour=[];
+    if(!Array.isArray(this.state.docs)) this.state.docs=[];
+    if(!Array.isArray(this.state.vendors)) this.state.vendors=[];
+    if(!Array.isArray(this.state.quotes)) this.state.quotes=[];
+    if(!Array.isArray(this.state.procurement)) this.state.procurement=[];
+    if(!this.state.chosen||typeof this.state.chosen!=="object") this.state.chosen={};
     if(!this.state.startDate) this.state.startDate=todayISO();
     if(typeof this.state.notes!=="string") this.state.notes="";
   },
@@ -1026,6 +1330,7 @@ const App={
     document.getElementById("expDate").value=todayISO();
     document.getElementById("actDate").value=todayISO();
     document.getElementById("labDate").value=todayISO();
+    const qd=document.getElementById("qDate"); if(qd) qd.value=todayISO();
     document.getElementById("startDate").value=Store.state.startDate||todayISO();
     document.getElementById("projectNotes").value=Store.state.notes||"";
     document.getElementById("tInvest").textContent=fmt(SEED.meta.budget);
@@ -1411,6 +1716,7 @@ const App={
     const mp=total?Math.round(done/total*100):0;
     document.getElementById("matPct").textContent=mp+"%";
     setTimeout(()=>{ const b=document.getElementById("matBar"); if(b) b.style.width=mp+"%"; },80);
+    this.renderDocs(); this.renderVendors(); this.renderQuotes(); this.renderProcurement();
   },
   tapMat(elDiv,i,j){
     const nv=!Store.state.stages[i].materials[j];
@@ -1445,6 +1751,10 @@ const App={
     let lopt='<option value="general">General</option>';
     SEED.stages.forEach((st,i)=>lopt+=`<option value="s${i+1}">Stage ${i+1} — ${st.short}</option>`);
     document.getElementById("labStage").innerHTML=lopt;
+    const ps=document.getElementById("procStage");
+    if(ps){ let popt='<option value="">— any / general —</option>';
+      SEED.stages.forEach((st,i)=>popt+=`<option value="s${i+1}">Stage ${i+1} — ${st.short}</option>`);
+      ps.innerHTML=popt; }
   },
   addExpense(){
     const item=document.getElementById("expItem").value.trim();
@@ -1509,6 +1819,228 @@ const App={
     this.renderLabour();
   },
   esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); },
+  uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); },
+
+  /* ---------- DOCUMENTS (drawings / BOQ) ---------- */
+  async pickDocs(input){
+    const files=[...input.files]; const kind=document.getElementById("docKind").value;
+    if(!files.length) return;
+    for(const f of files){
+      try{
+        const dataURL=await fileToDataURL(f);
+        const id="doc_"+this.uid();
+        const ok=await Docs.put(id,dataURL);
+        Store.state.docs.unshift({id,name:f.name,type:f.type,size:f.size,kind,addedAt:todayISO(),stored:ok});
+      }catch(e){ this.toast("⚠︎","Couldn't read "+f.name); }
+    }
+    Store.save(); input.value=""; this.renderDocs(); this.buzz(8);
+    this.toast("✅",files.length>1?files.length+" files added":"Document added");
+  },
+  docKindLabel(k){ return {drawing:"Drawing",boq:"BOQ",permit:"Permit",other:"Doc"}[k]||"Doc"; },
+  docIcon(rec){ const t=rec.type||""; if(t.includes("pdf")) return "📄"; if(t.startsWith("image")) return "🖼️"; return "📎"; },
+  renderDocs(){
+    const el=document.getElementById("docList"); if(!el) return;
+    const docs=Store.state.docs||[];
+    el.innerHTML=docs.map(d=>`<div class="doc-row">
+      <div class="di">${this.docIcon(d)}</div>
+      <div class="dn"><b>${this.esc(d.name)}</b><small>${humanSize(d.size)} · ${d.addedAt}</small></div>
+      <span class="doc-badge">${this.docKindLabel(d.kind)}</span>
+      <span class="dx" onclick="App.openDoc('${d.id}')">Open</span>
+      <span class="dx" onclick="App.delDoc('${d.id}')">✕</span>
+    </div>`).join("");
+  },
+  async openDoc(id){
+    const data=await Docs.get(id);
+    if(!data){ this.toast("⚠︎","File not stored on this device"); return; }
+    try{ const blob=await(await fetch(data)).blob(); const url=URL.createObjectURL(blob); window.open(url,"_blank"); setTimeout(()=>URL.revokeObjectURL(url),60000); }
+    catch(e){ window.open(data,"_blank"); }
+  },
+  async delDoc(id){
+    Store.state.docs=(Store.state.docs||[]).filter(d=>d.id!==id);
+    await Docs.del(id); Store.save(); this.renderDocs(); this.buzz(6);
+  },
+
+  /* ---------- VENDORS ---------- */
+  addVendor(){
+    const name=document.getElementById("venName").value.trim();
+    if(!name){ this.toast("⚠︎","Enter a vendor name"); return; }
+    Store.state.vendors.unshift({id:"v_"+this.uid(),name,
+      cat:document.getElementById("venCat").value,
+      phone:document.getElementById("venPhone").value.trim(),
+      web:document.getElementById("venWeb").value.trim(),
+      rating:parseInt(document.getElementById("venRating").value)||0,
+      note:document.getElementById("venNote").value.trim()});
+    Store.save();
+    ["venName","venPhone","venWeb","venNote"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("venRating").value="0";
+    this.renderVendors(); this.buzz(8); this.toast("✅","Vendor added");
+  },
+  addSuggested(idx){
+    const s=SEED.vendorSuggestions[idx]; if(!s) return;
+    if(Store.state.vendors.some(v=>v.name===s.name)){ this.toast("ℹ︎","Already in your list"); return; }
+    Store.state.vendors.unshift({id:"v_"+this.uid(),name:s.name,cat:(s.cats&&s.cats[0])||"General",phone:s.phone||"",web:s.web||"",rating:0,note:s.note||""});
+    Store.save(); this.renderVendors(); this.buzz(8); this.toast("✅",s.name+" added");
+  },
+  delVendor(id){
+    Store.state.vendors=Store.state.vendors.filter(v=>v.id!==id);
+    Store.state.quotes=Store.state.quotes.filter(q=>q.vendorId!==id);
+    Store.save(); this.renderVendors(); this.renderQuotes(); this.buzz(6);
+  },
+  stars(n){ return n>0?'<span class="stars">'+"★".repeat(n)+"</span>":""; },
+  vendorName(id){ const v=Store.state.vendors.find(x=>x.id===id); return v?v.name:"—"; },
+  renderVendors(){
+    const sg=document.getElementById("vendorSuggest");
+    if(sg){ sg.innerHTML=(SEED.vendorSuggestions||[]).map((s,i)=>{
+      const added=Store.state.vendors.some(v=>v.name===s.name);
+      return `<div class="sugg"><div class="sinfo"><b>${this.esc(s.name)}</b>
+        <div class="scats">${s.cats.slice(0,5).map(c=>`<i>${this.esc(c)}</i>`).join("")}</div>
+        <div class="snote">${this.esc(s.note)}</div>
+        <div class="smeta">${s.phone?this.esc(s.phone)+(s.web?" · ":""):""}${s.web?this.esc(s.web):""}</div></div>
+        <button class="sadd" onclick="App.addSuggested(${i})"${added?' disabled style="opacity:.35"':""}>${added?"✓ Added":"+ Add"}</button></div>`;
+    }).join(""); }
+    const el=document.getElementById("vendorList");
+    const vs=Store.state.vendors||[];
+    if(el){ el.innerHTML=vs.length?vs.map(v=>`<div class="row">
+      <div class="body"><div class="t">${this.esc(v.name)} ${this.stars(v.rating)}</div>
+        <div class="s">${this.esc(v.cat)}${v.phone?" · "+this.esc(v.phone):""}${v.web?" · "+this.esc(v.web):""}${v.note?" · "+this.esc(v.note):""}</div></div>
+      <button class="del" onclick="App.delVendor('${v.id}')">Delete</button></div>`).join("")
+      :'<div class="row" style="justify-content:center;color:var(--muted)">No vendors yet — add one or tap a recommendation above</div>'; }
+    const sel=document.getElementById("qVendor");
+    if(sel){ sel.innerHTML=vs.length?vs.map(v=>`<option value="${v.id}">${this.esc(v.name)}</option>`).join(""):'<option value="">— add a vendor first —</option>'; }
+  },
+
+  /* ---------- QUOTATIONS ---------- */
+  async pickQuoteDoc(input){
+    const f=input.files[0]; if(!f) return;
+    try{ const dataURL=await fileToDataURL(f); const id="q_"+this.uid(); await Docs.put(id,dataURL);
+      this._pendingQuoteDoc={id,name:f.name,type:f.type,size:f.size};
+      document.getElementById("qDocName").textContent=f.name;
+    }catch(e){ this.toast("⚠︎","Couldn't attach file"); }
+  },
+  addQuote(){
+    const vendorId=document.getElementById("qVendor").value;
+    if(!vendorId){ this.toast("⚠︎","Add a vendor first"); return; }
+    const item=document.getElementById("qItem").value.trim();
+    if(!item){ this.toast("⚠︎","Enter an item"); return; }
+    const qty=parseFloat(document.getElementById("qQty").value)||1;
+    const unitPrice=parseFloat(document.getElementById("qPrice").value)||0;
+    const q={id:"qt_"+this.uid(),vendorId,item,qty,
+      unit:document.getElementById("qUnit").value.trim(),
+      unitPrice,total:qty*unitPrice,
+      lead:document.getElementById("qLead").value.trim(),
+      date:document.getElementById("qDate").value||todayISO(),
+      doc:this._pendingQuoteDoc||null};
+    Store.state.quotes.unshift(q); Store.save();
+    ["qItem","qQty","qUnit","qPrice","qLead"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("qDocName").textContent=""; this._pendingQuoteDoc=null;
+    this.renderQuotes(); this.buzz(8); this.toast("✅","Quotation saved");
+  },
+  async delQuote(id){
+    const q=Store.state.quotes.find(x=>x.id===id);
+    if(q&&q.doc&&q.doc.id){ await Docs.del(q.doc.id); }
+    Store.state.quotes=Store.state.quotes.filter(x=>x.id!==id);
+    Store.save(); this.renderQuotes(); this.buzz(6);
+  },
+  pickWinner(item,vendorId){
+    if(!Store.state.chosen) Store.state.chosen={};
+    Store.state.chosen[item.toLowerCase()]=vendorId; Store.save(); this.renderQuotes(); this.buzz(10);
+    this.toast("✅","Vendor selected");
+  },
+  renderQuotes(){
+    const el=document.getElementById("quoteCompare"); if(!el) return;
+    const quotes=Store.state.quotes||[];
+    if(!quotes.length){ el.innerHTML='<div class="card" style="text-align:center;color:var(--muted)">No quotations yet. Record quotes above to compare vendors side-by-side.</div>'; return; }
+    const chosen=Store.state.chosen||{};
+    const groups={};
+    quotes.forEach(q=>{ const k=q.item.toLowerCase(); (groups[k]=groups[k]||{name:q.item,list:[]}).list.push(q); });
+    let html="";
+    Object.values(groups).forEach(g=>{
+      const priced=g.list.filter(q=>q.total>0);
+      const min=priced.length?Math.min(...priced.map(q=>q.total)):null;
+      const rows=g.list.slice().sort((a,b)=>(a.total||1e12)-(b.total||1e12)).map(q=>{
+        const best=(min!==null&&q.total===min&&q.total>0);
+        const isChosen=chosen[g.name.toLowerCase()]===q.vendorId;
+        return `<div class="cmp-row ${best?"best":""} ${isChosen?"chosen":""}">
+          <div class="cv"><b>${this.esc(this.vendorName(q.vendorId))}${best?'<span class="tag-best">Lowest</span>':""}</b>
+            <small>${q.qty||1}${q.unit?" "+this.esc(q.unit):""}${q.unitPrice?" @ "+fmt(q.unitPrice):""}${q.lead?" · "+this.esc(q.lead):""}${q.doc?' · 📎':""}</small></div>
+          <div class="cp">${q.total>0?fmt(q.total):"—"}</div>
+          <button class="pick" onclick="App.pickWinner('${this.esc(g.name).replace(/'/g,"\\'")}','${q.vendorId}')">${isChosen?"✓ Picked":"Pick"}</button>
+        </div>`;
+      }).join("");
+      html+=`<div class="cmp"><div class="ci"><span>${this.esc(g.name)}</span><small>${g.list.length} quote${g.list.length>1?"s":""}</small></div>${rows}</div>`;
+    });
+    el.innerHTML=html;
+  },
+
+  /* ---------- PROCUREMENT LIST ---------- */
+  addProcItem(){
+    const item=document.getElementById("procItem").value.trim();
+    if(!item){ this.toast("⚠︎","Enter an item"); return; }
+    Store.state.procurement.unshift({id:"p_"+this.uid(),item,
+      qty:document.getElementById("procQty").value.trim(),
+      unit:document.getElementById("procUnit").value.trim(),
+      stage:document.getElementById("procStage").value,status:"todo"});
+    Store.save();
+    ["procItem","procQty","procUnit"].forEach(id=>document.getElementById(id).value="");
+    this.renderProcurement(); this.buzz(8); this.toast("✅","Added to list");
+  },
+  buildProcurementFromStages(){
+    let added=0;
+    SEED.stages.forEach((st,i)=>{
+      const cur=Store.state.stages[i];
+      st.materials.forEach((m,j)=>{
+        if(cur.materials[j]) return; // skip already-delivered
+        const exists=Store.state.procurement.some(p=>p.item===m.n && p.stage==="s"+(i+1));
+        if(exists) return;
+        Store.state.procurement.push({id:"p_"+this.uid(),item:m.n,qty:m.q,unit:"",stage:"s"+(i+1),status:"todo"});
+        added++;
+      });
+    });
+    Store.save(); this.renderProcurement(); this.buzz(10);
+    this.toast(added?"✅":"ℹ︎",added?added+" outstanding items pulled":"Nothing outstanding to add");
+  },
+  toggleProc(id){
+    const p=Store.state.procurement.find(x=>x.id===id); if(!p) return;
+    p.status=p.status==="ordered"?"todo":"ordered"; Store.save(); this.renderProcurement(); this.buzz(6);
+  },
+  delProcItem(id){
+    Store.state.procurement=Store.state.procurement.filter(p=>p.id!==id);
+    Store.save(); this.renderProcurement(); this.buzz(6);
+  },
+  renderProcurement(){
+    const el=document.getElementById("procList"); if(!el) return;
+    const list=Store.state.procurement||[];
+    if(!list.length){ el.innerHTML='<div class="row" style="justify-content:center;color:var(--muted)">List empty — add items or pull from stages</div>'; return; }
+    el.innerHTML=list.map(p=>`<div class="row">
+      <div class="body"><div class="t" style="${p.status==="ordered"?"text-decoration:line-through;color:var(--muted)":""}">${this.esc(p.item)}</div>
+        <div class="s">${[p.qty,p.unit].filter(Boolean).map(x=>this.esc(x)).join(" ")}${p.stage?(p.qty||p.unit?" · ":"")+this.stageLabel(p.stage):""}</div></div>
+      <span class="proc-status ${p.status}" onclick="App.toggleProc('${p.id}')">${p.status==="ordered"?"Ordered":"To buy"}</span>
+      <button class="del" onclick="App.delProcItem('${p.id}')">✕</button></div>`).join("");
+  },
+  shareProcurement(){
+    const list=(Store.state.procurement||[]).filter(p=>p.status!=="ordered");
+    if(!list.length){ this.toast("ℹ︎","Nothing to buy on the list"); return; }
+    const byStage={};
+    list.forEach(p=>{ const k=p.stage||"other"; (byStage[k]=byStage[k]||[]).push(p); });
+    let txt="*BuildTrack — Procurement Request*\nMurehwa Villa\n";
+    Object.keys(byStage).forEach(k=>{
+      txt+="\n"+(k==="other"?"General":this.stageLabel(k))+":\n";
+      byStage[k].forEach(p=>{ txt+="• "+[p.qty,p.unit].filter(Boolean).join(" ")+(p.qty||p.unit?" — ":"")+p.item+"\n"; });
+    });
+    txt+="\nPlease send your best price & lead time. Thank you.";
+    if(navigator.share){ navigator.share({title:"Procurement list",text:txt}).catch(()=>this._copyText(txt)); }
+    else this._copyText(txt);
+  },
+  _copyText(txt){
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(()=>this.toast("✅","List copied — paste into WhatsApp/email")).catch(()=>this._fallbackCopy(txt)); }
+    else this._fallbackCopy(txt);
+  },
+  _fallbackCopy(txt){
+    const ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); this.toast("✅","List copied"); }catch(e){ this.toast("⚠︎","Copy not supported"); }
+    ta.remove();
+  },
 
   /* ---------- ACTIVITY LOG ---------- */
   actMeta:{
