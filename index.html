@@ -1005,9 +1005,9 @@ const TAB_EMOJI={dash:"📊",stages:"🏗️",materials:"📦",budget:"💵",act
    ============================================================ */
 const SEED = {
   meta:{ budget:36160 },
-  stageColors:["#0d9488","#6366f1","#7c3aed","#a855f7","#0891b2","#fbbf24","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#64748b","#f59e0b","#c026d3","#f97316","#78716c","#92400e","#dc2626"],
-  stageIcons:["🚧","📐","📏","🏛️","💧","🔆","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🚽","🪟","🎨","☀️","🚪","🗄️","🔥"],
-  stageWeeks:[2,2,2,3,3,1,3,1,2,6,3,2,2,2,2,4,4,2,3,2,1],
+  stageColors:["#0d9488","#6366f1","#7c3aed","#a855f7","#0891b2","#fbbf24","#64748b","#276F27","#b45309","#499A13","#8ECA3C","#BBDC12","#30b0c7","#0ea5e9","#eab308","#f59e0b","#c026d3","#f97316","#78716c","#92400e","#dc2626"],
+  stageIcons:["🚧","📐","📏","🏛️","💧","🔆","🚽","⛏️","🐜","🧱","🏗️","🧱","🏠","🚰","⚡","🪟","🎨","☀️","🚪","🗄️","🔥"],
+  stageWeeks:[2,2,2,3,3,1,2,3,1,2,6,3,2,2,2,4,4,2,3,2,1],
   stages:[
     { id:"s1", name:"Site Establishment — Boundary Fencing & Cabin", short:"Site Setup", estCost:3500,
       objective:"The very FIRST thing on the ground: secure the whole ~0.8 ha (almost 1 ha) farm/plot with boundary fencing and put up a 2-roomed site cabin (IBR sheets, floored) — one room as a dry, lockable materials & cement store, the other as the builders' sleep room. This protects materials and houses the workers from day one, and can proceed while the drawings are being finalised.",
@@ -1101,7 +1101,24 @@ const SEED = {
         {n:"Mounting Stand, DC Cable, Isolators & Breakers", q:"1 lot"},
         {n:"Optional Battery + Timer for irrigation controls", q:"1 set"}
       ]},
-    { id:"s7", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
+    { id:"s7", name:"Septic Tank, Soakaway & Drainage", short:"Sewer & Drainage", estCost:2600,
+      objective:"ESTABLISHED EARLY — the septic tank & soakaway must be in before major building starts because the builders need working ablution/toilets on-site throughout the build. Build the on-site foul-water treatment (septic tank + soakaway pit) now near the house footprint; the final external sewer runs from the house soil stacks are connected later at plumbing first-fix.",
+      steps:[
+        "Excavate & cast/lay the septic tank chambers with baffle & access covers",
+        "Dig and charge the soakaway pit with hardcore & filter stone",
+        "Provide a temporary builders' toilet connection into the septic for site use",
+        "Later (at plumbing first-fix): lay external 110mm sewer runs at fall from all soil stacks to the tank",
+        "Install inspection chambers, gully traps & storm-water drainage channels",
+        "🔍 Inspection/party: Council drainage/health inspection of sewer & septic before backfill"
+      ],
+      materials:[
+        {n:"Septic Tank — JoJo poly 2500L (double-storey) or brick-built + covers", q:"1 unit"},
+        {n:"110mm PVC Sewer Pipe, Bends & Junctions", q:"1 lot"},
+        {n:"Inspection Chambers & Gully Traps", q:"assorted"},
+        {n:"Hardcore, Filter Stone & Pit Sand (soakaway)", q:"10 m³"},
+        {n:"Cement & Bricks (tank base & chambers)", q:"1 lot"}
+      ]},
+    { id:"s8", name:"Substructure & Foundation", short:"Deep Trenches", estCost:4200,
       objective:"Excavate load-bearing trenches to carry the vertical weight of a double-storey structure, avoiding ground settling or wall cracking.",
       steps:[
         "Excavate trenches exactly 1 m deep and 600 mm wide",
@@ -1116,7 +1133,7 @@ const SEED = {
         {n:"19mm Quarry Stones", q:"15 m³"},
         {n:"Coarse Pit Sand", q:"12 m³"}
       ]},
-    { id:"s8", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
+    { id:"s9", name:"Termite Treatment & Soil Poisoning", short:"Anti-Termite", estCost:450,
       objective:"Chemically poison the soil in the foundation trenches and under-floor fill BEFORE the slab seals the ground — this is the only chance to lay a continuous barrier under the building. Roof timbers, wall plates & door frames are then spot-treated as they are installed in later stages.",
       steps:[
         "Trench & drench the foundation perimeter and footings with termiticide",
@@ -1129,7 +1146,7 @@ const SEED = {
         {n:"Knapsack / Drench Sprayer (rental)", q:"1 unit"},
         {n:"Applicator Labour & Treatment Certificate", q:"1 job"}
       ]},
-    { id:"s9", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
+    { id:"s10", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
       objective:"Cast a solid concrete surface bed across the full living area and the attached single-storey vehicle wing (295 m²).",
       steps:[
         "Backfill internal foundation pockets in 150 mm layers, water & compact heavily",
@@ -1146,7 +1163,7 @@ const SEED = {
         {n:"Washed River Sand", q:"20 m³"},
         {n:"19mm Crushed Quarry Stones", q:"25 m³"}
       ]},
-    { id:"s10", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11200,
+    { id:"s11", name:"Ground Brickwork & Suspended Mid-Slab", short:"Deck & Propping", estCost:11200,
       objective:"Erect ground level walls and engineer the heavy floor structure supporting the upper-level bedrooms. Walling is split for cost: LOAD-BEARING external & structural walls stay in machine-pressed brick (they carry the mid-slab & roof), while internal NON-load-bearing partitions use cheaper hollow concrete blocks (faster to lay, less mortar, plastered to match).",
       steps:[
         "Erect load-bearing external & structural walls to 3 m in machine-pressed bricks",
@@ -1166,7 +1183,7 @@ const SEED = {
         {n:"Machine-pressed Bricks — load-bearing external/structural walls only", q:"structural walls"},
         {n:"Hollow Concrete Blocks (200mm) — internal non-load-bearing partitions", q:"partition walls"}
       ]},
-    { id:"s11", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
+    { id:"s12", name:"First Floor Brickwork & High Parapet", short:"Upper Shell", estCost:600,
       objective:"Build the upstairs private sanctuary and erect architectural screening to mimic a flat Dubai layout. Load-bearing perimeter/parapet walls stay in brick; internal bedroom & bathroom partitions use cheaper hollow concrete blocks.",
       steps:[
         "Build upper-level bedroom & bathroom partitions in hollow concrete blocks (non-load-bearing)",
@@ -1182,7 +1199,7 @@ const SEED = {
         {n:"Machine-pressed Bricks — load-bearing perimeter/parapet walls", q:"structural walls"},
         {n:"Hollow Concrete Blocks (200mm) — internal non-load-bearing partitions", q:"partition walls"}
       ]},
-    { id:"s12", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
+    { id:"s13", name:"Hidden IBR Roof & Waterproofing", short:"Roof System", estCost:5650,
       objective:"Install a lightweight, ultra-durable timber & steel roof hidden entirely inside the parapet framework, making the villa weather-tight before internal works begin.",
       steps:[
         "Construct sloped timber truss network inside parapet, pitched to backyard",
@@ -1198,7 +1215,7 @@ const SEED = {
         {n:"Galvanized Box Gutters & Downpipes", q:"custom set"},
         {n:"Roofing Screws, Washers & Weatherproof Silicone", q:"1 lot"}
       ]},
-    { id:"s13", name:"Plumbing & Water Reticulation", short:"Plumbing Pipes", estCost:2800,
+    { id:"s14", name:"Plumbing & Water Reticulation", short:"Plumbing Pipes", estCost:2800,
       objective:"First-fix all hot & cold water supply piping and internal waste/soil pipework to kitchens, bathrooms and the laundry — chased into walls & floors BEFORE ceilings and plastering close everything up.",
       steps:[
         "Chase walls & floors and lay first-fix PEX/PPR supply piping",
@@ -1216,7 +1233,7 @@ const SEED = {
         {n:"Taps, Mixers, Showers & Sanitaryware", q:"full house"},
         {n:"Pipe Clips, Solvent Cement & Thread Tape", q:"1 lot"}
       ]},
-    { id:"s14", name:"Electrical Installation", short:"Electricals", estCost:3800,
+    { id:"s15", name:"Electrical Installation", short:"Electricals", estCost:3800,
       objective:"First-fix the full electrical system — conduits, wiring and back-boxes chased into walls BEFORE ceilings close up — then second-fix and certify to a safe, ready-to-energise standard.",
       steps:[
         "First-fix: chase walls & cast conduits, draw-boxes and back-boxes",
@@ -1231,22 +1248,6 @@ const SEED = {
         {n:"Distribution Board, Breakers & RCD", q:"1 board"},
         {n:"Light Fittings, Switches & Sockets", q:"full house"},
         {n:"Earth Rod, Cable Ties & Terminations", q:"1 lot"}
-      ]},
-    { id:"s15", name:"Septic Tank, Soakaway & Drainage", short:"Sewer & Drainage", estCost:2600,
-      objective:"Build the on-site foul-water treatment (septic tank + soakaway) and connect all external sewer and storm-water drainage from the soil stacks laid during plumbing first-fix.",
-      steps:[
-        "Excavate & cast/lay the septic tank chambers with baffle & access covers",
-        "Dig and charge the soakaway pit with hardcore & filter stone",
-        "Lay external 110mm sewer runs at fall from all soil stacks to the tank",
-        "Install inspection chambers, gully traps & storm-water drainage channels",
-        "🔍 Inspection/party: Council drainage/health inspection of sewer & septic before backfill"
-      ],
-      materials:[
-        {n:"Septic Tank — JoJo poly 2500L (double-storey) or brick-built + covers", q:"1 unit"},
-        {n:"110mm PVC Sewer Pipe, Bends & Junctions", q:"1 lot"},
-        {n:"Inspection Chambers & Gully Traps", q:"assorted"},
-        {n:"Hardcore, Filter Stone & Pit Sand (soakaway)", q:"10 m³"},
-        {n:"Cement & Bricks (tank base & chambers)", q:"1 lot"}
       ]},
     { id:"s16", name:"Windows, Doors, Ceilings & Security Screens", short:"Glazing & Security", estCost:18000,
       objective:"With plumbing & electrical first-fix complete, close up the house: install premium slim-frame aluminium glazing (toughened/shatter-proof, floor-to-ceiling sliders — Dubai/Tilal Al Ghaf look), external & internal doors, full CEILING works (only now that wiring & pipework are in), plus security hardening — Trellidor screens and burglar bars on the lower level. Glazing ≈74m² is the main cost driver (~$150–$250/m² standard, up to $450/m² for minimal-frame).",
@@ -1610,7 +1611,7 @@ const Store={
     this.migrate(); return this.state;
   },
   fresh(){
-    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{}, stageOrder:1, stageVer:3 };
+    const s={ stages:[], expenses:[], funds:[], notes:"", bricks:[], activity:[], labour:[], startDate:todayISO(), docs:[], vendors:[], quotes:[], procurement:[], chosen:{}, stageOrder:1, stageVer:4 };
     SEED.stages.forEach(st=> s.stages.push({id:st.id,steps:st.steps.map(()=>false),materials:st.materials.map(()=>false),notes:"",photos:[]}));
     SEED.bricks.forEach(()=> s.bricks.push({delivered:0}));
     return s;
@@ -1668,6 +1669,22 @@ const Store={
       this.state.stages.splice(INS,0,{steps:[],materials:[],notes:"",photos:[]});
       this.state.stages.forEach((s,i)=> s.id="s"+(i+1));
       this.state.stageVer=3;
+    }
+    if((this.state.stageVer||0) < 4 && Array.isArray(this.state.stages) && this.state.stages.length){
+      const o2n={0:0,1:1,2:2,3:3,4:4,5:5,6:7,7:8,8:9,9:10,10:11,11:12,12:13,13:14,14:6,15:15,16:16,17:17,18:18,19:19,20:20};
+      const old=this.state.stages, ns=new Array(21);
+      old.forEach((s,oi)=>{ const ni=(o2n[oi]!=null)?o2n[oi]:oi; ns[ni]=s; });
+      for(let i=0;i<21;i++){ if(!ns[i]) ns[i]={steps:[],materials:[],notes:"",photos:[]}; ns[i].id="s"+(i+1); }
+      this.state.stages=ns;
+      const codeMap={}; for(const k in o2n) codeMap["s"+(+k+1)]="s"+(o2n[k]+1);
+      const rc=c=>(c&&codeMap[c])||c;
+      (this.state.expenses||[]).forEach(e=>{
+        if(typeof e.id==="string" && e.id.indexOf("mat_")===0){ const p=e.id.split("_"); const oi=+p[1]; if(o2n[oi]!=null) e.id="mat_"+o2n[oi]+"_"+p[2]; }
+        if(e.stage) e.stage=rc(e.stage);
+      });
+      (this.state.procurement||[]).forEach(p=>{ if(p.stage) p.stage=rc(p.stage); });
+      (this.state.labour||[]).forEach(l=>{ if(l.stage) l.stage=rc(l.stage); });
+      this.state.stageVer=4;
     }
     SEED.stages.forEach((st,i)=>{
       if(!this.state.stages[i]) this.state.stages[i]={id:st.id,steps:[],materials:[],notes:"",photos:[]};
