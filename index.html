@@ -1151,14 +1151,14 @@ const SEED = {
         {n:"Applicator Labour & Treatment Certificate", q:"1 job"}
       ]},
     { id:"s10", name:"Ground Floor Slab", short:"The Platform", estCost:4500,
-      objective:"Cast a solid concrete surface bed across the full living area and the attached single-storey vehicle wing (295 m²).",
+      objective:"Cast a solid concrete surface bed across the full living area and the attached single-storey vehicle wing (~370 m² — ground floor of the architect's 650 m² total).",
       steps:[
         "Backfill internal foundation pockets in 150 mm layers, water & compact heavily",
         "Set below-slab sewer & water stub connections before pouring (coordinate with drainage stage)",
         "Lay plastic Damp-Proof Membrane (DPC) to block ground moisture",
         "🔍 Inspection/party: Council DPC / damp-proof inspection before the slab pour",
         "Lay steel anti-crack reinforcing mesh across the ground footprint",
-        "Pour continuous 100 mm concrete slab across combined 295 m² zone"
+        "Pour continuous 100 mm concrete slab across combined ~370 m² zone"
       ],
       materials:[
         {n:"50kg Cement (1:2:4 mix)", q:"210 bags"},
@@ -1175,7 +1175,7 @@ const SEED = {
         "Assemble steel scaffolding props & marine plywood shuttering",
         "Weave & tie dense dual-layer Y16 + Y12 reinforcement grid",
         "🔍 Inspection/party: Structural engineer inspects & signs off the slab rebar BEFORE the pour (critical hold-point)",
-        "Pour solid 150 mm suspended concrete deck over 225 m² footprint",
+        "Pour solid 150 mm suspended concrete deck over ~280 m² footprint (first floor of the 650 m² total)",
         "Keep slab wet & propped for 28 consecutive days (full curing)"
       ],
       materials:[
@@ -1274,7 +1274,7 @@ const SEED = {
         {n:"Ceiling Boards, Brandering, Cornices & Trims", q:"1 lot"}
       ]},
     { id:"s17", name:"Internal Finishes — Plaster, Screed, Tiling & Paint", short:"Finishes", estCost:30000,
-      objective:"The biggest 'hidden' cost on any luxury build — and previously missing from the budget. Once services are in and the house is closed up, apply all wet & decorative finishes: plaster every internal (and external) wall, screed & level floors, lay flooring, tile bathrooms & kitchen splashbacks, and paint inside & out. Benchmark for a ~520 m² double-storey at mid-luxury finish is ~$50–$70/m² of floor for plaster+tile+paint combined (~$26k–$36k). This is typically 20–30% of a build, so getting it costed properly is what makes the total 'add up'. 🎨 FLOOR CHOICE (noted): COLOURED SAND (quartz-broadcast) EPOXY in high-traffic & feature areas — living/dining, kitchen, entrance, stairs, verandah & garage (~$35–$50/m² supply&fix; slip-resistant, seamless, no grout, hides slab imperfections). Keep tiles in bathrooms and cheaper tiles/screed in bedrooms. ⚠️ Needs a crack-free screed + UV-stable PU topcoat near the big windows. Cost kept as-is for now (broadly cost-neutral vs the premium tiles it replaces).",
+      objective:"The biggest 'hidden' cost on any luxury build — and previously missing from the budget. Once services are in and the house is closed up, apply all wet & decorative finishes: plaster every internal (and external) wall, screed & level floors, lay flooring, tile bathrooms & kitchen splashbacks, and paint inside & out. Benchmark for the ~650 m² double-storey (architect's area) at mid-luxury finish is ~$50–$70/m² of floor for plaster+tile+paint combined (~$33k–$46k). This is typically 20–30% of a build, so getting it costed properly is what makes the total 'add up'. 🎨 FLOOR CHOICE (noted): COLOURED SAND (quartz-broadcast) EPOXY in high-traffic & feature areas — living/dining, kitchen, entrance, stairs, verandah & garage (~$35–$50/m² supply&fix; slip-resistant, seamless, no grout, hides slab imperfections). Keep tiles in bathrooms and cheaper tiles/screed in bedrooms. ⚠️ Needs a crack-free screed + UV-stable PU topcoat near the big windows. Cost kept as-is for now (broadly cost-neutral vs the premium tiles it replaces).",
       steps:[
         "Plaster all internal walls (and external where required); make good openings & reveals",
         "Screed, level & waterproof floors (bathrooms, balconies, wet areas)",
@@ -1285,9 +1285,9 @@ const SEED = {
         "Final snag: touch-ups, silicone sealing, grout clean-up"
       ],
       materials:[
-        {n:"Plaster Sand, Cement & Lime — internal/external plaster (~1,300 m² wall area)", q:"1 lot"},
-        {n:"Floor Screed & Self-Levelling Compound", q:"~520 m²"},
-        {n:"Porcelain Floor Tiles (supply & lay, ~$20/m²)", q:"~400 m²"},
+        {n:"Plaster Sand, Cement & Lime — internal/external plaster (~1,600 m² wall area)", q:"1 lot"},
+        {n:"Floor Screed & Self-Levelling Compound", q:"~650 m²"},
+        {n:"Porcelain Floor Tiles (supply & lay, ~$20/m²)", q:"~500 m²"},
         {n:"Wall Tiles — bathrooms, kitchen & features", q:"~80 m²"},
         {n:"Tile Adhesive, Grout, Trims & Waterproofing Membrane", q:"1 lot"},
         {n:"Interior Paint — primer + 2 coats (~1,300 m²)", q:"1 lot"},
@@ -1438,6 +1438,7 @@ const SEED = {
     basePlan:"Ocean Mansion — Typical “OM | 1”",
     source:"Jumeirah Asora Bay Villa Brochure (Dubai) — used as the design template / inspiration.",
     storeys:"Ground + First floor only — the brochure's old 1st & 2nd floors are COMBINED into one First floor",
+    buildArea:"650 m² total floor area (architect's quote) — Ground ~370 m² + First ~280 m². (Earlier app estimate was 520 m²; updated to match the architect.)",
     bedrooms:"7 bedrooms — 1 master + 2 guest rooms + 4 bedrooms",
     note:"Brochure room sizes are for a large Dubai mansion — treat dimensions as proportions to be scaled to the actual Murehwa plot by the architect. This is a rough brief and can be edited.",
     given:"✅ The GROUND FLOOR plan is approved as-is — design & build from it. Only the upper level and the sightline rules below change.",
@@ -1516,7 +1517,7 @@ const SEED = {
     {id:"sq_fence_b",vendorId:"seed_nakiso_fence",item:"Perimeter fencing — option B",qty:1,unit:"job",unitPrice:1858.44,total:1858.44,lead:"",date:"2026-07-02",note:"Alternative fencing spec"},
     {id:"sq_fence_c",vendorId:"seed_nakiso_fence",item:"Perimeter fencing — option C",qty:1,unit:"job",unitPrice:1638.44,total:1638.44,lead:"",date:"2026-07-02",note:"Alternative fencing spec"},
     {id:"sq_doer_labour",vendorId:"seed_doer",item:"Full-project construction labour (complete build)",qty:1,unit:"project",unitPrice:20000,total:20000,lead:"",date:"2026-07-12",note:"Labour only, estimate $18,000 – $22,000"},
-    {id:"sq_blessed_plan",vendorId:"seed_blessed",item:"Architectural plan drawing (per m²)",qty:1,unit:"m²",unitPrice:3,total:3,lead:"",date:"2026-07-12",note:"$3 per m² of house area — multiply by total floor area"},
+    {id:"sq_blessed_plan",vendorId:"seed_blessed",item:"Architectural plan drawing (per m²)",qty:650,unit:"m²",unitPrice:3,total:1950,lead:"",date:"2026-07-12",note:"$3 per m² × 650 m² (architect's area) = $1,950 for the drawings"},
     {id:"sq_muk_plan",vendorId:"seed_mukuvisi",item:"Architectural house plan design (full package)",qty:1,unit:"package",unitPrice:420,total:420,lead:"10 working days",date:"2026-07-09",note:"Incl. 3D visualisation, 4 plan copies, free BOQ & site visit. Structural excluded"},
     {id:"sq_muk_council",vendorId:"seed_mukuvisi",item:"Council plan submission",qty:1,unit:"job",unitPrice:80,total:80,lead:"",date:"2026-07-09",note:"Optional add-on"},
     {id:"sq_mut_arch",vendorId:"seed_mututa",item:"Architectural house plan design (full package)",qty:1,unit:"package",unitPrice:1300,total:1300,lead:"",date:"2026-07-12",note:"Range $1200–$1400; excludes site visit"},
@@ -2420,7 +2421,7 @@ const App={
     const d=SEED.designBrief; if(!d){ el.innerHTML=""; return; }
     el.innerHTML=`<div class="db-base">${this.esc(d.basePlan)}</div>
       <div class="db-src">${this.esc(d.source)}</div>
-      <div class="db-meta"><span class="db-chip">🏢 ${this.esc(d.storeys)}</span><span class="db-chip">🛏️ ${this.esc(d.bedrooms)}</span></div>
+      <div class="db-meta"><span class="db-chip">🏢 ${this.esc(d.storeys)}</span><span class="db-chip">🛏️ ${this.esc(d.bedrooms)}</span>${d.buildArea?`<span class="db-chip">📐 ${this.esc(d.buildArea)}</span>`:""}</div>
       ${d.given?`<div class="db-given">${this.esc(d.given)}</div>`:""}
       <div class="db-hd">✏️ Owner's edits</div>
       ${d.edits.map(e=>`<div class="db-edit">${this.esc(e)}</div>`).join("")}
